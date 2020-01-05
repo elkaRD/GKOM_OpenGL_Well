@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Transform.h"
+#include "MeshRenderer.h"
 
 class GameObject
 {
@@ -31,6 +32,7 @@ private:
 
 	GameObject *parent;
 	std::vector<GameObject*> children;
+	std::vector<MeshRenderer*> meshes;
 };
 
 #endif
