@@ -8,7 +8,7 @@ class CubeMesh : public MeshRenderer
 public:
 
 protected:
-	virtual void initializeMeshVertices();
+	virtual void initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode);
 
 private:
 

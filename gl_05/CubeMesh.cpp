@@ -2,7 +2,7 @@
 
 using namespace glm;
 
-void CubeMesh::initializeMeshVertices()
+void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode)
 {
 	vertices.reserve(8);
 

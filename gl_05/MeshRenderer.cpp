@@ -2,7 +2,10 @@
 
 void MeshRenderer::start()
 {
-	initializeMeshVertices();
+	std::vector<Vertex> *vertices = new std::vector<Vertex>();
+	std::vector<GLuint> *indices = new std::vector<GLuint>();
+
+	initializeMeshVertices(*vertices, *indices, drawingMode);
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -12,10 +15,10 @@ void MeshRenderer::start()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices->size() * sizeof(Vertex), &(*vertices)[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices->size() * sizeof(GLuint), &(*indices)[0], GL_STATIC_DRAW);
 
 	// vertex geometry data
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
@@ -32,11 +35,23 @@ void MeshRenderer::start()
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 
 	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+
+	indicesSize = indices->size();
+
+	delete vertices;
+	delete indices;
 }
 
 void MeshRenderer::render() const
 {
 	glBindVertexArray(VAO);
-	glDrawElements(drawingMode, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(drawingMode, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+}
+
+void MeshRenderer::destroy()
+{
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 }
