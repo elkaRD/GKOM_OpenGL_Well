@@ -100,7 +100,7 @@ void GameEngine::run()
 			static GLfloat rot_angle = 0.0f;
 			trans = glm::rotate(trans, -glm::radians(rot_angle), glm::vec3(1.0, 0.0, 0.0));
 			//trans = glm::translate(trans, glm::vec3(0,0,rot_angle));
-			rot_angle -= 0.5f;
+			rot_angle -= 0.005f;
 			if (rot_angle >= 360.0f)
 				rot_angle -= 360.0f;
 			GLuint transformLoc = glGetUniformLocation(theProgram.get_programID(), "transform");
