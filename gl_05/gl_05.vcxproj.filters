@@ -86,5 +86,8 @@
     <ClInclude Include="CubeMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="CylinderMesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
