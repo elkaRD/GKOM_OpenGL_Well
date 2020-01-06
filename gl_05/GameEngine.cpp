@@ -22,6 +22,26 @@ ostream& operator<<(ostream& os, const glm::vec4& mx)
 	return os;
 }
 
+ostream& operator<<(ostream& os, const glm::vec3& mx)
+{
+	for (int row = 0; row < 3; ++row)
+	{
+		cout << mx[row] << ' ';
+	}
+	cout << endl;
+	return os;
+}
+
+ostream& operator<<(ostream& os, const glm::vec2& mx)
+{
+	for (int row = 0; row < 2; ++row)
+	{
+		cout << mx[row] << ' ';
+	}
+	cout << endl;
+	return os;
+}
+
 GameEngine* GameEngine::instance = nullptr;
 
 GameEngine& GameEngine::getInstance()
@@ -63,9 +83,11 @@ void GameEngine::run()
 		if (window == nullptr)
 			throw exception("GLFW window not created");
 		glfwMakeContextCurrent(window);
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetKeyCallback(window, key_callback);
 		glfwSetMouseButtonCallback(window, mouse_button_callback);
 		glfwSetWindowSizeCallback(window, window_size_callback);
+		glfwSetCursorPosCallback(window, cursor_position_callback);
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
@@ -105,6 +127,7 @@ void GameEngine::run()
 		while (!glfwWindowShouldClose(window))
 		{
 			keyboardManager.nextFrame();
+			mouseManager.nextFrame();
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 			
@@ -135,13 +158,17 @@ void GameEngine::run()
 
 
 			glm::mat4 camRot;
-			camRot = glm::rotate(camRot, glm::radians(rot_angle), glm::vec3(0, 1, 0));
+			//camRot = glm::rotate(camRot, glm::radians(rot_angle), glm::vec3(0, 1, 0));
+			camRot = glm::rotate(camRot, glm::radians(cameraRotation[0]), glm::vec3(0, 1, 0));
 			glm::vec3 cameraPos = glm::vec3(camRot * glm::vec4(0, 0, -5, 1));
 
 			glm::mat4 view;
 			glm::mat4 projection;
 			//view = glm::translate(view, glm::vec3(0, 0, -3));
+			view = glm::rotate(view, glm::radians(cameraRotation[1]), glm::vec3(1, 0, 0));
+			view = glm::rotate(view, glm::radians(cameraRotation[0]), glm::vec3(0, 1, 0));
 			view = glm::translate(view, cameraPosition);
+			
 			//view = glm::lookAt(cameraPos, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 			projection = glm::perspective(glm::radians(60.0f), 1.67f, 0.1f, 100.0f);
 			GLuint viewLoc = glGetUniformLocation(theProgram.get_programID(), "view");
@@ -177,12 +204,17 @@ void GameEngine::key_callback(GLFWwindow* window, int key, int scancode, int act
 
 void GameEngine::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	//mouseEvents.push(MouseEvent(button, action, mods));
+
 }
 
 void GameEngine::window_size_callback(GLFWwindow* window, int width, int height)
 {
 	getInstance().handleScreenResizeEvent(width, height);
+}
+
+void GameEngine::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	getInstance().mouseManager.mousePosChanged(xpos, ypos);
 }
 
 void GameEngine::handleKeyboardEvent()
@@ -218,20 +250,27 @@ void GameEngine::handleKeyboardEvent()
 	cameraMovement += glm::vec4(0, 0, 0, 1);
 
 	glm::mat4 rotateTransform;
-	rotateTransform *= cameraMovement;
+	//rotateTransform *= cameraMovement;
 	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.y), glm::vec3(1.0f, 0.0f, 0.0f));
 	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.x), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	//cameraMovement = rotateTransform * cameraMovement;
+	cameraMovement = rotateTransform * cameraMovement;
 
-	//cout << cameraMovement << endl;
+	cout << cameraMovement << endl;
 
 	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
 }
 
 void GameEngine::handleMouseEvent()
 {
+	cameraRotation[0] += mouseManager.getDeltaX() * 0.1f;
+	cameraRotation[1] += mouseManager.getDeltaY() * 0.1f;
 
+	if (cameraRotation[0] > 360) cameraRotation[0] -= 360;
+	if (cameraRotation[0] < 0) cameraRotation[0] += 360;
+
+	if (cameraRotation[1] > 80) cameraRotation[1] = 80;
+	if (cameraRotation[1] < -80) cameraRotation[1] = -80;
 }
 
 void GameEngine::handleScreenResizeEvent(int width, int height)
@@ -283,4 +322,40 @@ bool GameEngine::KeyboardManager::isHold(int key)
 bool GameEngine::KeyboardManager::wasPressed(int key)
 {
 	return keysPressed[key];
+}
+
+GameEngine::MouseManager::MouseManager() : firstUpdate(true)
+{
+
+}
+
+void GameEngine::MouseManager::nextFrame()
+{
+	deltaX = 0;
+	deltaY = 0;
+}
+
+void GameEngine::MouseManager::mousePosChanged(int x, int y)
+{
+	deltaX = x - lastX;
+	deltaY = y - lastY;
+	lastX = x;
+	lastY = y;
+
+	if (firstUpdate)
+	{
+		deltaX = 0;
+		deltaY = 0;
+		firstUpdate = false;
+	}
+}
+
+int GameEngine::MouseManager::getDeltaX()
+{
+	return deltaX;
+}
+
+int GameEngine::MouseManager::getDeltaY()
+{
+	return deltaY;
 }
