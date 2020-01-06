@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -24,13 +25,38 @@ public:
 
 private:
 	static GameEngine *instance;
+	GLFWwindow* window;
+
+	glm::vec3 cameraPosition;
+	glm::vec2 cameraRotation;
 
 	GameEngine();
 
-	const GLuint WIDTH = 800, HEIGHT = 600;
+	GLuint screenWidth = 800, screenHeight = 600;
+	bool resizeNeeded;
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	static void window_size_callback(GLFWwindow* window, int width, int height);
+
+	void handleKeyboardEvent();
+	void handleMouseEvent();
+	void handleScreenResizeEvent(int widht, int height);
+
 	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
+
+	class KeyboardManager
+	{
+	public:
+		void nextFrame();
+		void keyStateChanged(int key, int state);
+		bool isHold(int key);
+		bool wasPressed(int key);
+
+	private:
+		std::unordered_map<int, bool> keysStates;
+		std::unordered_map<int, bool> keysPressed;
+	} keyboardManager;
 };
 
 #endif

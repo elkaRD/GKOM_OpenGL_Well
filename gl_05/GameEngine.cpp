@@ -1,5 +1,27 @@
 #include "GameEngine.h"
 
+//only for debug purposes
+ostream& operator<<(ostream& os, const glm::mat4& mx)
+{
+	for (int row = 0; row < 4; ++row)
+	{
+		for (int col = 0; col < 4; ++col)
+			cout << mx[row][col] << ' ';
+		cout << endl;
+	}
+	return os;
+}
+
+ostream& operator<<(ostream& os, const glm::vec4& mx)
+{
+	for (int row = 0; row < 4; ++row)
+	{
+		cout << mx[row] << ' ';
+	}
+	cout << endl;
+	return os;
+}
+
 GameEngine* GameEngine::instance = nullptr;
 
 GameEngine& GameEngine::getInstance()
@@ -12,9 +34,10 @@ GameEngine& GameEngine::getInstance()
 	return *instance;
 }
 
-GameEngine::GameEngine()
+GameEngine::GameEngine() : resizeNeeded(true)
 {
-
+	cameraPosition = glm::vec3(0.0f, 0, -3);
+	cameraRotation = glm::vec2(0.0f);
 }
 
 int GameEngine::init()
@@ -29,8 +52,6 @@ int GameEngine::init()
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	
-
 	return 0;
 }
 
@@ -38,11 +59,13 @@ void GameEngine::run()
 {
 	try
 	{
-		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 05", nullptr, nullptr);
+		window = glfwCreateWindow(screenWidth, screenHeight, "GKOM - OpenGL 05", nullptr, nullptr);
 		if (window == nullptr)
 			throw exception("GLFW window not created");
 		glfwMakeContextCurrent(window);
 		glfwSetKeyCallback(window, key_callback);
+		glfwSetMouseButtonCallback(window, mouse_button_callback);
+		glfwSetWindowSizeCallback(window, window_size_callback);
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
@@ -50,7 +73,7 @@ void GameEngine::run()
 			throw exception("GLEW Initialization failed");
 		}
 
-		glViewport(0, 0, WIDTH, HEIGHT);
+		glViewport(0, 0, screenWidth, screenHeight);
 
 		glEnable(GL_DEPTH_TEST);
 
@@ -81,8 +104,12 @@ void GameEngine::run()
 		// main event loop
 		while (!glfwWindowShouldClose(window))
 		{
+			keyboardManager.nextFrame();
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
+			
+			handleKeyboardEvent();
+			handleMouseEvent();
 
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -114,7 +141,8 @@ void GameEngine::run()
 			glm::mat4 view;
 			glm::mat4 projection;
 			//view = glm::translate(view, glm::vec3(0, 0, -3));
-			view = glm::lookAt(cameraPos, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+			view = glm::translate(view, cameraPosition);
+			//view = glm::lookAt(cameraPos, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 			projection = glm::perspective(glm::radians(60.0f), 1.67f, 0.1f, 100.0f);
 			GLuint viewLoc = glGetUniformLocation(theProgram.get_programID(), "view");
 			GLuint projLoc = glGetUniformLocation(theProgram.get_programID(), "projection");
@@ -144,9 +172,74 @@ void GameEngine::run()
 
 void GameEngine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-	cout << key << endl;
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	getInstance().keyboardManager.keyStateChanged(key, action);
+}
+
+void GameEngine::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	//mouseEvents.push(MouseEvent(button, action, mods));
+}
+
+void GameEngine::window_size_callback(GLFWwindow* window, int width, int height)
+{
+	getInstance().handleScreenResizeEvent(width, height);
+}
+
+void GameEngine::handleKeyboardEvent()
+{
+	if (keyboardManager.wasPressed(GLFW_KEY_ESCAPE))
 		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	glm::vec4 cameraMovement = glm::vec4(0.0f);
+
+	if (keyboardManager.isHold(GLFW_KEY_W) || keyboardManager.isHold(GLFW_KEY_UP))
+		cameraMovement += glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+	
+	if (keyboardManager.isHold(GLFW_KEY_S) || keyboardManager.isHold(GLFW_KEY_DOWN))
+		cameraMovement += glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
+
+	if (keyboardManager.isHold(GLFW_KEY_A) || keyboardManager.isHold(GLFW_KEY_LEFT))
+		cameraMovement += glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+
+	if (keyboardManager.isHold(GLFW_KEY_D) || keyboardManager.isHold(GLFW_KEY_RIGHT))
+		cameraMovement += glm::vec4(-1.0f, 0.0f, 0.0f, 0.0f);
+
+	if (keyboardManager.isHold(GLFW_KEY_E))
+		cameraMovement += glm::vec4(0.0f, -1.0f, 0.0f, 0.0f);
+
+	if (keyboardManager.isHold(GLFW_KEY_Q))
+		cameraMovement += glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+
+	glm::normalize(cameraMovement);
+
+	if (keyboardManager.isHold(GLFW_KEY_LEFT_SHIFT) || keyboardManager.isHold(GLFW_KEY_RIGHT_SHIFT))
+		cameraMovement *= 5.0f;
+
+	cameraMovement += glm::vec4(0, 0, 0, 1);
+
+	glm::mat4 rotateTransform;
+	rotateTransform *= cameraMovement;
+	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.y), glm::vec3(1.0f, 0.0f, 0.0f));
+	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.x), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	//cameraMovement = rotateTransform * cameraMovement;
+
+	//cout << cameraMovement << endl;
+
+	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
+}
+
+void GameEngine::handleMouseEvent()
+{
+
+}
+
+void GameEngine::handleScreenResizeEvent(int width, int height)
+{
+	resizeNeeded = true;
+	screenWidth = width;
+	screenHeight = height;
+	//screenFixRatio = 360 * height / 720.0;
 }
 
 GLuint GameEngine::LoadMipmapTexture(GLuint texId, const char* fname)
@@ -166,4 +259,28 @@ GLuint GameEngine::LoadMipmapTexture(GLuint texId, const char* fname)
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return texture;
+}
+
+void GameEngine::KeyboardManager::nextFrame()
+{
+	for (auto &it : keysPressed)
+		it.second = false;
+}
+
+void GameEngine::KeyboardManager::keyStateChanged(int key, int state)
+{
+	if (state != GLFW_PRESS && state != GLFW_RELEASE) return;
+
+	keysStates[key] = state == GLFW_PRESS;
+	if (state == GLFW_PRESS) keysPressed[key] = true;
+}
+
+bool GameEngine::KeyboardManager::isHold(int key)
+{
+	return keysStates[key] || keysPressed[key];
+}
+
+bool GameEngine::KeyboardManager::wasPressed(int key)
+{
+	return keysPressed[key];
 }

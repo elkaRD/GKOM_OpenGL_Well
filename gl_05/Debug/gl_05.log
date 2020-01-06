@@ -1,4 +1,4 @@
-﻿Build started 2020-01-05 23:09:15.
+﻿Build started 2020-01-06 02:19:41.
      1>Project "F:\studia\sem5\gkom\projekt\ZW2-studnia\gl_05\gl_05.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt GameEngine.cpp
@@ -30,4 +30,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.61
+Time Elapsed 00:00:01.72
