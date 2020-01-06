@@ -150,7 +150,7 @@ void GameEngine::run()
 			static GLfloat rot_angle = 0.0f;
 			trans = glm::rotate(trans, -glm::radians(rot_angle), glm::vec3(1.0, 0.0, 0.0));
 			//trans = glm::translate(trans, glm::vec3(0,0,rot_angle));
-			rot_angle -= 0.5f;
+			//rot_angle -= 0.5f;
 			if (rot_angle >= 360.0f)
 				rot_angle -= 360.0f;
 			GLuint transformLoc = glGetUniformLocation(theProgram.get_programID(), "transform");
@@ -250,13 +250,10 @@ void GameEngine::handleKeyboardEvent()
 	cameraMovement += glm::vec4(0, 0, 0, 1);
 
 	glm::mat4 rotateTransform;
-	//rotateTransform *= cameraMovement;
-	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.y), glm::vec3(1.0f, 0.0f, 0.0f));
-	rotateTransform = glm::rotate(rotateTransform, glm::radians(cameraRotation.x), glm::vec3(0.0f, 1.0f, 0.0f));
+	rotateTransform = glm::rotate(rotateTransform, glm::radians(-cameraRotation[0]), glm::vec3(0.0f, 1.0f, 0.0f));
+	rotateTransform = glm::rotate(rotateTransform, glm::radians(-cameraRotation[1]), glm::vec3(1.0f, 0.0f, 0.0f)); 
 
 	cameraMovement = rotateTransform * cameraMovement;
-
-	cout << cameraMovement << endl;
 
 	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
 }
