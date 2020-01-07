@@ -15,6 +15,8 @@ using namespace std;
 
 #include "CubeMesh.h"
 
+
+
 class GameEngine
 {
 public:
@@ -30,6 +32,9 @@ private:
 
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
+
+	float deltaTime = 0.0f;
+	float lastFrame = 0.0f;
 
 	GameEngine();
 

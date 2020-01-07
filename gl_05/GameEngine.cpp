@@ -78,12 +78,13 @@ void GameEngine::run()
 		if (window == nullptr)
 			throw exception("GLFW window not created");
 		glfwMakeContextCurrent(window);
-		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		glfwSetKeyCallback(window, key_callback);
 		glfwSetMouseButtonCallback(window, mouse_button_callback);
 		glfwSetWindowSizeCallback(window, window_size_callback);
 		glfwSetCursorPosCallback(window, cursor_position_callback);
+		
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
@@ -94,13 +95,6 @@ void GameEngine::run()
 		glViewport(0, 0, screenWidth, screenHeight);
 
 		glEnable(GL_DEPTH_TEST);
-
-		// Let's check what are maximum parameters counts
-		GLint nrAttributes;
-		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-		cout << "Max vertex attributes allowed: " << nrAttributes << std::endl;
-		glGetIntegerv(GL_MAX_TEXTURE_COORDS, &nrAttributes);
-		cout << "Max texture coords allowed: " << nrAttributes << std::endl;
 
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
@@ -131,6 +125,9 @@ void GameEngine::run()
 			
 			handleKeyboardEvent();
 			handleMouseEvent();
+			float currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
 
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -144,7 +141,8 @@ void GameEngine::run()
 			glBindTexture(GL_TEXTURE_2D, texture1);
 			glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture1"), 1);
 
-			glm::mat4 trans;
+			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+			//trans = glm::rotate(trans,60,glm::vec3(1.0f, 1.0f, 0.0f));
 			GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
 			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
@@ -245,19 +243,19 @@ void GameEngine::handleKeyboardEvent()
 
 	cameraMovement = rotateTransform * cameraMovement;
 
-	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
+	cameraPosition += glm::vec3(cameraMovement) * deltaTime * 2.0f;
 }
 
 void GameEngine::handleMouseEvent()
 {
-	cameraRotation[0] += mouseManager.getDeltaX() * 0.1f;
-	cameraRotation[1] += mouseManager.getDeltaY() * 0.1f;
+	cameraRotation[0] += mouseManager.getDeltaX() *  0.1f;
+	cameraRotation[1] += mouseManager.getDeltaY() *  0.1f;
 
 	if (cameraRotation[0] > 360) cameraRotation[0] -= 360;
 	if (cameraRotation[0] < 0) cameraRotation[0] += 360;
 
-	if (cameraRotation[1] > 80) cameraRotation[1] = 80;
-	if (cameraRotation[1] < -80) cameraRotation[1] = -80;
+	if (cameraRotation[1] > 89) cameraRotation[1] = 89;
+	if (cameraRotation[1] < -89) cameraRotation[1] = -89;
 }
 
 void GameEngine::handleScreenResizeEvent(int width, int height)
