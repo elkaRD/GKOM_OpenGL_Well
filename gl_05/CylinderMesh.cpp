@@ -19,12 +19,12 @@ void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::ve
 			vertices.push_back(Vertex(glm::vec3(cosf(angle * M_PI / 180.0f) * radius, height / 2.0f - h_layer * slice,
 				-sinf(angle * M_PI / 180.0f) * radius), color, glm::vec2(0.0f, 0.0f)));
 		}
-		std::cout << slice << std::endl;
+		//std::cout << slice << std::endl;
 	}
 	//generate bottom plane
 	planeCenter = glm::vec3(0.0f, -height / 2.0f, 0.0f);
 	vertices.push_back(Vertex(planeCenter, color, glm::vec2(0.0f, 0.0f)));
-	std::cout << vertices.size() << std::endl;
+	//std::cout << vertices.size() << std::endl;
 	//indices
 	for (unsigned int i = 0; i < segments; ++i)
 	{
