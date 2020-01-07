@@ -6,12 +6,21 @@
 
 class CylinderMesh : public MeshRenderer {
 public:
-
+	CylinderMesh();
 protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 private:
-	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 18;
-	static const unsigned int DEAFULT_LAYERS_NUMBER = 3;
+	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 24;
+	static const unsigned int DEFAULT_LAYERS_NUMBER = 2;
+
+	GLfloat height;
+	GLfloat radius;
+
+	GLuint segments;
+	GLuint layers;
+
+	glm::vec3 color;
+
 };
 
 #endif // !CYLINDER_MESH_H

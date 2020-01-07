@@ -99,7 +99,7 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
-		MeshRenderer *cube = new CubeMesh();
+		MeshRenderer *cube = new CylinderMesh();
 		cube->start();
 
 		// Set the texture wrapping parameters
@@ -141,7 +141,7 @@ void GameEngine::run()
 			glBindTexture(GL_TEXTURE_2D, texture1);
 			glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture1"), 1);
 
-			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+			glm::mat4 trans;// = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
 			//trans = glm::rotate(trans,60,glm::vec3(1.0f, 1.0f, 0.0f));
 			GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
 			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
