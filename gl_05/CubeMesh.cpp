@@ -4,37 +4,48 @@ using namespace glm;
 
 void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode)
 {
-	vertices.reserve(8);
+	vertices.reserve(32);
 
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3(-0.5f,  0.5f, -0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3( 0.5f,  0.5f, -0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3( 0.5f, -0.5f, -0.5f), vec3(1.0f), vec2()));
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
 
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f,  0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3(-0.5f,  0.5f,  0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3( 0.5f,  0.5f,  0.5f), vec3(1.0f), vec2()));
-	vertices.push_back(Vertex(vec3( 0.5f, -0.5f,  0.5f), vec3(1.0f), vec2()));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
 
-	indices = {
-		0, 1, 2,
-		0, 2, 3,
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
 
-		1,6,2,
-		1,5,6,	
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
 
-		4,5,1,
-		4,1,0,
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
 
-		4,0,3,
-		4,3,7,
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 0.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f), vec3(1.0f), vec2(1.0f, 1.0f)));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f), vec3(1.0f), vec2(0.0f, 1.0f)));
 
-		3,2,6,
-		3,6,7,
+	for (int i = 0; i < 6; ++i)
+	{
+		indices.push_back(i*4 + 2);
+		indices.push_back(i*4 + 1);
+		indices.push_back(i*4 + 0);
 
-		7,6,5,
-		7,5,4
-	};
+		indices.push_back(i*4 + 2);
+		indices.push_back(i*4 + 3);
+		indices.push_back(i*4 + 1);
+	}
 
 	drawingMode = GL_TRIANGLES;
 }

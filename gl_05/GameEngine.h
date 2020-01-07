@@ -20,20 +20,22 @@ class GameEngine
 public:
 	static GameEngine &getInstance();
 
-	int init();
+	void init();
 	void run();
 
 private:
 	static GameEngine *instance;
-	GLFWwindow* window;
+	GLFWwindow *window;
+	ShaderProgram *theProgram;
 
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
 
 	GameEngine();
 
-	GLuint screenWidth = 800, screenHeight = 600;
-	bool resizeNeeded;
+	GLuint screenWidth = 1280, screenHeight = 720;
+
+	void setCamera();
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
