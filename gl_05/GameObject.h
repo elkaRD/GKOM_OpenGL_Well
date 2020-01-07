@@ -4,6 +4,7 @@
 #include <vector>
 #include "Transform.h"
 #include "MeshRenderer.h"
+//#include "GameEngine.h"
 
 class GameObject
 {
@@ -13,11 +14,13 @@ public:
 
 	Transform transform;
 
-	void renderObject(const glm::vec4 &parentTransform);
+	void renderObject(const glm::mat4 &parentTransform);
 	void updateObject(float delta);
 
 	void addChild(GameObject *child);
 	void removeChild(GameObject *child);
+
+	void startObject();
 
 	virtual void render();
 	virtual void update(float delta);
@@ -26,9 +29,6 @@ public:
 	virtual void destroy();
 
 protected:
-	
-
-private:
 
 	GameObject *parent;
 	std::vector<GameObject*> children;

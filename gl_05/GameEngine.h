@@ -14,6 +14,7 @@ using namespace std;
 #include <glm/gtc/type_ptr.hpp>
 
 #include "CubeMesh.h"
+#include "WellObject.h"
 
 class GameEngine
 {
@@ -22,6 +23,8 @@ public:
 
 	void init();
 	void run();
+
+	void setTransform(glm::mat4 trans); //TODO: make it private
 
 private:
 	static GameEngine *instance;
@@ -34,6 +37,8 @@ private:
 	GameEngine();
 
 	GLuint screenWidth = 1280, screenHeight = 720;
+
+	double currentFrame, deltaTime, lastFrame;
 
 	void setCamera();
 

@@ -17,9 +17,9 @@ public:
 	glm::vec3 getRotation() const;
 	glm::vec3 getScale() const;
 
-	glm::vec4 getTransform() const;
+	glm::mat4 getTransform() const;
 	//glm::vec4 getTransform(const Transform &parentTransform) const;
-	glm::vec4 getTransform(const glm::vec4 &parentTransform) const;
+	glm::mat4 getTransform(const glm::mat4 &parentTransform) const;
 
 private:
 	glm::vec3 position;

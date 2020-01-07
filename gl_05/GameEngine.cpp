@@ -108,6 +108,12 @@ void GameEngine::run()
 		MeshRenderer *cube = new CubeMesh();
 		cube->start();
 
+		GameObject *well = new Well(nullptr);
+		well->startObject();
+
+		GameObject *well2 = new Well(nullptr);
+		well2->startObject();
+
 		// Set the texture wrapping parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -121,6 +127,10 @@ void GameEngine::run()
 
 		handleScreenResizeEvent(screenWidth, screenHeight);
 
+		currentFrame = glfwGetTime();
+		lastFrame = currentFrame;
+		deltaTime = 0;
+
 		// main event loop
 		while (!glfwWindowShouldClose(window))
 		{
@@ -131,6 +141,10 @@ void GameEngine::run()
 			
 			handleKeyboardEvent();
 			handleMouseEvent();
+
+			currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
 
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -145,15 +159,21 @@ void GameEngine::run()
 			glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture1"), 1);
 
 			glm::mat4 trans;
-			GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
-			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+			setTransform(trans);
+			//GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
+			//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 			setCamera();
 
 			// Draw our first triangle
 			theProgram->Use();
 
-			cube->render();
+			//cube->render();
+			setTransform(well->transform.getTransform());
+			well->render();
+
+			setTransform(well2->transform.getTransform());
+			well2->render();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
@@ -161,6 +181,12 @@ void GameEngine::run()
 
 		cube->destroy();
 		delete cube;
+
+		well->destroy();
+		delete well;
+
+		well2->destroy();
+		delete well2;
 
 		delete theProgram;
 	}
@@ -170,6 +196,12 @@ void GameEngine::run()
 		system("pause");
 	}
 	glfwTerminate();
+}
+
+void GameEngine::setTransform(glm::mat4 trans)
+{
+	GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 }
 
 void GameEngine::setCamera()
@@ -245,7 +277,7 @@ void GameEngine::handleKeyboardEvent()
 
 	cameraMovement = rotateTransform * cameraMovement;
 
-	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
+	cameraPosition += glm::vec3(cameraMovement) * 3.0f *(float)deltaTime;
 }
 
 void GameEngine::handleMouseEvent()

@@ -10,6 +10,7 @@ public:
 	GameScene();
 	~GameScene();
 
+	void start();
 	void render();
 	void update(float delta);
 

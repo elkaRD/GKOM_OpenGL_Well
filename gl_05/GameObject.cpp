@@ -11,9 +11,9 @@ GameObject::~GameObject()
 	parent->removeChild(this);
 }
 
-void GameObject::renderObject(const glm::vec4 &parentTransform)
+void GameObject::renderObject(const glm::mat4 &parentTransform)
 {
-	glm::vec4 transformMatrix = transform.getTransform(parentTransform);
+	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
 
 	render();
 
@@ -33,9 +33,25 @@ void GameObject::updateObject(float delta)
 	}
 }
 
+void GameObject::startObject()
+{
+	start();
+
+	for (auto &mesh : meshes)
+	{
+		mesh->start();
+	}
+}
+
 void GameObject::render()
 {
+	//TODO: temp solution. Discuss setting transform in engine when iterating over all gameobjects
+	//GameEngine::getInstance().setTransform(transform.getTransform());
 
+	for (const auto &mesh : meshes)
+	{
+		mesh->render();
+	}
 }
 
 void GameObject::update(float delta)
