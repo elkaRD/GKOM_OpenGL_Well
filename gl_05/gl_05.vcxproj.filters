@@ -48,6 +48,9 @@
     <ClCompile Include="CylinderMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TubeMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CylinderMesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TubeMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

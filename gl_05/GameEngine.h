@@ -15,6 +15,7 @@ using namespace std;
 
 #include "CubeMesh.h"
 #include "CylinderMesh.h"
+#include "TubeMesh.h"
 
 
 

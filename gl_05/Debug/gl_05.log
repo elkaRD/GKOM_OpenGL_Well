@@ -1,16 +1,8 @@
-﻿  CylinderMesh.cpp
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(36,66): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(37,23): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(37,95): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(38,24): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(51,72): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-  GameEngine.cpp
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(52,24): warning C4244:  "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(128,23): warning C4244:  "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(205,51): warning C4244:  "argument": konwersja z "double" do "int", możliwa utrata danych
-  gl_05.cpp
-  Generowanie kodu...
-C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(205,45): warning C4244:  "argument": konwersja z "double" do "int", możliwa utrata danych
+﻿  TubeMesh.cpp
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(34,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(35,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(47,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(48,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
   Trwa generowanie kodu
   Zakończono generowanie kodu
 LINK : warning LNK4286: symbol „___glewBindBuffer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”

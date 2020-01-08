@@ -99,7 +99,7 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
-		MeshRenderer *cube = new CylinderMesh();
+		MeshRenderer *cube = new TubeMesh();
 		cube->start();
 
 		// Set the texture wrapping parameters
