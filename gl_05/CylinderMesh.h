@@ -11,7 +11,7 @@ protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 private:
 	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 24;
-	static const unsigned int DEFAULT_LAYERS_NUMBER = 2;
+	static const unsigned int DEFAULT_LAYERS_NUMBER = 1;
 
 	GLfloat height;
 	GLfloat radius;
@@ -21,6 +21,9 @@ private:
 
 	glm::vec3 color;
 
+	void generatePlate(std::vector<Vertex>& vertices, bool top);
+	void generateWalls(std::vector<Vertex>& vertices);
+	void generateIndices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
 };
 
 #endif // !CYLINDER_MESH_H

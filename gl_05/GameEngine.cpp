@@ -111,7 +111,7 @@ void GameEngine::run()
 
 		// prepare textures
 		GLuint texture0 = LoadMipmapTexture(GL_TEXTURE0, "iipw.png");
-		GLuint texture1 = LoadMipmapTexture(GL_TEXTURE1, "weiti.png");
+		GLuint texture1 = LoadMipmapTexture(GL_TEXTURE1, "awesomeface.png");
 
 		handleScreenResizeEvent(screenWidth, screenHeight);
 

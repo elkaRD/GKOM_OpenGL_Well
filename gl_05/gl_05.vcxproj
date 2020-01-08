@@ -102,6 +102,7 @@
     <None Include="gl_05.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="awesomeface.png" />
     <Image Include="iipw.png" />
     <Image Include="weiti.png" />
   </ItemGroup>
