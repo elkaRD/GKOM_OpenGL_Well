@@ -66,6 +66,9 @@
     <Image Include="awesomeface.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="tubeTex.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shprogram.h">

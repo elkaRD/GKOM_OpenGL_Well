@@ -13,14 +13,13 @@ protected:
 	void generateIndices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
 private:
 	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 24;
-	static const unsigned int DEFAULT_LAYERS_NUMBER = 1;
 
 	GLfloat height;
 	GLfloat radius;
 	GLfloat wallThickness;
 
 	GLuint segments;
-	GLuint layers;
+	static const GLuint layers = 1;
 
 	glm::vec3 color;
 };

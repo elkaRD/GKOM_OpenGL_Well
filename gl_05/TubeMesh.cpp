@@ -5,8 +5,7 @@
 
 #include <iostream>
 
-TubeMesh::TubeMesh(): height(3.0f), radius(1.5f), wallThickness(0.25f), segments(DEFAULT_SEGMENTS_NUMBER),
-	layers(DEFAULT_LAYERS_NUMBER) {}
+TubeMesh::TubeMesh(): height(3.0f), radius(1.5f), wallThickness(0.5f), segments(DEFAULT_SEGMENTS_NUMBER) {}
 
 void TubeMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {
@@ -50,25 +49,59 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius - wallThickness),
 			0.0f, -sinf(0.0f) * (radius - wallThickness)), color, glm::vec2(uCoord, 0.0f)));
 	}
-	std::cout << vertices.size() << std::endl;
+	//std::cout << vertices.size() << std::endl;
+
+	glm::vec3 center = glm::vec3(0.0f, height / 2.0f, 0.0f);
+	glm::vec2 textureCenter = glm::vec2(0.25f, 0.25f);
+
+	for (int j = 0; j != 2; ++j)
+	{
+		for (int i = 0; i != 2; ++i)
+		{
+			for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
+			{
+				vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
+					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i)), color, textureCenter + glm::vec2(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
+						-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius)));
+			}
+		}
+		center.y -= height;
+		textureCenter = glm::vec2(0.25f, 0.75f);
+	}
+	//std::cout << vertices.size() << std::endl;
 }
 
 void TubeMesh::generateIndices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
 {
-	for (unsigned int l = 0; l <= layers * 2 + 1; ++l)
+	for (unsigned int l = 0; l <= layers * 2; ++l)
 	{
+		if (l == layers)
+			continue;
 		unsigned int verticesperlayer = segments + 1;
 		for (unsigned int i = 0; i <= verticesperlayer - 2; ++i)
 		{
-			indices.push_back((i + l * verticesperlayer)%vertices.size());
-			indices.push_back((i + 1 + l * verticesperlayer)%vertices.size());
-			indices.push_back((i + verticesperlayer * (l + 1)) % vertices.size());
-			indices.push_back((i + 1 + l * verticesperlayer) % vertices.size());
-			indices.push_back((i + verticesperlayer * (l + 1)) % vertices.size());
-			indices.push_back((i + 1 + verticesperlayer * (l + 1)) % vertices.size());
-			std::cout << i + l * verticesperlayer << ", " << i + 1 + l * verticesperlayer
-				<< ", " << i + verticesperlayer * (l + 1) << std::endl << i + 1 + l * verticesperlayer
-				<< ", " << i + verticesperlayer * (l + 1) << ", " << i + 1 + verticesperlayer * (l + 1) << std::endl;
+			indices.push_back(i + l * verticesperlayer);
+			indices.push_back(i + 1 + l * verticesperlayer);
+			indices.push_back(i + verticesperlayer * (l + 1));
+			indices.push_back(i + 1 + l * verticesperlayer);
+			indices.push_back(i + verticesperlayer * (l + 1));
+			indices.push_back(i + 1 + verticesperlayer * (l + 1));
 		}
 	}
+
+	unsigned int offset = layers * 4 * (segments + 1);
+
+	for (unsigned int k = 0; k < 4 ; k+=2)
+	{
+		for (unsigned int i = 0; i <= segments - 1; ++i)
+		{
+			indices.push_back(i % segments + k * segments + offset);
+			indices.push_back(i != segments - 1 ? i % segments + 1 + k * segments + offset : i % segments + 1 + (k-1) * segments + offset);
+			indices.push_back(i % segments + segments * (k + 1) + offset);
+			indices.push_back((i + 1) % segments + k * segments + offset);
+			indices.push_back(i % segments + segments * (k + 1) + offset);
+			indices.push_back((i + 1) % segments + segments * (k + 1) + offset);
+		}
+	}
+
 }

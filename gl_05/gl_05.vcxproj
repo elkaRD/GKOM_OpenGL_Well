@@ -105,6 +105,7 @@
   <ItemGroup>
     <Image Include="awesomeface.png" />
     <Image Include="iipw.png" />
+    <Image Include="tubeTex.png" />
     <Image Include="weiti.png" />
   </ItemGroup>
   <ItemGroup>
