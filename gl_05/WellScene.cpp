@@ -9,10 +9,12 @@ void WellScene::start()
 {
 	well = new Well(rootObject, this);
 	well->startObject();
+	//well = generateObject();
 	well->transform.setPosition(-2, 0, 0);
 
-	well2 = new Well(well, this);
-	well2->startObject();
+	//well2 = new Well(well, this);
+	//well2->startObject();
+	well2 = generateObject(well);
 	well2->transform.setPosition(3, 0, 0);
 }
 
@@ -26,5 +28,5 @@ void WellScene::update(float delta)
 	well->transform.rotate(15.0f * delta, 0, 0);
 	well->transform.rotate(0, 0, 15.0f * delta);
 
-	well2->transform.rotate(0, 0, 45.0f * delta);
+	//well2->transform.rotate(0, 0, 45.0f * delta);
 }

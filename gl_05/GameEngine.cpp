@@ -105,16 +105,6 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
-		/*MeshRenderer *cube = new CubeMesh();
-		cube->start();
-
-		GameObject *well = new Well(nullptr);
-		well->startObject();
-		well->transform.setPosition(-2, 0, 0);
-
-		GameObject *well2 = new Well(well);
-		well2->startObject();*/
-
 		gameScene = new WellScene(theProgram);
 		gameScene->start();
 
@@ -146,9 +136,7 @@ void GameEngine::run()
 			handleKeyboardEvent();
 			handleMouseEvent();
 
-			currentFrame = glfwGetTime();
-			deltaTime = currentFrame - lastFrame;
-			lastFrame = currentFrame;
+			updateDeltaTime();
 
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -162,22 +150,10 @@ void GameEngine::run()
 			glBindTexture(GL_TEXTURE_2D, texture1);
 			glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture1"), 1);
 
-			glm::mat4 trans;
-			setTransform(trans);
-			//GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
-			//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
 			setCamera();
 
 			// Draw our first triangle
 			theProgram->Use();
-
-			//cube->render();
-			//setTransform(well->transform.getTransform());
-			//well->render();
-
-			//setTransform(well2->transform.getTransform());
-			//well2->render();
 
 			gameScene->update(deltaTime);
 			gameScene->render();
@@ -186,14 +162,7 @@ void GameEngine::run()
 			glfwSwapBuffers(window);
 		}
 
-		/*cube->destroy();
-		delete cube;
-
-		well->destroy();
-		delete well;
-
-		well2->destroy();
-		delete well2;*/
+		delete gameScene;
 
 		delete theProgram;
 	}
@@ -224,6 +193,13 @@ void GameEngine::setCamera()
 	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 	GLuint projLoc = glGetUniformLocation(theProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+}
+
+void GameEngine::updateDeltaTime()
+{
+	currentFrame = glfwGetTime();
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
 }
 
 void GameEngine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
