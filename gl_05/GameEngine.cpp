@@ -105,8 +105,11 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
+		Skybox *skybox = new Skybox();
+
 		MeshRenderer *cube = new CubeMesh();
 		cube->start();
+		skybox->start();
 
 		// Set the texture wrapping parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
@@ -148,18 +151,37 @@ void GameEngine::run()
 			GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
 			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
-			setCamera();
+			//setCamera();
 
-			// Draw our first triangle
+			glm::mat4 view;
+			view = glm::rotate(view, glm::radians(cameraRotation[1]), glm::vec3(1, 0, 0));
+			view = glm::rotate(view, glm::radians(cameraRotation[0]), glm::vec3(0, 1, 0));
+			view = glm::translate(view, cameraPosition);
+			GLuint viewLoc = glGetUniformLocation(theProgram->get_programID(), "view");
+			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+			glm::mat4 projection;
+			projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+			GLuint projLoc = glGetUniformLocation(theProgram->get_programID(), "projection");
+			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
+			// Draw rest
 			theProgram->Use();
 
 			cube->render();
+
+
+			// Draw skybox
+			skybox->render(view, projection);
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
 
+		skybox->destroy();
 		cube->destroy();
+		delete skybox;
 		delete cube;
 
 		delete theProgram;

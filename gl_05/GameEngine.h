@@ -14,6 +14,7 @@ using namespace std;
 #include <glm/gtc/type_ptr.hpp>
 
 #include "CubeMesh.h"
+#include "Skybox.h"
 
 class GameEngine
 {
@@ -27,6 +28,7 @@ private:
 	static GameEngine *instance;
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
+	ShaderProgram *skyboxProgram;
 
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
