@@ -54,16 +54,37 @@
     <ClCompile Include="Well.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CylinderMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TubeMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
+    <None Include="skybox.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="skybox.vert">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="iipw.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="weiti.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="awesomeface.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tubeTex.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -102,6 +123,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Well.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TubeMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,8 +27,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Marcin/Desktop/ZW2-studnia/Include/glm/out/build/x64-Debug",
-		"source" : "C:/Users/Marcin/Desktop/ZW2-studnia/Include/glm"
+		"build" : "C:/Users/Marcin/Desktop/gkom/Include/glm/out/build/x64-Debug",
+		"source" : "C:/Users/Marcin/Desktop/gkom/Include/glm"
 	},
 	"version" : 
 	{

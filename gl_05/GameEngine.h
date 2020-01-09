@@ -14,6 +14,7 @@ using namespace std;
 #include <glm/gtc/type_ptr.hpp>
 
 #include "CubeMesh.h"
+#include "Skybox.h"
 #include "Well.h"
 #include "WellScene.h"
 

@@ -1,8 +1,16 @@
 ﻿  GameEngine.cpp
-C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(230,51): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(230,45): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Marcin\Desktop\gkom\gl_05\GameEngine.cpp(171,27): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Marcin\Desktop\gkom\gl_05\GameEngine.cpp(236,51): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Marcin\Desktop\gkom\gl_05\GameEngine.cpp(236,45): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+  gl_05.cpp
+  Skybox.cpp
+  Generowanie kodu...
   Trwa generowanie kodu
   Zakończono generowanie kodu
+LINK : warning LNK4286: symbol „___glewGetUniformLocation” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „GameScene.obj”
+LINK : warning LNK4286: symbol „___glewGetUniformLocation” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
+LINK : warning LNK4286: symbol „___glewUniformMatrix4fv” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „GameScene.obj”
+LINK : warning LNK4286: symbol „___glewUniformMatrix4fv” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
 LINK : warning LNK4286: symbol „___glewBindBuffer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
 LINK : warning LNK4286: symbol „___glewBindBuffer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
 LINK : warning LNK4286: symbol „___glewBufferData” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
@@ -21,7 +29,5 @@ LINK : warning LNK4286: symbol „___glewDeleteVertexArrays” zdefiniowany w el
 LINK : warning LNK4286: symbol „___glewDeleteVertexArrays” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
 LINK : warning LNK4286: symbol „___glewGenVertexArrays” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
 LINK : warning LNK4286: symbol „___glewGenVertexArrays” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
-LINK : warning LNK4286: symbol „___glewGetUniformLocation” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
-LINK : warning LNK4286: symbol „___glewUniformMatrix4fv” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
 LINK : warning LNK4286: symbol „___glewUseProgram” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „Skybox.obj”
-  gl_05.vcxproj -> C:\Users\Marcin\Desktop\ZW2-studnia\Debug\gl_05.exe
+  gl_05.vcxproj -> C:\Users\Marcin\Desktop\gkom\Debug\gl_05.exe
