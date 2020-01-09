@@ -1,14 +1,29 @@
 #include "GameObject.h"
 
-GameObject::GameObject(GameObject* parent, GameScene *scene) : parent(parent), scene(scene)
+GameObject::GameObject(GameObject* parent) : parent(parent)
 {
 	if (parent != nullptr)
+	{
 		parent->addChild(this);
+		scene = parent->scene;
+		scene->registerObject(this);
+	}
+}
+
+GameObject::GameObject(GameScene *scene) : scene(scene)
+{
+	scene->registerObject(this);
 }
 
 GameObject::~GameObject()
 {
 	parent->removeChild(this);
+
+	for (auto &mesh : meshes)
+	{
+		mesh->destroy();
+		delete mesh;
+	}
 }
 
 void GameObject::renderObject(const glm::mat4 &parentTransform)
@@ -49,22 +64,20 @@ void GameObject::startObject()
 	}
 }
 
+void GameObject::destroyObject()
+{
+	for (auto &child : children)
+	{
+		child->destroyObject();
+		delete child;
+	}
+
+	destroy();
+}
+
 void GameObject::render()
 {
-	//TODO: temp solution. Discuss setting transform in engine when iterating over all gameobjects
-	//GameEngine::getInstance().setTransform(transform.getTransform());
-	//glm::mat4 trans = transform.getTransform();
-	//scene->setTransform(transform.getTransform(parent);
 
-	//for (const auto &mesh : meshes)
-	//{
-	//	mesh->render();
-	//}
-
-	//for (auto &child : children)
-	//{
-	//	child->render();
-	//}
 }
 
 void GameObject::update(float delta)

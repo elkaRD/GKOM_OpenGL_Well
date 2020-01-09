@@ -106,7 +106,7 @@ void GameEngine::run()
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
 		gameScene = new WellScene(theProgram);
-		gameScene->start();
+		gameScene->startScene();
 
 		// Set the texture wrapping parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
@@ -155,13 +155,14 @@ void GameEngine::run()
 			// Draw our first triangle
 			theProgram->Use();
 
-			gameScene->update(deltaTime);
+			gameScene->updateScene(deltaTime);
 			gameScene->render();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
 
+		gameScene->destroyScene();
 		delete gameScene;
 
 		delete theProgram;
@@ -172,12 +173,6 @@ void GameEngine::run()
 		system("pause");
 	}
 	glfwTerminate();
-}
-
-void GameEngine::setTransform(glm::mat4 trans)
-{
-	GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 }
 
 void GameEngine::setCamera()

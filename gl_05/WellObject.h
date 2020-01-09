@@ -8,8 +8,9 @@ class Well : public GameObject
 {
 public:
 
-	Well(GameObject *parent, GameScene *scene);
+	Well(GameObject *parent);
 	void start();
+	void update(float delta);
 };
 
 #endif

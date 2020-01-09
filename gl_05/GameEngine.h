@@ -25,8 +25,6 @@ public:
 	void init();
 	void run();
 
-	void setTransform(glm::mat4 trans); //TODO: make it private
-
 private:
 	static GameEngine *instance;
 	GLFWwindow *window;
