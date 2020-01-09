@@ -116,7 +116,7 @@ void GameEngine::run()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		// prepare textures
-		GLuint texture0 = LoadMipmapTexture(GL_TEXTURE0, "iipw.png");
+		GLuint texture0 = LoadMipmapTexture(GL_TEXTURE0, "tubeTex.png");
 		GLuint texture1 = LoadMipmapTexture(GL_TEXTURE1, "weiti.png");
 
 		handleScreenResizeEvent(screenWidth, screenHeight);

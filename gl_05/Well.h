@@ -3,6 +3,8 @@
 
 #include "GameObject.h"
 #include "CubeMesh.h"
+#include "CylinderMesh.h"
+#include "TubeMesh.h"
 
 class Well : public GameObject
 {

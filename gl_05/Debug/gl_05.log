@@ -1,44 +1,47 @@
-﻿Build started 2020-01-09 14:56:28.
-     1>Project "F:\studia\sem5\gkom\projekt\ZW2-studnia\gl_05\gl_05.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt GameEngine.cpp Well.cpp WellScene.cpp gl_05.cpp
-         gl_05.cpp
-         WellScene.cpp
-         Well.cpp
-         GameEngine.cpp
-     1>GameEngine.cpp(158): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-     1>GameEngine.cpp(217): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-         Generating Code...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\studia\sem5\gkom\projekt\ZW2-studnia\Debug\gl_05.exe" /INCREMENTAL:NO /NOLOGO legacy_stdio_definitions.lib opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"F:\studia\sem5\gkom\projekt\ZW2-studnia\Debug\gl_05.pdb" /SUBSYSTEM:CONSOLE /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\studia\sem5\gkom\projekt\ZW2-studnia\Debug\gl_05.lib" /MACHINE:X86 Debug\CubeMesh.obj
-         Debug\GameEngine.obj
-         Debug\GameObject.obj
-         Debug\GameScene.obj
-         Debug\gl_05.obj
-         Debug\Light.obj
-         Debug\MeshRenderer.obj
-         Debug\shprogram.obj
-         Debug\Texture.obj
-         Debug\Transform.obj
-         Debug\Vertex.obj
-         Debug\Well.obj
-         Debug\WellScene.obj
-         Generating code
-         Finished generating code
-     1>GameScene.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
-     1>GameScene.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
-     1>MeshRenderer.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-         gl_05.vcxproj -> F:\studia\sem5\gkom\projekt\ZW2-studnia\Debug\gl_05.exe
-     1>Done Building Project "F:\studia\sem5\gkom\projekt\ZW2-studnia\gl_05\gl_05.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:03.09
+﻿  CubeMesh.cpp
+  CylinderMesh.cpp
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(36,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(37,23): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(37,95): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(38,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(51,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\CylinderMesh.cpp(52,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  GameEngine.cpp
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(158,27): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(217,51): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\GameEngine.cpp(217,45): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+  GameObject.cpp
+  GameScene.cpp
+  gl_05.cpp
+  Light.cpp
+  MeshRenderer.cpp
+  shprogram.cpp
+  Texture.cpp
+  Transform.cpp
+  TubeMesh.cpp
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(33,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(34,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(46,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(47,24): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(63,68): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(64,25): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(64,119): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\gl_05\TubeMesh.cpp(65,26): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Vertex.cpp
+  Well.cpp
+  WellScene.cpp
+  Generowanie kodu...
+  Trwa generowanie kodu
+  Zakończono generowanie kodu
+LINK : warning LNK4286: symbol „___glewGetUniformLocation” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „GameScene.obj”
+LINK : warning LNK4286: symbol „___glewUniformMatrix4fv” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „GameScene.obj”
+LINK : warning LNK4286: symbol „___glewBindBuffer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewBufferData” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewDeleteBuffers” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewGenBuffers” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewEnableVertexAttribArray” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewVertexAttribPointer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewBindVertexArray” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewDeleteVertexArrays” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+LINK : warning LNK4286: symbol „___glewGenVertexArrays” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”
+  gl_05.vcxproj -> C:\Users\Łukasz\Desktop\GKOM_projekt\ZW2-studnia\Debug\gl_05.exe
