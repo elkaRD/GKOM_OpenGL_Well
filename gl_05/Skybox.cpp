@@ -30,13 +30,13 @@ unsigned int loadCubemap(std::vector<std::string> faces)
 	return textureID;
 }
 
-void Skybox::setupBuffers()
+void Skybox::setupBuffers(GLfloat skyboxVercities[])
 {
 	glGenVertexArrays(1, &skyboxVAO);
 	glGenBuffers(1, &skyboxVBO);
 	glBindVertexArray(skyboxVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 108 * sizeof(skyboxVercities), &skyboxVercities[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 }
@@ -50,9 +50,53 @@ void Skybox::start()
 	faces.push_back("skybox/hills_bk.png");
 	faces.push_back("skybox/hills_ft.png");
 
+	GLfloat skyboxVertices[] = {
+		// positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f
+	};
 
 	skyboxProgram = new ShaderProgram("skybox.vert", "skybox.frag");
-	setupBuffers();
+	setupBuffers(skyboxVertices);
 	cubemapTexture = loadCubemap(faces);
 }
 

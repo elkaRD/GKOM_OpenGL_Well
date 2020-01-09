@@ -1,6 +1,6 @@
 ﻿  GameEngine.cpp
-C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(229,51): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(229,45): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(230,51): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Marcin\Desktop\ZW2-studnia\gl_05\GameEngine.cpp(230,45): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
   Trwa generowanie kodu
   Zakończono generowanie kodu
 LINK : warning LNK4286: symbol „___glewBindBuffer” zdefiniowany w elemencie „glew32s.lib(glew.obj)” jest importowany przez element „MeshRenderer.obj”

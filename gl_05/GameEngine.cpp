@@ -166,14 +166,15 @@ void GameEngine::run()
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 
-			// Draw rest
-			theProgram->Use();
+			// Draw objects
+			//theProgram->Use();
 
 			cube->render();
 
-
 			// Draw skybox
 			skybox->render(view, projection);
+			theProgram->Use();
+
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
