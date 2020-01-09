@@ -105,11 +105,8 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
-		Skybox *skybox = new Skybox();
-
-		MeshRenderer *cube = new CubeMesh();
-		cube->start();
-		skybox->start();
+		gameScene = new WellScene(theProgram);
+		gameScene->startScene();
 
 		// Set the texture wrapping parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
@@ -119,10 +116,14 @@ void GameEngine::run()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		// prepare textures
-		GLuint texture0 = LoadMipmapTexture(GL_TEXTURE0, "iipw.png");
+		GLuint texture0 = LoadMipmapTexture(GL_TEXTURE0, "tubeTex.png");
 		GLuint texture1 = LoadMipmapTexture(GL_TEXTURE1, "weiti.png");
 
 		handleScreenResizeEvent(screenWidth, screenHeight);
+
+		currentFrame = glfwGetTime();
+		lastFrame = currentFrame;
+		deltaTime = 0;
 
 		// main event loop
 		while (!glfwWindowShouldClose(window))
@@ -134,6 +135,8 @@ void GameEngine::run()
 			
 			handleKeyboardEvent();
 			handleMouseEvent();
+
+			updateDeltaTime();
 
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -147,43 +150,20 @@ void GameEngine::run()
 			glBindTexture(GL_TEXTURE_2D, texture1);
 			glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture1"), 1);
 
-			glm::mat4 trans;
-			GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
-			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+			setCamera();
 
-			//setCamera();
-
-			glm::mat4 view;
-			view = glm::rotate(view, glm::radians(cameraRotation[1]), glm::vec3(1, 0, 0));
-			view = glm::rotate(view, glm::radians(cameraRotation[0]), glm::vec3(0, 1, 0));
-			view = glm::translate(view, cameraPosition);
-			GLuint viewLoc = glGetUniformLocation(theProgram->get_programID(), "view");
-			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-
-			glm::mat4 projection;
-			projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
-			GLuint projLoc = glGetUniformLocation(theProgram->get_programID(), "projection");
-			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-
-			// Draw objects
-			//theProgram->Use();
-
-			cube->render();
-
-			// Draw skybox
-			skybox->render(view, projection);
+			// Draw our first triangle
 			theProgram->Use();
 
+			gameScene->updateScene(deltaTime);
+			gameScene->render();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
 
-		skybox->destroy();
-		cube->destroy();
-		delete skybox;
-		delete cube;
+		gameScene->destroyScene();
+		delete gameScene;
 
 		delete theProgram;
 	}
@@ -208,6 +188,13 @@ void GameEngine::setCamera()
 	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 	GLuint projLoc = glGetUniformLocation(theProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+}
+
+void GameEngine::updateDeltaTime()
+{
+	currentFrame = glfwGetTime();
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
 }
 
 void GameEngine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -268,7 +255,7 @@ void GameEngine::handleKeyboardEvent()
 
 	cameraMovement = rotateTransform * cameraMovement;
 
-	cameraPosition += glm::vec3(cameraMovement) * 0.05f;
+	cameraPosition += glm::vec3(cameraMovement) * 3.0f *(float)deltaTime;
 }
 
 void GameEngine::handleMouseEvent()

@@ -14,7 +14,7 @@
     <ProjectGuid>{B00CDD07-BE64-4A86-8B73-FAC569267C9A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>gl_05</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CubeMesh.cpp" />
+    <ClCompile Include="CylinderMesh.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -93,41 +94,38 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="shprogram.cpp" />
-    <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TubeMesh.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Well.cpp" />
+    <ClCompile Include="WellScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
-    <None Include="skybox.frag" />
-    <None Include="skybox.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="awesomeface.png" />
     <Image Include="iipw.png" />
-    <Image Include="skybox\hills_bk.png" />
-    <Image Include="skybox\hills_dn.png" />
-    <Image Include="skybox\hills_ft.png" />
-    <Image Include="skybox\hills_lf.png" />
-    <Image Include="skybox\hills_rt.png" />
-    <Image Include="skybox\hills_up.png" />
+    <Image Include="tubeTex.png" />
     <Image Include="weiti.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CubeMesh.h" />
+    <ClInclude Include="CylinderMesh.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="shprogram.h" />
-    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TubeMesh.h" />
     <ClInclude Include="Vertex.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="gl_05.rc" />
+    <ClInclude Include="Well.h" />
+    <ClInclude Include="WellScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

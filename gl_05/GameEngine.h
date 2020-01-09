@@ -14,7 +14,8 @@ using namespace std;
 #include <glm/gtc/type_ptr.hpp>
 
 #include "CubeMesh.h"
-#include "Skybox.h"
+#include "Well.h"
+#include "WellScene.h"
 
 class GameEngine
 {
@@ -28,7 +29,7 @@ private:
 	static GameEngine *instance;
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
-	ShaderProgram *skyboxProgram;
+	GameScene *gameScene;
 
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
@@ -37,7 +38,10 @@ private:
 
 	GLuint screenWidth = 1280, screenHeight = 720;
 
+	double currentFrame, deltaTime, lastFrame;
+
 	void setCamera();
+	void updateDeltaTime();
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);

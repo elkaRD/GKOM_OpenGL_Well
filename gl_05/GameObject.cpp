@@ -3,17 +3,38 @@
 GameObject::GameObject(GameObject* parent) : parent(parent)
 {
 	if (parent != nullptr)
+	{
 		parent->addChild(this);
+		scene = parent->scene;
+		scene->registerObject(this);
+	}
+}
+
+GameObject::GameObject(GameScene *scene) : scene(scene)
+{
+	scene->registerObject(this);
 }
 
 GameObject::~GameObject()
 {
 	parent->removeChild(this);
+
+	for (auto &mesh : meshes)
+	{
+		mesh->destroy();
+		delete mesh;
+	}
 }
 
-void GameObject::renderObject(const glm::vec4 &parentTransform)
+void GameObject::renderObject(const glm::mat4 &parentTransform)
 {
-	glm::vec4 transformMatrix = transform.getTransform(parentTransform);
+	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
+	scene->setTransform(transformMatrix);
+
+	for (const auto &mesh : meshes)
+	{
+		mesh->render();
+	}
 
 	render();
 
@@ -31,6 +52,27 @@ void GameObject::updateObject(float delta)
 	{
 		child->updateObject(delta);
 	}
+}
+
+void GameObject::startObject()
+{
+	start();
+
+	for (auto &mesh : meshes)
+	{
+		mesh->start();
+	}
+}
+
+void GameObject::destroyObject()
+{
+	for (auto &child : children)
+	{
+		child->destroyObject();
+		delete child;
+	}
+
+	destroy();
 }
 
 void GameObject::render()

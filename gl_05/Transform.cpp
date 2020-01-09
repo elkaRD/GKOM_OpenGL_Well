@@ -22,6 +22,56 @@ void Transform::setScale(const glm::vec3 &scale)
 	this->scale = scale;
 }
 
+void Transform::setPosition(float x, float y, float z)
+{
+	setPosition(glm::vec3(x, y, z));
+}
+
+void Transform::setRotation(float x, float y, float z)
+{
+	setRotation(glm::vec3(x, y, z));
+}
+
+void Transform::setScale(float x, float y, float z)
+{
+	setScale(glm::vec3(x, y, z));
+}
+
+void Transform::setScale(float scale)
+{
+	setScale(glm::vec3(scale, scale, scale));
+}
+
+void Transform::translate(const glm::vec3 &position)
+{
+	this->position += position;
+}
+
+void Transform::rotate(const glm::vec3 &rotation)
+{
+	this->rotation += rotation;
+}
+
+//void Transform::scale(const glm::vec3 &scale)
+//{
+//	this->scale *= scale;
+//}
+
+void Transform::translate(float x, float y, float z)
+{
+	translate(glm::vec3(x, y, z));
+}
+
+void Transform::rotate(float x, float y, float z)
+{
+	rotate(glm::vec3(x, y, z));
+}
+
+//void Transform::scale(float x, float y, float z)
+//{
+//	scale(glm::vec3(x, y, z));
+//}
+
 glm::vec3 Transform::getPosition() const
 {
 	return position;
@@ -37,9 +87,9 @@ glm::vec3 Transform::getScale() const
 	return scale;
 }
 
-glm::vec4 Transform::getTransform() const
+glm::mat4 Transform::getTransform() const
 {
-	return getTransform(glm::vec4(1.0f));
+	return getTransform(glm::mat4());
 }
 
 //glm::vec4 Transform::getTransform(const Transform &parentTransform) const
@@ -47,7 +97,7 @@ glm::vec4 Transform::getTransform() const
 //	return getTransform(parentTransform.getLastTransform());
 //}
 
-glm::vec4 Transform::getTransform(const glm::vec4 &parentTransform) const
+glm::mat4 Transform::getTransform(const glm::mat4 &parentTransform) const
 {
 	glm::mat4 temp = glm::mat4(1.0f);
 
