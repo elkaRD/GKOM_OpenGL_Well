@@ -2,7 +2,7 @@
 #define WELL_SCENE_H
 
 #include "GameScene.h"
-#include "WellObject.h"
+#include "Well.h"
 
 class WellScene : public GameScene
 {

@@ -11,6 +11,9 @@ public:
 	Well(GameObject *parent);
 	void start();
 	void update(float delta);
+
+private:
+
 };
 
 #endif

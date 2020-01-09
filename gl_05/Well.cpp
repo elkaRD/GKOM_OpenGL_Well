@@ -1,4 +1,4 @@
-#include "WellObject.h"
+#include "Well.h"
 
 Well::Well(GameObject *parent) : GameObject(parent)
 {

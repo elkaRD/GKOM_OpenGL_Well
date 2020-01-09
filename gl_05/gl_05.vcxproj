@@ -93,8 +93,11 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="shprogram.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Well.cpp" />
+    <ClCompile Include="WellScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
@@ -112,8 +115,11 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="shprogram.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Well.h" />
+    <ClInclude Include="WellScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

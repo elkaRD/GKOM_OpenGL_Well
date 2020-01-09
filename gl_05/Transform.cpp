@@ -37,6 +37,11 @@ void Transform::setScale(float x, float y, float z)
 	setScale(glm::vec3(x, y, z));
 }
 
+void Transform::setScale(float scale)
+{
+	setScale(glm::vec3(scale, scale, scale));
+}
+
 void Transform::translate(const glm::vec3 &position)
 {
 	this->position += position;
