@@ -15,6 +15,7 @@ using namespace std;
 
 #include "CubeMesh.h"
 #include "WellObject.h"
+#include "WellScene.h"
 
 class GameEngine
 {
@@ -30,6 +31,7 @@ private:
 	static GameEngine *instance;
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
+	GameScene *gameScene;
 
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;

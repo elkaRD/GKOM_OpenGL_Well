@@ -105,14 +105,18 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 
-		MeshRenderer *cube = new CubeMesh();
+		/*MeshRenderer *cube = new CubeMesh();
 		cube->start();
 
 		GameObject *well = new Well(nullptr);
 		well->startObject();
+		well->transform.setPosition(-2, 0, 0);
 
-		GameObject *well2 = new Well(nullptr);
-		well2->startObject();
+		GameObject *well2 = new Well(well);
+		well2->startObject();*/
+
+		gameScene = new WellScene(theProgram);
+		gameScene->start();
 
 		// Set the texture wrapping parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
@@ -169,24 +173,27 @@ void GameEngine::run()
 			theProgram->Use();
 
 			//cube->render();
-			setTransform(well->transform.getTransform());
-			well->render();
+			//setTransform(well->transform.getTransform());
+			//well->render();
 
-			setTransform(well2->transform.getTransform());
-			well2->render();
+			//setTransform(well2->transform.getTransform());
+			//well2->render();
+
+			gameScene->update(deltaTime);
+			gameScene->render();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
 
-		cube->destroy();
+		/*cube->destroy();
 		delete cube;
 
 		well->destroy();
 		delete well;
 
 		well2->destroy();
-		delete well2;
+		delete well2;*/
 
 		delete theProgram;
 	}

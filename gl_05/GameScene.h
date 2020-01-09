@@ -1,21 +1,30 @@
 #ifndef GAME_SCENE_H
 #define GAME_SCENE_H
 
+#include <glm/gtc/type_ptr.hpp>
 #include "GameObject.h"
+#include "shprogram.h"
+
+class GameObject;
 
 class GameScene
 {
 public:
 
-	GameScene();
+	GameScene(ShaderProgram * shader);
 	~GameScene();
 
-	void start();
+	virtual void start();
 	void render();
-	void update(float delta);
+	virtual void update(float delta);
 
-private:
+	ShaderProgram* getShader();
+
+	void setTransform(glm::mat4 trans);
+
+protected:
 	GameObject *rootObject;
+	ShaderProgram *shader;
 };
 
 #endif

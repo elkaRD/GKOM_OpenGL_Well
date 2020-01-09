@@ -8,7 +8,7 @@ class Well : public GameObject
 {
 public:
 
-	Well(GameObject *parent);
+	Well(GameObject *parent, GameScene *scene);
 	void start();
 };
 
