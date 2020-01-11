@@ -7,7 +7,7 @@ Well::Well(GameObject *parent) : GameObject(parent)
 
 void Well::start()
 {
-	meshes.push_back(new CubeMesh(1, 0.5f, 0.1f));
+	meshes.push_back(new CubeMesh());
 }
 
 void Well::update(float delta)

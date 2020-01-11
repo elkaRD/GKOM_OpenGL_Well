@@ -63,6 +63,7 @@ void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector
 	}
 
 	scaleVertices(vertices, x, y, z);
+	verticalInterpolationScale(vertices, 1.5f, 0.5f);
 
 	drawingMode = GL_TRIANGLES;
 }

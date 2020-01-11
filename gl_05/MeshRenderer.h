@@ -29,6 +29,7 @@ private:
 	GLsizei indicesSize;
 
 	float lerp(float b, float e, float s);
+	float reversedLerp(float b, float e, float x);
 };
 
 #endif
