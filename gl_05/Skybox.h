@@ -18,7 +18,6 @@ public:
 	void destroy();
 private:
 	GLuint skyboxVAO, skyboxVBO;
-	//GLfloat skyboxVertices[108];
 	GLuint cubemapTexture;
 	ShaderProgram *skyboxProgram;
 	std::vector<std::string> faces;
