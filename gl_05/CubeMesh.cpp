@@ -2,6 +2,21 @@
 
 using namespace glm;
 
+CubeMesh::CubeMesh() : x(1.0f), y(1.0f), z(1.0f)
+{
+
+}
+
+CubeMesh::CubeMesh(float size) : x(size), y(size), z(size)
+{
+
+}
+
+CubeMesh::CubeMesh(float x, float y, float z) : x(x), y(y), z(z)
+{
+
+}
+
 void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode)
 {
 	vertices.reserve(32);
@@ -46,6 +61,8 @@ void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector
 		indices.push_back(i*4 + 3);
 		indices.push_back(i*4 + 1);
 	}
+
+	scaleVertices(vertices, x, y, z);
 
 	drawingMode = GL_TRIANGLES;
 }
