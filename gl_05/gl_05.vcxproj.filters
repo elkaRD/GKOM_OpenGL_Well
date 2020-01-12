@@ -92,47 +92,47 @@
     <ClInclude Include="shprogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeMesh.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WellScene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Well.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CylinderMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TubeMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CubeMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Skybox.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Well.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WellScene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

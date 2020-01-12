@@ -101,12 +101,13 @@ glm::mat4 Transform::getTransform(const glm::mat4 &parentTransform) const
 {
 	glm::mat4 temp = glm::mat4(1.0f);
 
-	temp = glm::scale(temp, scale);
 	temp = glm::translate(temp, position);
 
 	temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0, 1, 0));
 	temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1, 0, 0));
 	temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+
+	temp = glm::scale(temp, scale);
 
 	return parentTransform * temp;
 }

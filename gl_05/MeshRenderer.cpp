@@ -65,8 +65,7 @@ void MeshRenderer::scaleVertices(std::vector<Vertex> &vertices, float x, float y
 		vertex.coord[2] *= z;
 	}
 }
-#include <iostream>
-using namespace std;
+
 void MeshRenderer::verticalInterpolationScale(std::vector<Vertex> &vertices, float lowerScale, float upperScale)
 {
 	float maxY = std::numeric_limits<float>::min();
