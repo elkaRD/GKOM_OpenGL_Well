@@ -55,3 +55,41 @@ void MeshRenderer::destroy()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 }
+
+void MeshRenderer::scaleVertices(std::vector<Vertex> &vertices, float x, float y, float z)
+{
+	for (auto &vertex : vertices)
+	{
+		vertex.coord[0] *= x;
+		vertex.coord[1] *= y;
+		vertex.coord[2] *= z;
+	}
+}
+
+void MeshRenderer::verticalInterpolationScale(std::vector<Vertex> &vertices, float lowerScale, float upperScale)
+{
+	float maxY = std::numeric_limits<float>::min();
+	float minY = std::numeric_limits<float>::max();
+
+	for (const auto &vertex : vertices)
+	{
+		if (vertex.coord[1] > maxY) maxY = vertex.coord[1];
+		if (vertex.coord[1] < minY) minY = vertex.coord[1];
+	}
+
+	for (auto &vertex : vertices)
+	{
+		vertex.coord[0] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));
+		vertex.coord[2] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));
+	}
+}
+
+float MeshRenderer::lerp(float b, float e, float s)
+{
+	return (e - b) * s + b;
+}
+
+float MeshRenderer::reversedLerp(float b, float e, float x)
+{
+	return (x - b) / (e - b);
+}

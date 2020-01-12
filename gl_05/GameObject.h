@@ -2,6 +2,7 @@
 #define GAME_OBJECT_H
 
 #include <vector>
+#include <algorithm>
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "GameScene.h"
