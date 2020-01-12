@@ -84,16 +84,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="iipw.png">
+    <Image Include="textures\awesomeface.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="weiti.png">
+    <Image Include="textures\iipw.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="awesomeface.png">
+    <Image Include="textures\weiti.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="tubeTex.png">
+    <Image Include="textures\brickwall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\brickwall_normal.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\tubeTex.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

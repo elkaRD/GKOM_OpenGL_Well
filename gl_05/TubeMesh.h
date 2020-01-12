@@ -20,6 +20,9 @@ private:
 
 	GLuint segments;
 	static const GLuint layers = 1;
+	const char texMode;
+
+	glm::vec2 texScale;
 
 	glm::vec3 color;
 };

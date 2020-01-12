@@ -7,6 +7,8 @@ class PlaneMesh : public MeshRenderer
 {
 public:
 	PlaneMesh();
+	PlaneMesh(GLfloat aWidth, GLfloat aLength, GLfloat scaleU, GLfloat scaleV); // no hole
+	PlaneMesh(GLfloat aWidth, GLfloat aLength, GLfloat aHoleRadius, glm::vec2 aHoleCenter, GLfloat scaleU, GLfloat scaleV); //hole
 protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 private:
@@ -16,6 +18,8 @@ private:
 	GLfloat width;
 	glm::vec2 holeCenter;
 	GLfloat holeRadius;
+
+	glm::vec2 texScale;
 
 	glm::vec3 color;
 };

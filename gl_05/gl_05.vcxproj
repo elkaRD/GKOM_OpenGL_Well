@@ -14,13 +14,13 @@
     <ProjectGuid>{B00CDD07-BE64-4A86-8B73-FAC569267C9A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>gl_05</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -112,10 +112,12 @@
     <None Include="skybox.vert" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="awesomeface.png" />
-    <Image Include="iipw.png" />
-    <Image Include="tubeTex.png" />
-    <Image Include="weiti.png" />
+    <Image Include="textures\awesomeface.png" />
+    <Image Include="textures\brickwall.jpg" />
+    <Image Include="textures\brickwall_normal.jpg" />
+    <Image Include="textures\iipw.png" />
+    <Image Include="textures\tubeTex.png" />
+    <Image Include="textures\weiti.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CubeMesh.h" />
