@@ -92,6 +92,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="gl_05.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="InputManagers.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="InputManagers.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PlaneMesh.h" />

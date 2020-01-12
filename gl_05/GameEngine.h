@@ -6,15 +6,13 @@
 #include "shprogram.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <unordered_map>
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "CubeMesh.h"
+#include "InputManagers.h"
 #include "Skybox.h"
-#include "Well.h"
 #include "WellScene.h"
 
 class GameEngine
@@ -52,37 +50,8 @@ private:
 	void handleMouseEvent();
 	void handleScreenResizeEvent(int widht, int height);
 
-	class KeyboardManager
-	{
-	public:
-		void nextFrame();
-		void keyStateChanged(int key, int state);
-		bool isHold(int key);
-		bool wasPressed(int key);
-
-	private:
-		std::unordered_map<int, bool> keysStates;
-		std::unordered_map<int, bool> keysPressed;
-	} keyboardManager;
-
-	class MouseManager
-	{
-	public:
-		MouseManager();
-
-		void nextFrame();
-		void mousePosChanged(int x, int y);
-		int getDeltaX();
-		int getDeltaY();
-	private:
-		int lastX;
-		int lastY;
-
-		int deltaX;
-		int deltaY;
-
-		bool firstUpdate;
-	} mouseManager;
+	KeyboardManager keyboardManager;
+	MouseManager mouseManager;
 };
 
 #endif

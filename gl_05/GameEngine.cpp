@@ -256,8 +256,8 @@ void GameEngine::handleMouseEvent()
 	if (cameraRotation[0] > 360) cameraRotation[0] -= 360;
 	if (cameraRotation[0] < 0) cameraRotation[0] += 360;
 
-	if (cameraRotation[1] > 80) cameraRotation[1] = 80;
-	if (cameraRotation[1] < -80) cameraRotation[1] = -80;
+	if (cameraRotation[1] > 88) cameraRotation[1] = 88;
+	if (cameraRotation[1] < -88) cameraRotation[1] = -88;
 }
 
 void GameEngine::handleScreenResizeEvent(int width, int height)
@@ -266,64 +266,4 @@ void GameEngine::handleScreenResizeEvent(int width, int height)
 	screenHeight = height;
 
 	glViewport(0, 0, screenWidth, screenHeight);
-}
-
-void GameEngine::KeyboardManager::nextFrame()
-{
-	for (auto &it : keysPressed)
-		it.second = false;
-}
-
-void GameEngine::KeyboardManager::keyStateChanged(int key, int state)
-{
-	if (state != GLFW_PRESS && state != GLFW_RELEASE) return;
-
-	keysStates[key] = state == GLFW_PRESS;
-	if (state == GLFW_PRESS) keysPressed[key] = true;
-}
-
-bool GameEngine::KeyboardManager::isHold(int key)
-{
-	return keysStates[key] || keysPressed[key];
-}
-
-bool GameEngine::KeyboardManager::wasPressed(int key)
-{
-	return keysPressed[key];
-}
-
-GameEngine::MouseManager::MouseManager() : firstUpdate(true)
-{
-
-}
-
-void GameEngine::MouseManager::nextFrame()
-{
-	deltaX = 0;
-	deltaY = 0;
-}
-
-void GameEngine::MouseManager::mousePosChanged(int x, int y)
-{
-	deltaX = x - lastX;
-	deltaY = y - lastY;
-	lastX = x;
-	lastY = y;
-
-	if (firstUpdate)
-	{
-		deltaX = 0;
-		deltaY = 0;
-		firstUpdate = false;
-	}
-}
-
-int GameEngine::MouseManager::getDeltaX()
-{
-	return deltaX;
-}
-
-int GameEngine::MouseManager::getDeltaY()
-{
-	return deltaY;
 }
