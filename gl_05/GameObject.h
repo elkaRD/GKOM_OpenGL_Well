@@ -32,6 +32,9 @@ public:
 	virtual void render();
 	virtual void update(float delta);
 
+private:
+	Texture *texture;
+
 protected:
 	GameObject *parent;
 	GameScene *scene;
@@ -39,7 +42,7 @@ protected:
 	std::vector<GameObject*> children;
 	std::vector<MeshRenderer*> meshes;
 
-	Texture *texture;
+	void setTexture(const char *fileName);
 };
 
 #endif

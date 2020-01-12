@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(GameObject* parent) : parent(parent)
+GameObject::GameObject(GameObject* parent) : parent(parent), texture(nullptr)
 {
 	if (parent != nullptr)
 	{
@@ -10,7 +10,7 @@ GameObject::GameObject(GameObject* parent) : parent(parent)
 	}
 }
 
-GameObject::GameObject(GameScene *scene) : scene(scene)
+GameObject::GameObject(GameScene *scene) : scene(scene), texture(nullptr)
 {
 	scene->registerObject(this);
 }
@@ -31,17 +31,16 @@ void GameObject::renderObject(const glm::mat4 &parentTransform)
 	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
 	scene->setTransform(transformMatrix);
 
+	if (texture != nullptr)
+		texture->use();
+
 	for (const auto &mesh : meshes)
-	{
 		mesh->render();
-	}
 
 	render();
 
 	for (auto &child : children)
-	{
 		child->renderObject(transformMatrix);
-	}
 }
 
 void GameObject::updateObject(float delta)
@@ -105,7 +104,13 @@ void GameObject::addChild(GameObject *child)
 
 void GameObject::removeChild(GameObject *child)
 {
+	//TODO: fix
 	//auto objectToRemove = find(children.begin(), children.end(), child);
 	//iter_swap(objectToRemove, children.end() - 1);
 	//children.pop_back();
+}
+
+void GameObject::setTexture(const char *fileName)
+{
+	texture = new Texture(scene->getShader(), fileName);
 }

@@ -5,7 +5,6 @@
 #include <GL/glew.h>
 #include "shprogram.h"
 #include <GLFW/glfw3.h>
-#include <SOIL.h>
 #include <iostream>
 #include <unordered_map>
 using namespace std;
@@ -52,8 +51,6 @@ private:
 	void handleKeyboardEvent();
 	void handleMouseEvent();
 	void handleScreenResizeEvent(int widht, int height);
-
-	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
 
 	class KeyboardManager
 	{
