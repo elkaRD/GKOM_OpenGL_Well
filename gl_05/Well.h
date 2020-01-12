@@ -5,6 +5,8 @@
 #include "CubeMesh.h"
 #include "CylinderMesh.h"
 #include "TubeMesh.h"
+#include "PlaneMesh.h"
+#include "Ground.h"
 
 class Well : public GameObject
 {

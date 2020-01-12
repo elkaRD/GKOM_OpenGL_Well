@@ -3,6 +3,7 @@
 
 #include "GameScene.h"
 #include "Well.h"
+#include "Ground.h"
 
 class WellScene : public GameScene
 {

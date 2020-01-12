@@ -91,8 +91,10 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="gl_05.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="shprogram.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -120,8 +122,10 @@
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="shprogram.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Texture.h" />

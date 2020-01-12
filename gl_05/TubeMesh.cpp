@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-TubeMesh::TubeMesh(): height(3.0f), radius(1.5f), wallThickness(0.5f), segments(DEFAULT_SEGMENTS_NUMBER) {}
+TubeMesh::TubeMesh(): height(30.0f), radius(1.5f), wallThickness(0.2f), segments(DEFAULT_SEGMENTS_NUMBER) {}
 
 void TubeMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {

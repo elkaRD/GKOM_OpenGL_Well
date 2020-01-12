@@ -105,7 +105,7 @@ void GameObject::addChild(GameObject *child)
 
 void GameObject::removeChild(GameObject *child)
 {
-	auto objectToRemove = find(children.begin(), children.end(), child);
-	iter_swap(objectToRemove, children.end() - 1);
-	children.pop_back();
+	//auto objectToRemove = find(children.begin(), children.end(), child);
+	//iter_swap(objectToRemove, children.end() - 1);
+	//children.pop_back();
 }
