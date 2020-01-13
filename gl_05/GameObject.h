@@ -27,6 +27,8 @@ public:
 	void addChild(GameObject *child);
 	void removeChild(GameObject *child);
 
+	MeshRenderer* addMesh(MeshRenderer *mesh);
+
 	virtual void start();
 	virtual void destroy();
 	virtual void render();
@@ -34,13 +36,14 @@ public:
 
 private:
 	Texture *texture;
+	std::vector<MeshRenderer*> meshes;
+	bool firstUpdate = true;
 
 protected:
 	GameObject *parent;
 	GameScene *scene;
 
 	std::vector<GameObject*> children;
-	std::vector<MeshRenderer*> meshes;
 
 	void setTexture(const char *fileName);
 };

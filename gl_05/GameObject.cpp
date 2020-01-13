@@ -45,6 +45,12 @@ void GameObject::renderObject(const glm::mat4 &parentTransform)
 
 void GameObject::updateObject(float delta)
 {
+	if (firstUpdate)
+	{
+		firstUpdate = false;
+		startObject();
+	}
+
 	update(delta);
 
 	for (auto &child : children)
@@ -108,6 +114,13 @@ void GameObject::removeChild(GameObject *child)
 	//auto objectToRemove = find(children.begin(), children.end(), child);
 	//iter_swap(objectToRemove, children.end() - 1);
 	//children.pop_back();
+}
+
+MeshRenderer* GameObject::addMesh(MeshRenderer *mesh)
+{
+	mesh->init();
+	meshes.push_back(mesh);
+	return mesh;
 }
 
 void GameObject::setTexture(const char *fileName)

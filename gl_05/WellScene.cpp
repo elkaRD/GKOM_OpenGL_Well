@@ -13,6 +13,7 @@ void WellScene::start()
 	well2 = new Well(well);
 	well2->transform.setPosition(-30, -13.8, -20);
 
+	Lamp *lamp = new Lamp(rootObject);
 }
 
 void WellScene::update(float delta)

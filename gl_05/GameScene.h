@@ -34,7 +34,6 @@ protected:
 
 private:
 	std::vector<GameObject*> gameObjects;
-	std::vector<GameObject*> objectsToInit;
 };
 
 #endif

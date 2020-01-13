@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "Well.h"
 #include "Ground.h"
+#include "Lamp.h"
 
 class WellScene : public GameScene
 {

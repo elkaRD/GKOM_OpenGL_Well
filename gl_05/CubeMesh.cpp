@@ -89,15 +89,7 @@ void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector
 		indices.push_back(i*4 + 1);
 	}
 
-	if (x != z)
-	{
-		if (x > z)
-		{
-
-		}
-	}
-
-	scaleVertices(vertices, x, y, z);
+	scaleVertices(x, y, z);
 
 	drawingMode = GL_TRIANGLES;
 }

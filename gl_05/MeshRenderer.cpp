@@ -1,12 +1,18 @@
 #include "MeshRenderer.h"
 
+MeshRenderer::MeshRenderer()
+{
+	vertices = new std::vector<Vertex>();
+	indices = new std::vector<GLuint>();
+}
+
+void MeshRenderer::init()
+{
+	initializeMeshVertices(*vertices, *indices, drawingMode);
+}
+
 void MeshRenderer::start()
 {
-	std::vector<Vertex> *vertices = new std::vector<Vertex>();
-	std::vector<GLuint> *indices = new std::vector<GLuint>();
-
-	initializeMeshVertices(*vertices, *indices, drawingMode);
-
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -56,9 +62,9 @@ void MeshRenderer::destroy()
 	glDeleteBuffers(1, &EBO);
 }
 
-void MeshRenderer::scaleVertices(std::vector<Vertex> &vertices, float x, float y, float z)
+void MeshRenderer::scaleVertices(float x, float y, float z)
 {
-	for (auto &vertex : vertices)
+	for (auto &vertex : *vertices)
 	{
 		vertex.coord[0] *= x;
 		vertex.coord[1] *= y;
@@ -66,18 +72,18 @@ void MeshRenderer::scaleVertices(std::vector<Vertex> &vertices, float x, float y
 	}
 }
 
-void MeshRenderer::verticalInterpolationScale(std::vector<Vertex> &vertices, float lowerScale, float upperScale)
+void MeshRenderer::verticalInterpolationScale(float lowerScale, float upperScale)
 {
 	float maxY = std::numeric_limits<float>::min();
 	float minY = std::numeric_limits<float>::max();
 
-	for (const auto &vertex : vertices)
+	for (const auto &vertex : *vertices)
 	{
 		if (vertex.coord[1] > maxY) maxY = vertex.coord[1];
 		if (vertex.coord[1] < minY) minY = vertex.coord[1];
 	}
 
-	for (auto &vertex : vertices)
+	for (auto &vertex : *vertices)
 	{
 		vertex.coord[0] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));
 		vertex.coord[2] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));

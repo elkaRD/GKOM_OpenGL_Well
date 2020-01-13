@@ -44,11 +44,6 @@ void GameScene::destroy()
 
 void GameScene::updateScene(float delta)
 {
-	for (auto &objectToInit : objectsToInit)
-		objectToInit->startObject();
-
-	objectsToInit.clear();
-
 	rootObject->updateObject(delta);
 	update(delta);
 }
@@ -67,5 +62,4 @@ void GameScene::setTransform(glm::mat4 trans)
 void GameScene::registerObject(GameObject *gameObject)
 {
 	gameObjects.push_back(gameObject);
-	objectsToInit.push_back(gameObject);
 }

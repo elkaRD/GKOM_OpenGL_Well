@@ -10,23 +10,29 @@
 class MeshRenderer
 {
 public:
+	MeshRenderer();
 
+	void init();
 	void start();
 	void render() const;
 	void destroy();
+
+	//methods to use in overridden initializeMeshVertices() method:
+	void scaleVertices(float x, float y, float z);
+	void verticalInterpolationScale(float lowerScale, float upperScale);
+	void setColor(float r, float g, float b);
 
 protected:
 	
 	virtual void initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode) = 0;
 
-	//methods to use in overridden initializeMeshVertices() method:
-	void scaleVertices(std::vector<Vertex> &vertices, float x, float y, float z);
-	void verticalInterpolationScale(std::vector<Vertex> &vertices, float lowerScale, float upperScale);
-
 private:
 	GLuint VBO, EBO, VAO;
 	GLenum drawingMode;
 	GLsizei indicesSize;
+
+	std::vector<Vertex> *vertices;
+	std::vector<GLuint> *indices;
 
 	float lerp(float b, float e, float s);
 	float reversedLerp(float b, float e, float x);
