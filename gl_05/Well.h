@@ -17,7 +17,8 @@ public:
 	void update(float delta);
 
 private:
-	GameObject* createStem();
+	GameObject* createStem(GameObject *parent);
+	GameObject* createPeak(GameObject *parent);
 };
 
 #endif
