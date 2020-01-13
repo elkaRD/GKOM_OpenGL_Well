@@ -19,6 +19,7 @@ public:
 
 	//methods to use in overridden initializeMeshVertices() method:
 	void scaleVertices(float x, float y, float z);
+	void scaleVertices(float s);
 	void verticalInterpolationScale(float lowerScale, float upperScale);
 	void setColor(float r, float g, float b);
 

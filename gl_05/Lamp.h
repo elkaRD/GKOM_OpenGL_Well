@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "CubeMesh.h"
+#include "CylinderMesh.h"
 
 class Lamp : public GameObject
 {

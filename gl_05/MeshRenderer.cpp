@@ -72,6 +72,16 @@ void MeshRenderer::scaleVertices(float x, float y, float z)
 	}
 }
 
+void MeshRenderer::scaleVertices(float s)
+{
+	for (auto &vertex : *vertices)
+	{
+		vertex.coord[0] *= s;
+		vertex.coord[1] *= s;
+		vertex.coord[2] *= s;
+	}
+}
+
 void MeshRenderer::verticalInterpolationScale(float lowerScale, float upperScale)
 {
 	float maxY = std::numeric_limits<float>::min();
@@ -87,6 +97,16 @@ void MeshRenderer::verticalInterpolationScale(float lowerScale, float upperScale
 	{
 		vertex.coord[0] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));
 		vertex.coord[2] *= lerp(lowerScale, upperScale, reversedLerp(minY, maxY, vertex.coord[1]));
+	}
+}
+
+void MeshRenderer::setColor(float r, float g, float b)
+{
+	for (auto &vertex : *vertices)
+	{
+		vertex.color[0] = r;
+		vertex.color[1] = g;
+		vertex.color[2] = b;
 	}
 }
 
