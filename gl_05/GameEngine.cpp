@@ -56,7 +56,7 @@ GameEngine& GameEngine::getInstance()
 
 GameEngine::GameEngine()
 {
-	cameraPosition = glm::vec3(0.0f, 0, -3);
+	cameraPosition = glm::vec3(27, -6, 15);
 	cameraRotation = glm::vec2(0.0f);
 }
 
@@ -174,7 +174,7 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	glm::mat4 projection;
-	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 300.0f);
 	GLuint projLoc = glGetUniformLocation(theProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	return std::pair<glm::mat4, glm::mat4> (view, projection);

@@ -17,6 +17,8 @@ public:
 private:
 	GameObject *well;
 	GameObject *well2;
+
+	void createAvenue();
 };
 
 #endif

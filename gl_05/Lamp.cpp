@@ -22,13 +22,11 @@ void Lamp::start()
 	GameObject *base3 = new GameObject(base2);
 	base3->transform.translate(0, 0.4f, 0);
 	mesh = base3->addMesh(new CylinderMesh());
-	//mesh->verticalInterpolationScale(1, 0.5f);
 	mesh->scaleVertices(0.18f, 0.015f, 0.18f);
 
 	GameObject *base4 = new GameObject(base3);
 	base4->transform.translate(0, 1.5f, 0);
 	mesh = base4->addMesh(new CylinderMesh());
-	//mesh->verticalInterpolationScale(1, 0.5f);
 	mesh->scaleVertices(0.12f, 0.7f, 0.12f);
 
 	GameObject *base5 = new GameObject(base4);
@@ -36,7 +34,6 @@ void Lamp::start()
 	mesh = base5->addMesh(new CubeMesh());
 	mesh->verticalInterpolationScale(0.5f, 0.8f);
 	mesh->scaleVertices(0.9f);
-	//mesh->scaleVertices(0.12f, 0.55f, 0.12f);
 
 	GameObject *base6 = new GameObject(base5);
 	base6->transform.translate(0, 0.5f, 0);

@@ -17,7 +17,7 @@ public:
 	void update(float delta);
 
 private:
-
+	GameObject* createStem();
 };
 
 #endif
