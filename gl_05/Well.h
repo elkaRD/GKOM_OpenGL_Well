@@ -17,8 +17,11 @@ public:
 	void update(float delta);
 
 private:
+	GameObject *roller;
+
 	GameObject* createStem(GameObject *parent);
 	GameObject* createPeak(GameObject *parent);
+	GameObject* createRoller(GameObject *parent);
 };
 
 #endif
