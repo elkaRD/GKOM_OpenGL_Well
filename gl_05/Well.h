@@ -18,6 +18,11 @@ public:
 
 private:
 	GameObject *roller;
+	const float fullAnimationDuration = 7;
+	const float fluentActivation = 2;
+	const float rotationSpeed = 300;
+	float rollTime = 0;
+	bool direction = true;
 
 	GameObject* createStem(GameObject *parent);
 	GameObject* createPeak(GameObject *parent);

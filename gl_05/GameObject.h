@@ -3,10 +3,14 @@
 
 #include <vector>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "GameScene.h"
 #include"Texture.h"
+
+#define M_PI       3.14159265358979323846
 
 class GameScene;
 

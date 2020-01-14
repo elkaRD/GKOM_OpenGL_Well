@@ -18,7 +18,31 @@ void Well::start()
 
 void Well::update(float delta)
 {
+	rollTime += delta;
 
+	float d = 1;
+
+	if (rollTime < fluentActivation)
+	{
+		float s = rollTime / fluentActivation;
+		d = (sin(M_PI * s - M_PI / 2) + 1) / 2;
+	}
+	else if (rollTime > fullAnimationDuration - fluentActivation)
+	{
+		float s = (rollTime - (fullAnimationDuration - fluentActivation)) / fluentActivation;
+		d = (sin(M_PI * s + M_PI / 2) + 1) / 2;
+	}
+
+	if (rollTime >= fullAnimationDuration)
+	{
+		d = 0;
+		direction = !direction;
+		rollTime = 0;
+	}
+
+	if (direction) d *= -1;
+
+	roller->transform.rotate(rotationSpeed * d * delta, 0, 0);
 }
 
 GameObject* Well::createStem(GameObject *parent)
@@ -95,10 +119,11 @@ GameObject* Well::createPeak(GameObject *parent)
 GameObject* Well::createRoller(GameObject *parent)
 {
 	GameObject *pivot = new GameObject(parent);
+	pivot->transform.translate(0, 3.5, 0);
 
 	GameObject *horizontal = new GameObject(pivot);
 	horizontal->transform.rotate(0, 0, 90);
-	horizontal->transform.translate(0.5f, 3.5, 0);
+	horizontal->transform.translate(0.5f, 0, 0);
 	MeshRenderer *mesh = horizontal->addMesh(new CylinderMesh());
 	mesh->scaleVertices(0.08f, 0.8, 0.08f);
 

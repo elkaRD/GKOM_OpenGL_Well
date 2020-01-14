@@ -34,7 +34,7 @@ private:
 
 	GameEngine();
 
-	GLuint screenWidth = 1880, screenHeight = 920;
+	GLuint screenWidth = 1280, screenHeight = 720;
 
 	double currentFrame, deltaTime, lastFrame;
 
