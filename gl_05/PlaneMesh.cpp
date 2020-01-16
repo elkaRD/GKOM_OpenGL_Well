@@ -16,9 +16,8 @@ PlaneMesh::PlaneMesh(GLfloat aWidth, GLfloat aLength, GLfloat aHoleRadius, glm::
 
 void PlaneMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	vertices.push_back(Vertex(glm::vec3(-width / 2, 0, -length / 2), color, glm::vec2(0.0f, 0.0f) * texScale, up));
-	vertices.push_back(Vertex(glm::vec3(width / 2, 0, -length / 2), color, glm::vec2(1.0f, 0.0f) * texScale, up));
+	vertices.push_back(Vertex(glm::vec3(-width / 2, 0, -length / 2), color, glm::vec2(0.0f, 0.0f) * texScale));
+	vertices.push_back(Vertex(glm::vec3(width / 2, 0, -length / 2), color, glm::vec2(1.0f, 0.0f) * texScale));
 
 	if (holeRadius != 0.0f)
 	{
@@ -26,14 +25,14 @@ void PlaneMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vecto
 		{
 			GLfloat z = i == 0 ? holeCenter.y - holeRadius : holeCenter.y + holeRadius;
 			GLfloat v = i == 0 ? (holeCenter.y - holeRadius) / length + 0.5f : (holeCenter.y + holeRadius) / length + 0.5f;
-			vertices.push_back(Vertex(glm::vec3(-width / 2, 0, z), color, glm::vec2(0.0f, v) * texScale, up));
-			vertices.push_back(Vertex(glm::vec3(holeCenter.x - holeRadius, 0, z), color, glm::vec2((holeCenter.x - holeRadius) / length + 0.5f, v) * texScale, up));
-			vertices.push_back(Vertex(glm::vec3(holeCenter.x + holeRadius, 0, z), color, glm::vec2((holeCenter.x + holeRadius) / length + 0.5f, v) * texScale, up));
-			vertices.push_back(Vertex(glm::vec3(width / 2, 0, z), color, glm::vec2(1.0f, v) * texScale, up));
+			vertices.push_back(Vertex(glm::vec3(-width / 2, 0, z), color, glm::vec2(0.0f, v) * texScale));
+			vertices.push_back(Vertex(glm::vec3(holeCenter.x - holeRadius, 0, z), color, glm::vec2((holeCenter.x - holeRadius) / length + 0.5f, v) * texScale));
+			vertices.push_back(Vertex(glm::vec3(holeCenter.x + holeRadius, 0, z), color, glm::vec2((holeCenter.x + holeRadius) / length + 0.5f, v) * texScale));
+			vertices.push_back(Vertex(glm::vec3(width / 2, 0, z), color, glm::vec2(1.0f, v) * texScale));
 		}
 	}
-	vertices.push_back(Vertex(glm::vec3(-width / 2, 0, length / 2), color, glm::vec2(0.0f, 1.0f) * texScale, up));
-	vertices.push_back(Vertex(glm::vec3(width / 2, 0, length / 2), color, glm::vec2(1.0f, 1.0f) * texScale, up));
+	vertices.push_back(Vertex(glm::vec3(-width / 2, 0, length / 2), color, glm::vec2(0.0f, 1.0f) * texScale));
+	vertices.push_back(Vertex(glm::vec3(width / 2, 0, length / 2), color, glm::vec2(1.0f, 1.0f) * texScale));
 	if ( holeRadius != 0.0f) 
 	{
 		glm::vec3 center = glm::vec3(holeCenter.x, 0.0f, holeCenter.y);
@@ -42,7 +41,7 @@ void PlaneMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vecto
 		{
 			vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * holeRadius, 0.0f,-sinf(angle * M_PI / 180.0f) * holeRadius),
 				color,texCenter * texScale + glm::vec2(cosf(angle * M_PI / 180.0f) * holeRadius / width,
-					-sinf(angle * M_PI / 180.0f) * holeRadius / length) * texScale, up));
+					-sinf(angle * M_PI / 180.0f) * holeRadius / length) * texScale));
 		}
 	}
 	
