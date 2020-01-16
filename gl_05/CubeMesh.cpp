@@ -43,40 +43,46 @@ void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector
 	if (z > y) lr_x = z / y;
 
 	//up
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 1.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 1.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 0.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 0.0f * ud_y)));
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 1.0f * ud_y),up));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 1.0f * ud_y), up));
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 0.0f * ud_y), up));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 0.0f * ud_y), up));
 
+	glm::vec3 down = glm::vec3(0.0f, -1.0f, 0.0f);
 	//down
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 1.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 1.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(0.0f * ud_x, 0.0f * ud_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 0.0f * ud_y)));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * ud_x, 1.0f * ud_y), down));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 1.0f * ud_y), down));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(0.0f * ud_x, 0.0f * ud_y), down));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * ud_x, 0.0f * ud_y), down));
 
 	//near
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 0.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 0.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 1.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 1.0f * nf_y)));
+	glm::vec3 front = glm::vec3(0.0f, 0.0f, 1.0f);
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 0.0f * nf_y), front));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 0.0f * nf_y), front));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 1.0f * nf_y), front));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 1.0f * nf_y), front));
 
 	//far
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 0.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 0.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(1.0f * nf_x, 1.0f * nf_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 1.0f * nf_y)));
+	glm::vec3 back = glm::vec3(0.0f, 0.0f, -1.0f);
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * nf_x, 0.0f * nf_y), back));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 0.0f * nf_y), back));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(1.0f * nf_x, 1.0f * nf_y), back));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * nf_x, 1.0f * nf_y), back));
 
 	//left
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 0.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 0.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(1.0f * lr_x, 1.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 1.0f * lr_y)));
+	glm::vec3 left = glm::vec3(-1.0f, 0.0f, 0.0f);
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 0.0f * lr_y), left));
+	vertices.push_back(Vertex(vec3(-0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 0.0f * lr_y), left));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, -0.5f),	vec3(1.0f), vec2(1.0f * lr_x, 1.0f * lr_y), left));
+	vertices.push_back(Vertex(vec3(-0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 1.0f * lr_y), left));
 
 	//right
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 0.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 0.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 1.0f * lr_y)));
-	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 1.0f * lr_y)));
+	glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 0.0f * lr_y), right));
+	vertices.push_back(Vertex(vec3(0.5f, 0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 0.0f * lr_y), right));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, 0.5f),		vec3(1.0f), vec2(1.0f * lr_x, 1.0f * lr_y), right));
+	vertices.push_back(Vertex(vec3(0.5f, -0.5f, -0.5f),		vec3(1.0f), vec2(0.0f * lr_x, 1.0f * lr_y), right));
 
 	for (int i = 0; i < 6; ++i)
 	{

@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <glm\detail\func_geometric.hpp>
 
 void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {
@@ -28,6 +29,7 @@ void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 {
 	glm::vec3 center = glm::vec3(0.0f, top ? height / 2.0f : -height / 2.0f, 0.0f);
 	glm::vec2 textureCenter = top ? glm::vec2(0.25f, 0.25f) : glm::vec2(0.25f, 0.75f);
+	glm::vec3 normal = top ? glm::vec3(0.0f, 1.0f, 0.0f) : glm::vec3(0.0f, -1.0f, 0.0f);
 	
 	vertices.push_back(Vertex(center, color, textureCenter));
 
@@ -35,7 +37,7 @@ void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 	{
 		vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * radius, 0.0f,
 			-sinf(angle * M_PI / 180.0f) * radius), color, textureCenter + glm::vec2(cosf(angle * M_PI / 180.0f) * 0.25f,
-				-sinf(angle * M_PI / 180.0f) * 0.25f)));
+				-sinf(angle * M_PI / 180.0f) * 0.25f), normal));
 	}
 
 }
@@ -43,15 +45,16 @@ void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 void CylinderMesh::generateWalls(std::vector<Vertex>& vertices)
 {
 	for (unsigned int slice = 0; slice <= layers; ++slice)
-	{
+	{ 
 		glm::vec3 sliceCenter = glm::vec3(0.0f, height / 2.0f - height / layers * slice, 0.0f);
 		float uCoord = 0.5f + 0.5f / layers * slice;
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
-			vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(angle * M_PI / 180.0f) * radius, 0.0f,
-				-sinf(angle * M_PI / 180.0f) * radius), color, glm::vec2(uCoord, 1.0f - angle / 360.0f)));
+			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * radius, 0.0f, -sinf(angle * M_PI / 180.0f) * radius);
+			vertices.push_back(Vertex(sliceCenter + radial, color, glm::vec2(uCoord, 1.0f - angle / 360.0f), glm::normalize(radial)));
 		}
-		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * radius, 0.0f, -sinf(0.0f) * radius), color, glm::vec2(uCoord, 0.0f)));
+		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * radius, 0.0f, -sinf(0.0f) * radius), color, glm::vec2(uCoord, 0.0f),
+			glm::vec3(cosf(0.0f), 0.0f, -sinf(0.0f))));
 	}
 }
 

@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include <iostream>
+#include <glm\detail\func_geometric.hpp>
 
 TubeMesh::TubeMesh(): height(30.0f), radius(1.5f), wallThickness(0.2f), segments(DEFAULT_SEGMENTS_NUMBER), texScale(3.0f, 30.0f), 
 	texMode('r') {}
@@ -25,6 +26,7 @@ void TubeMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector
 
 void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 {
+	//outer tube
 	for (unsigned int slice = 0; slice <= layers; ++slice)
 	{
 		glm::vec3 sliceCenter = glm::vec3(0.0f, height / 2.0f - height / layers * slice, 0.0f);
@@ -32,13 +34,13 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f - angle / 360.0f, slice / layers) * texScale : glm::vec2(uCoord, 1.0f - angle / 360.0f);
-			vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(angle * M_PI / 180.0f) * (radius), 0.0f,
-				-sinf(angle * M_PI / 180.0f) * (radius)), color, tex));
+			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * (radius), 0.0f, -sinf(angle * M_PI / 180.0f) * (radius));
+			vertices.push_back(Vertex(sliceCenter + radial, color, tex, glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius),
 			0.0f, -sinf(0.0f) * (radius)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale : glm::vec2(uCoord, 0.0f)));
 	}
-
+	//inner tube
 	for (int slice = layers; slice >= 0; --slice)
 	{
 		glm::vec3 sliceCenter = glm::vec3(0.0f, height / 2.0f - height / layers * slice, 0.0f);
@@ -46,17 +48,19 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f - angle / 360.0f, slice / layers) * texScale : glm::vec2(uCoord, 1.0f - angle / 360.0f);
-			vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness), 0.0f,
-				-sinf(angle * M_PI / 180.0f) * (radius - wallThickness)), color, tex));
+			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness), 0.0f, -sinf(angle * M_PI / 180.0f));
+			vertices.push_back(Vertex(sliceCenter + radial * (radius - wallThickness), color, tex, -glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius - wallThickness),
-			0.0f, -sinf(0.0f) * (radius - wallThickness)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale : glm::vec2(uCoord, 0.0f)));
+			0.0f, -sinf(0.0f) * (radius - wallThickness)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale
+			: glm::vec2(uCoord, 0.0f), -glm::vec3(cosf(0.0f), 0.0f, -sinf(0.0f))));
 	}
 	//std::cout << vertices.size() << std::endl;
 
 	glm::vec3 center = glm::vec3(0.0f, height / 2.0f, 0.0f);
 	glm::vec2 textureCenter = glm::vec2(0.25f, 0.25f);
-
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	//top and bottom 
 	for (int j = 0; j != 2; ++j)
 	{
 		for (int i = 0; i != 2; ++i)
@@ -66,15 +70,16 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 				glm::vec2 tex = texMode == 'r' ? glm::vec2(angle / 360.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
 					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
 				vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
-					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex));
+					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
 			}
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
 				-sinf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
 			if(texMode=='r')
 				vertices.push_back(Vertex(center + glm::vec3(cosf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
-					-sinf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex));
+					-sinf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
 		}
 		center.y -= height;
+		up = glm::vec3(0.0f, -1.0f, 0.0f);
 		textureCenter = glm::vec2(0.25f, 0.75f);
 	}
 	//std::cout << vertices.size() << std::endl;
