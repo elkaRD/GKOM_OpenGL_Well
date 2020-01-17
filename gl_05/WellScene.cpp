@@ -34,9 +34,9 @@ void WellScene::createAvenue()
 	GameObject *avenue = new GameObject(rootObject);
 	
 
-	for (int x = -10; x <= 20; ++x)
-	{
+	//for (int x = -10; x <= 20; ++x)
+	//{
 		GameObject *lamp = new Lamp(avenue);
-		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
-	}
+		lamp->transform.translate(1 * spaceBetweenLamps, 0, 0);
+	//}
 }
