@@ -4,6 +4,7 @@ MeshRenderer::MeshRenderer()
 {
 	vertices = new std::vector<Vertex>();
 	indices = new std::vector<GLuint>();
+	isLight = false;
 }
 
 void MeshRenderer::init()
@@ -17,11 +18,12 @@ void MeshRenderer::start()
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices->size() * sizeof(Vertex), &(*vertices)[0], GL_STATIC_DRAW);
+
 	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
 	glBindVertexArray(VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices->size() * sizeof(Vertex), &(*vertices)[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices->size() * sizeof(GLuint), &(*indices)[0], GL_STATIC_DRAW);
@@ -38,10 +40,13 @@ void MeshRenderer::start()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
 
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 
 	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
-
+	
 	indicesSize = indices->size();
 
 	delete vertices;
@@ -118,4 +123,14 @@ float MeshRenderer::lerp(float b, float e, float s)
 float MeshRenderer::reversedLerp(float b, float e, float x)
 {
 	return (x - b) / (e - b);
+}
+
+void MeshRenderer::setLight()
+{
+	isLight = true;
+}
+
+bool MeshRenderer::getLight()
+{
+	return isLight;
 }

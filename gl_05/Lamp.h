@@ -13,7 +13,6 @@ public:
 	void update(float delta);
 
 private:
-
 };
 
 #endif

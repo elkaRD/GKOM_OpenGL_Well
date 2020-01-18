@@ -1,6 +1,7 @@
 #include "WellScene.h"
+#include <string>
 
-WellScene::WellScene(ShaderProgram *shader) : GameScene(shader)
+WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2) : GameScene(shader, shader2)
 {
 
 }
@@ -15,7 +16,10 @@ void WellScene::start()
 
 	//Lamp *lamp = new Lamp(rootObject);
 
+	//well->addChild(new TestObject(this));
+
 	createAvenue();
+	testObject();
 }
 
 void WellScene::update(float delta)
@@ -34,9 +38,24 @@ void WellScene::createAvenue()
 	GameObject *avenue = new GameObject(rootObject);
 	
 
-	//for (int x = -10; x <= 20; ++x)
-	//{
+	for (int x = -10; x <= 20; ++x)
+	{
 		GameObject *lamp = new Lamp(avenue);
-		lamp->transform.translate(1 * spaceBetweenLamps, 0, 0);
-	//}
+		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
+		int tmp = x + 10;
+		auto s = std::to_string(tmp);
+		std::string point = "pointLightsPosition[" + s + "].position";
+		shader->Use();
+		glUniform3f(glGetUniformLocation(shader->get_programID(), point.c_str()), x * spaceBetweenLamps , 4, 0);
+	}
+}
+
+void WellScene::testObject()
+{
+
+	GameObject* test = new TestObject(rootObject);
+
+	//GameObject* object = new TestObject(test);
+	test->transform.translate(-10, 10, -10);
+
 }

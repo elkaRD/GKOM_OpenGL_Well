@@ -34,6 +34,7 @@ void Lamp::start()
 	GameObject *base5 = new GameObject(base4);
 	base5->transform.translate(0, 2, 0);
 	mesh = base5->addMesh(new CubeMesh());
+	mesh->setLight();
 	mesh->verticalInterpolationScale(0.5f, 0.8f);
 	mesh->scaleVertices(0.9f);
 

@@ -5,11 +5,12 @@
 #include "Well.h"
 #include "Ground.h"
 #include "Lamp.h"
+#include "TestObject.h"
 
 class WellScene : public GameScene
 {
 public:
-	WellScene(ShaderProgram *shader);
+	WellScene(ShaderProgram *shader, ShaderProgram *shader2);
 
 	void start();
 	void update(float delta);
@@ -19,6 +20,7 @@ private:
 	GameObject *well2;
 
 	void createAvenue();
+	void testObject();
 };
 
 #endif

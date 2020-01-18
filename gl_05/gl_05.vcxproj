@@ -100,6 +100,7 @@
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="shprogram.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TubeMesh.cpp" />
@@ -110,6 +111,8 @@
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
+    <None Include="lightSrc.frag" />
+    <None Include="lightSrc.vert" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
   </ItemGroup>
@@ -136,6 +139,7 @@
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="shprogram.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="TestObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TubeMesh.h" />

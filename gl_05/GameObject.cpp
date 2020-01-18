@@ -26,7 +26,7 @@ GameObject::~GameObject()
 	}
 }
 
-void GameObject::renderObject(const glm::mat4 &parentTransform)
+void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2)
 {
 	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
 	scene->setTransform(transformMatrix);
@@ -34,13 +34,17 @@ void GameObject::renderObject(const glm::mat4 &parentTransform)
 	if (texture != nullptr)
 		texture->use();
 
-	for (const auto &mesh : meshes)
+	for (const auto& mesh : meshes) 
+	{
+		if (mesh->getLight()) shader2->Use();
+		else shader->Use();
 		mesh->render();
+	}
 
 	render();
 
 	for (auto &child : children)
-		child->renderObject(transformMatrix);
+		child->renderObject(transformMatrix, shader, shader2);
 }
 
 void GameObject::updateObject(float delta)

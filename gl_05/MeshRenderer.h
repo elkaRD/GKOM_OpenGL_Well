@@ -22,6 +22,8 @@ public:
 	void scaleVertices(float s);
 	void verticalInterpolationScale(float lowerScale, float upperScale);
 	void setColor(float r, float g, float b);
+	void setLight();
+	bool getLight();
 
 protected:
 	
@@ -37,6 +39,7 @@ private:
 
 	float lerp(float b, float e, float s);
 	float reversedLerp(float b, float e, float x);
+	bool isLight;
 };
 
 #endif
