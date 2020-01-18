@@ -42,12 +42,42 @@ void WellScene::createAvenue()
 	{
 		GameObject *lamp = new Lamp(avenue);
 		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
-		int tmp = x + 10;
-		auto s = std::to_string(tmp);
-		std::string point = "pointLightsPosition[" + s + "].position";
+		//int tmp = x + 10;
+		//auto s = std::to_string(tmp);
+		//std::string point = "pointLightsPosition[" + s + "].position";
 		shader->Use();
-		glUniform3f(glGetUniformLocation(shader->get_programID(), point.c_str()), x * spaceBetweenLamps , 4, 0);
+		//glUniform3f(glGetUniformLocation(shader->get_programID(), point.c_str()), x * spaceBetweenLamps , 4, 0);
 	}
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition0"), -10 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition1"), -9 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition2"), -8 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition3"), -7 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition4"), -6 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition5"), -5 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition6"), -4 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition7"), -3 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition8"), -2 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition9"), -1 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition10"), -0 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition11"), 1 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition12"), 2 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition13"), 3 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition14"), 4 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition15"), 5 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition16"), 6 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition17"), 7 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition18"), 8 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition19"), 9 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition20"), 10 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition21"), 11 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition22"), 12 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition23"), 13 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition24"), 14 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition25"), 15 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition26"), 16 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition27"), 17 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition28"), 18 * spaceBetweenLamps, 4, 0);
+	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition29"), 19 * spaceBetweenLamps, 4, 0);
 }
 
 void WellScene::testObject()
