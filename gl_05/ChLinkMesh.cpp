@@ -16,7 +16,7 @@ void ChLinkMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vect
 {
 	generateVertices(vertices);
 	generateIndices(vertices, indices);
-
+	std::cout << "Ogniwo" << std::endl;
 	drawingMode = GL_TRIANGLES;
 }
 

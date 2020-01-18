@@ -19,7 +19,7 @@ void WellScene::start()
 	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	testObject();
+	//testObject();
 }
 
 void WellScene::update(float delta)
