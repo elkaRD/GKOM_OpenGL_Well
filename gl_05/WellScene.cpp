@@ -1,6 +1,7 @@
 #include "WellScene.h"
+#include <string>
 
-WellScene::WellScene(ShaderProgram *shader) : GameScene(shader)
+WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2) : GameScene(shader, shader2)
 {
 
 }
@@ -38,5 +39,10 @@ void WellScene::createAvenue()
 	{
 		GameObject *lamp = new Lamp(avenue);
 		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
+		int tmp = x + 10;
+		auto s = std::to_string(tmp);
+		std::string point = "pointLightsPosition[" + s + "].position";
+		shader->Use();
+		glUniform3f(glGetUniformLocation(shader->get_programID(), point.c_str()), x * spaceBetweenLamps , 4, 0);
 	}
 }

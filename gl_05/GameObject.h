@@ -25,7 +25,7 @@ public:
 
 	void startObject();
 	void destroyObject();
-	void renderObject(const glm::mat4 &parentTransform);
+	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2);
 	void updateObject(float delta);
 
 	void addChild(GameObject *child);

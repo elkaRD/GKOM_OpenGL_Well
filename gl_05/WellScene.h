@@ -9,7 +9,7 @@
 class WellScene : public GameScene
 {
 public:
-	WellScene(ShaderProgram *shader);
+	WellScene(ShaderProgram *shader, ShaderProgram *shader2);
 
 	void start();
 	void update(float delta);

@@ -11,7 +11,7 @@ class GameScene
 {
 public:
 
-	GameScene(ShaderProgram * shader);
+	GameScene(ShaderProgram * shader, ShaderProgram * shader2);
 	virtual ~GameScene();
 
 	void startScene();
@@ -24,6 +24,7 @@ public:
 	virtual void destroy();
 
 	ShaderProgram* getShader();
+	ShaderProgram* getShader2();
 
 	void setTransform(glm::mat4 trans);
 	void registerObject(GameObject *gameObject);
@@ -31,6 +32,7 @@ public:
 protected:
 	GameObject *rootObject;
 	ShaderProgram *shader;
+	ShaderProgram *shader2;
 
 private:
 	std::vector<GameObject*> gameObjects;

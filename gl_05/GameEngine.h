@@ -27,6 +27,7 @@ private:
 	static GameEngine *instance;
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
+	ShaderProgram *lightSrcProgram;
 	GameScene *gameScene;
 
 	glm::vec3 cameraPosition;
