@@ -64,3 +64,13 @@ void ChLinkMesh::generateIndices(std::vector<Vertex>& vertices, std::vector<GLui
 		}
 	}
 }
+
+GLfloat ChLinkMesh::getHeight() const
+{
+	return height;
+}
+
+GLfloat ChLinkMesh::getRadius() const
+{
+	return radius;
+}

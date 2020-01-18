@@ -39,6 +39,8 @@ public:
 	virtual void render();
 	virtual void update(float delta);
 
+	GameObject* getParent();
+
 private:
 	Texture *texture;
 	std::vector<MeshRenderer*> meshes;

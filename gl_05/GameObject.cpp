@@ -131,3 +131,13 @@ void GameObject::setTexture(const char *fileName)
 {
 	texture = new Texture(scene->getShader(), fileName);
 }
+
+GameObject* GameObject::getParent()
+{
+	//if(parent!=nullptr)
+	//	return parent;
+	//else
+	//{
+		return nullptr;
+	//}
+}

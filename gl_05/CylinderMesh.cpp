@@ -5,6 +5,7 @@
 #include <math.h>
 #include <glm\detail\func_geometric.hpp>
 
+
 void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {
 	generatePlate(vertices, true);
@@ -21,6 +22,9 @@ void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::ve
 	
 	drawingMode = GL_TRIANGLES;
 }
+
+CylinderMesh::CylinderMesh(GLfloat r, GLfloat h): radius(r), height(h), segments(DEFAULT_SEGMENTS_NUMBER), layers(DEFAULT_LAYERS_NUMBER),
+color(glm::vec3(1.0f, 0.0f, 0.0f)) {}
 
 CylinderMesh::CylinderMesh() : height(5.0f), radius(1.0f), segments(DEFAULT_SEGMENTS_NUMBER), layers(DEFAULT_LAYERS_NUMBER),
 color(glm::vec3(1.0f, 0.0f, 0.0f)) {}

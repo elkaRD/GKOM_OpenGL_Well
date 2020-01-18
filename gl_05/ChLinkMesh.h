@@ -8,6 +8,8 @@ class ChLinkMesh : public MeshRenderer {
 public:
 	ChLinkMesh();
 	ChLinkMesh(GLfloat height, GLfloat width, GLfloat radius);
+	GLfloat getHeight() const;
+	GLfloat getRadius() const;
 protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 	void generateVertices(std::vector<Vertex>& vertices);
