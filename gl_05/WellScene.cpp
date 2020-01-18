@@ -16,7 +16,10 @@ void WellScene::start()
 
 	//Lamp *lamp = new Lamp(rootObject);
 
+	//well->addChild(new TestObject(this));
+
 	createAvenue();
+	testObject();
 }
 
 void WellScene::update(float delta)
@@ -45,4 +48,14 @@ void WellScene::createAvenue()
 		shader->Use();
 		glUniform3f(glGetUniformLocation(shader->get_programID(), point.c_str()), x * spaceBetweenLamps , 4, 0);
 	}
+}
+
+void WellScene::testObject()
+{
+
+	GameObject* test = new TestObject(rootObject);
+
+	//GameObject* object = new TestObject(test);
+	test->transform.translate(-10, 10, -10);
+
 }

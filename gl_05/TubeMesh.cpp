@@ -38,7 +38,7 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 			vertices.push_back(Vertex(sliceCenter + radial, color, tex, glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius),
-			0.0f, -sinf(0.0f) * (radius)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale : glm::vec2(uCoord, 0.0f)));
+			0.0f, -sinf(0.0f) * (radius)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale : glm::vec2(uCoord, 0.0f),glm::vec3(1.0f,0.0f,0.0f)));
 	}
 	//inner tube
 	for (int slice = layers; slice >= 0; --slice)
@@ -48,8 +48,8 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f - angle / 360.0f, slice / layers) * texScale : glm::vec2(uCoord, 1.0f - angle / 360.0f);
-			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness), 0.0f, -sinf(angle * M_PI / 180.0f));
-			vertices.push_back(Vertex(sliceCenter + radial * (radius - wallThickness), color, tex, -glm::normalize(radial)));
+			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f), 0.0f, -sinf(angle * M_PI / 180.0f)) * (radius - wallThickness);
+			vertices.push_back(Vertex(sliceCenter + radial, color, tex, -glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius - wallThickness),
 			0.0f, -sinf(0.0f) * (radius - wallThickness)), color, texMode == 'r' ? glm::vec2(0.0f, slice / layers) * texScale

@@ -99,6 +99,7 @@
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="shprogram.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TubeMesh.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="shprogram.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="TestObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TubeMesh.h" />
