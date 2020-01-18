@@ -1,6 +1,4 @@
 #include "Lamp.h"
-#include "ChLinkMesh.h"
-#include "CylinderMesh.h"
 
 Lamp::Lamp(GameObject *parent) : GameObject(parent)
 {
@@ -39,9 +37,9 @@ void Lamp::start()
 	mesh->scaleVertices(0.9f);
 
 	GameObject *base6 = new GameObject(base5);
-	base6->transform.translate(0, 1.0f, 0);
-	mesh = base6->addMesh(new ChLinkMesh());
-	//mesh->verticalInterpolationScale(1.3f, 0);
+	base6->transform.translate(0, 0.5f, 0);
+	mesh = base6->addMesh(new CubeMesh());
+	mesh->verticalInterpolationScale(1.3f, 0);
 	mesh->scaleVertices(0.9f);
 	mesh->scaleVertices(1, 0.4f, 1);
 }
