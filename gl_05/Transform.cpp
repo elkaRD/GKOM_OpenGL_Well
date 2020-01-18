@@ -87,18 +87,37 @@ glm::vec3 Transform::getScale() const
 	return scale;
 }
 
-glm::mat4 Transform::getTransform() const
+glm::vec3 Transform::getGlobalPosition() const
+{
+	return lastGlobalPosition;
+}
+
+glm::vec3 Transform::getGlobalRotation() const
+{
+	return lastGlobalRotation;
+}
+
+glm::vec3 Transform::getGlobalScale() const
+{
+	return lastGlobalScale;
+}
+
+glm::mat4 Transform::getTransform()
 {
 	return getTransform(glm::mat4());
 }
 
-//glm::vec4 Transform::getTransform(const Transform &parentTransform) const
+//glm::vec4 Transform::getTransform(const Transform &parentTransform)
 //{
 //	return getTransform(parentTransform.getLastTransform());
 //}
 
-glm::mat4 Transform::getTransform(const glm::mat4 &parentTransform) const
+glm::mat4 Transform::getTransform(const glm::mat4 &parentTransform)
 {
+	lastGlobalPosition = glm::vec3(glm::vec4(position, 1.0f) * parentTransform);
+	lastGlobalRotation = glm::vec3(glm::vec4(rotation, 1.0f) * parentTransform);
+	lastGlobalScale = glm::vec3(glm::vec4(scale, 1.0f) * parentTransform);
+
 	glm::mat4 temp = glm::mat4(1.0f);
 
 	temp = glm::translate(temp, position);

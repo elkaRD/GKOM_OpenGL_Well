@@ -31,14 +31,22 @@ public:
 	glm::vec3 getRotation() const;
 	glm::vec3 getScale() const;
 
-	glm::mat4 getTransform() const;
-	//glm::vec4 getTransform(const Transform &parentTransform) const;
-	glm::mat4 getTransform(const glm::mat4 &parentTransform) const;
+	glm::vec3 getGlobalPosition() const;
+	glm::vec3 getGlobalRotation() const;
+	glm::vec3 getGlobalScale() const;
+
+	glm::mat4 getTransform();
+	//glm::vec4 getTransform(const Transform &parentTransform);
+	glm::mat4 getTransform(const glm::mat4 &parentTransform);
 
 private:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+
+	glm::vec3 lastGlobalPosition;
+	glm::vec3 lastGlobalRotation;
+	glm::vec3 lastGlobalScale;
 };
 
 #endif
