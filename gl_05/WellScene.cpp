@@ -15,7 +15,10 @@ void WellScene::start()
 
 	//Lamp *lamp = new Lamp(rootObject);
 
+	//well->addChild(new TestObject(this));
+
 	createAvenue();
+	testObject();
 }
 
 void WellScene::update(float delta)
@@ -39,4 +42,14 @@ void WellScene::createAvenue()
 		GameObject *lamp = new Lamp(avenue);
 		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
 	}
+}
+
+void WellScene::testObject()
+{
+
+	GameObject* test = new GameObject(rootObject);
+
+	GameObject* object = new TestObject(test);
+	test->transform.translate(0, 3, 0);
+
 }

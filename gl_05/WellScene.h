@@ -5,6 +5,7 @@
 #include "Well.h"
 #include "Ground.h"
 #include "Lamp.h"
+#include "TestObject.h"
 
 class WellScene : public GameScene
 {
@@ -19,6 +20,7 @@ private:
 	GameObject *well2;
 
 	void createAvenue();
+	void testObject();
 };
 
 #endif
