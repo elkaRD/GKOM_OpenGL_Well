@@ -17,13 +17,7 @@ GameObject::GameObject(GameScene *scene) : scene(scene), texture(nullptr)
 
 GameObject::~GameObject()
 {
-	parent->removeChild(this);
 
-	for (auto &mesh : meshes)
-	{
-		mesh->destroy();
-		delete mesh;
-	}
 }
 
 void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2)
@@ -81,6 +75,14 @@ void GameObject::destroyObject()
 		delete child;
 	}
 
+	parent->removeChild(this);
+
+	for (auto &mesh : meshes)
+	{
+		mesh->destroy();
+		delete mesh;
+	}
+
 	destroy();
 }
 
@@ -106,6 +108,9 @@ void GameObject::destroy()
 
 void GameObject::addChild(GameObject *child)
 {
+	if (child->parent != nullptr)
+		child->parent->removeChild(child);
+
 	auto itGameObject = find(children.begin(), children.end(), child);
 	if (itGameObject != children.end()) return;
 
@@ -114,10 +119,16 @@ void GameObject::addChild(GameObject *child)
 
 void GameObject::removeChild(GameObject *child)
 {
-	//TODO: fix
-	//auto objectToRemove = find(children.begin(), children.end(), child);
-	//iter_swap(objectToRemove, children.end() - 1);
-	//children.pop_back();
+	for (unsigned int i = 0; i < children.size(); ++i)
+	{
+		if (children[i] == child)
+		{
+			children[i] = children[children.size() - 1];
+			children[children.size() - 1] = child;
+			children.pop_back();
+			break;
+		}
+	}
 }
 
 MeshRenderer* GameObject::addMesh(MeshRenderer *mesh)
