@@ -47,9 +47,9 @@ void WellScene::createAvenue()
 void WellScene::testObject()
 {
 
-	GameObject* test = new GameObject(rootObject);
+	GameObject* test = new TestObject(rootObject);
 
-	GameObject* object = new TestObject(test);
-	test->transform.translate(0, 3, 0);
+	//GameObject* object = new TestObject(test);
+	test->transform.translate(-10, 10, -10);
 
 }
