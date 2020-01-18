@@ -16,7 +16,7 @@ void ChLinkMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vect
 {
 	generateVertices(vertices);
 	generateIndices(vertices, indices);
-	std::cout << "Ogniwo" << std::endl;
+
 	drawingMode = GL_TRIANGLES;
 }
 
@@ -42,7 +42,8 @@ void ChLinkMesh::generateVertices(std::vector<Vertex>& vertices)
 			glm::vec4 radial = glm::vec4(cosf(angle * M_PI / 180.0f) * radius, 0.0f, -sinf(angle * M_PI / 180.0f) * radius, 1.0f);
 				radial = transform[i] * radial;
 			glm::vec3 aRadial = glm::vec3(radial.x, radial.y, radial.z);
-			vertices.push_back(Vertex(aRadial, color, glm::vec2(i % 2 == 0 ? 1.0f : 0.0f, 1.0f - angle / 360.0f), glm::normalize(aRadial)));
+			glm::vec3 bias = glm::vec3(0.0f, -height / 2 + 3 * radius, 0.0f);
+			vertices.push_back(Vertex(aRadial-bias, color, glm::vec2(i % 2 == 0 ? 1.0f : 0.0f, 1.0f - angle / 360.0f), glm::normalize(aRadial)));
 		}
 	}
 

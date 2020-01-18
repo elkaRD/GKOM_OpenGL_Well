@@ -19,31 +19,31 @@ void Well::start()
 
 void Well::update(float delta)
 {
-	rollTime += delta;
+	//rollTime += delta;
 
-	float d = 1;
+	//float d = 1;
 
-	if (rollTime < fluentActivation)
-	{
-		float s = rollTime / fluentActivation;
-		d = (sin(M_PI * s - M_PI / 2) + 1) / 2;
-	}
-	else if (rollTime > fullAnimationDuration - fluentActivation)
-	{
-		float s = (rollTime - (fullAnimationDuration - fluentActivation)) / fluentActivation;
-		d = (sin(M_PI * s + M_PI / 2) + 1) / 2;
-	}
+	//if (rollTime < fluentActivation)
+	//{
+	//	float s = rollTime / fluentActivation;
+	//	d = (sin(M_PI * s - M_PI / 2) + 1) / 2;
+	//}
+	//else if (rollTime > fullAnimationDuration - fluentActivation)
+	//{
+	//	float s = (rollTime - (fullAnimationDuration - fluentActivation)) / fluentActivation;
+	//	d = (sin(M_PI * s + M_PI / 2) + 1) / 2;
+	//}
 
-	if (rollTime >= fullAnimationDuration)
-	{
-		d = 0;
-		direction = !direction;
-		rollTime = 0;
-	}
+	//if (rollTime >= fullAnimationDuration)
+	//{
+	//	d = 0;
+	//	direction = !direction;
+	//	rollTime = 0;
+	//}
 
-	if (direction) d *= -1;
+	//if (direction) d *= -1;
 
-	roller->transform.rotate(rotationSpeed * d * delta, 0, 0);
+	//roller->transform.rotate(rotationSpeed * d * delta, 0, 0);
 }
 
 GameObject* Well::createStem(GameObject *parent)
