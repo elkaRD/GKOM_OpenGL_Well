@@ -72,3 +72,8 @@ void GameScene::registerObject(GameObject *gameObject)
 {
 	gameObjects.push_back(gameObject);
 }
+
+GameObject* GameScene::getRoot()
+{
+	return rootObject;
+}

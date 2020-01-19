@@ -86,6 +86,7 @@ void WellScene::testObject()
 	GameObject* test = new TestObject(rootObject);
 
 	//GameObject* object = new TestObject(test);
-	test->transform.translate(0.000682787, -0.0195525, -0.00415141);
+	test->transform.translate(-29.9845 + 0.335f, 3.14772 + 0.3875, -19.8419);
+	test->transform.setScale(0.01f, 0.01f, 0.01f);
 
 }

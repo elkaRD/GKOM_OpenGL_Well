@@ -38,13 +38,35 @@ void Chain::start()
 	}
 
 	stateChanger = prev;
-	prev->transform.rotate(rotation+ 9.5f, 0.0f, 2.0f);
+	prev->setTexture("textures/iipw.png");
+
+
+
+	std::vector<GameObject*> pathToWell;
+	pathToWell.push_back(begin->getParent()->getParent()->getParent());
+	pathToWell.push_back(begin->getParent()->getParent());
+	pathToWell.push_back(begin->getParent());
+
+
+	glm::mat4 transform;
+	for (auto i = pathToWell.rbegin(); i != pathToWell.rend(); ++i)
+	{
+		transform = (*i)->transform.getTransform(transform);
+	}
+	glm::vec4 gPos = transform * glm::vec4(stateChanger->transform.getPosition(), 1.0f);
+	gPos = gPos / gPos.w;
+	std::cout << gPos.x << ", " << gPos.y << ", " << gPos.z << ",\n";
+	//-29.9845 + 0.335f, 3.14772 + 0.3875, -19.8419
+	GameObject* looseState = new GameObject(pathToWell[0]);
+	//looseState->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
+	looseState->transform.translate(0.35f, 3.52f, rollerRadius + 0.01);
+	prev = looseState;
 
 	for (auto i = 0; i < 1600; ++i)
 	{
 		GameObject* link = new GameObject(prev);
 		link->addMesh(new ChLinkMesh(0.03f, 0.02f, 0.0025f));
-		link->transform.translate(0.0f, 0.03f - 4 * 0.0025f, 0.0f);
+		link->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 		link->transform.rotate(0.0f, 90.0f, 0.0f);
 		prev = link;
 	}

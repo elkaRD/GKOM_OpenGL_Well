@@ -156,3 +156,8 @@ void GameObject::setVisible(bool isVisible)
 {
 	visible = isVisible;
 }
+
+GameObject* GameObject::getRoot()
+{
+	return scene->getRoot();
+}

@@ -41,6 +41,7 @@ public:
 	virtual void update(float delta);
 
 	GameObject* getParent();
+	GameObject* GameObject::getRoot();
 
 private:
 	Texture *texture;

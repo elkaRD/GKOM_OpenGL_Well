@@ -29,6 +29,8 @@ public:
 	void setTransform(glm::mat4 trans);
 	void registerObject(GameObject *gameObject);
 
+	GameObject* getRoot();
+
 protected:
 	GameObject *rootObject;
 	ShaderProgram *shader;

@@ -7,7 +7,7 @@ TestObject::TestObject(GameObject* parent): GameObject(parent)
 
 void TestObject::start()
 {
-	MeshRenderer* mesh = addMesh(new ChLinkMesh());
+	MeshRenderer* mesh = addMesh(new CubeMesh());
 
 	GameObject* backPannel = new GameObject(this);
 	backPannel->setTexture("textures/weiti.png");
