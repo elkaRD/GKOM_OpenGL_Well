@@ -41,7 +41,11 @@ public:
 	virtual void update(float delta);
 
 	GameObject* getParent();
+	void setParent(GameObject* parent);
 	GameObject* GameObject::getRoot();
+
+	//for chain animation
+	GameObject* getChild();
 
 private:
 	Texture *texture;

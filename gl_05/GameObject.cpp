@@ -161,3 +161,15 @@ GameObject* GameObject::getRoot()
 {
 	return scene->getRoot();
 }
+
+void GameObject::setParent(GameObject* aParent)
+{
+	this->parent = aParent;
+	aParent->addChild(this);
+}
+
+GameObject* GameObject::getChild()
+{
+	if (children.size() != 0)
+		return children[0];
+}

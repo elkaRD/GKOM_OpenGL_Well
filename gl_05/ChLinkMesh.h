@@ -15,7 +15,7 @@ protected:
 	void generateVertices(std::vector<Vertex>& vertices);
 	void generateIndices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
 private:
-	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 12;
+	static const unsigned int DEFAULT_SEGMENTS_NUMBER = 4;
 
 	GLfloat height;
 	GLfloat width;
