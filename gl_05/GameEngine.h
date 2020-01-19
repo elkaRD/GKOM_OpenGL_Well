@@ -36,6 +36,7 @@ private:
 	GameEngine();
 
 	GLuint screenWidth = 1280, screenHeight = 720;
+	GLfloat lightIntensity;
 
 	double currentFrame, deltaTime, lastFrame;
 
@@ -50,6 +51,8 @@ private:
 	void handleKeyboardEvent();
 	void handleMouseEvent();
 	void handleScreenResizeEvent(int widht, int height);
+	void decreaseLight();
+	void increaseLight();
 
 	KeyboardManager keyboardManager;
 	MouseManager mouseManager;

@@ -105,6 +105,7 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 		lightSrcProgram = new ShaderProgram("lightSrc.vert", "lightSrc.frag");
+		lightIntensity = 0.0f;
 
 		Skybox* skybox = new Skybox();
 		gameScene = new WellScene(theProgram, lightSrcProgram);
@@ -140,15 +141,21 @@ void GameEngine::run()
 			glUniform3f(lightDirLoc, -3.0f, -0.5f, -1.5f);
 			glUniform3f(viewPosLoc, cameraPosition.x, cameraPosition.y, cameraPosition.z);
 			// Set lights properties
+			glm::vec3 ambient = glm::vec3(0.2f, 0.2f, 0.2f) * lightIntensity;
+			glm::vec3 diffues = glm::vec3(1.0f, 1.0f, 1.0f) * lightIntensity;
+			glm::vec3 specular = glm::vec3(0.8f, 0.8f, 0.8f) * lightIntensity;
 			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.ambient"), 0.5f, 0.5f, 0.5f);
 			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.diffuse"), 0.5f, 0.5f, 0.5f);
 			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.specular"), 0.1f, 0.1f, 0.1f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.ambient"), 0.1f, 0.1f, 0.1f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.diffuse"), 0.8f, 0.8f, 0.8f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.specular"), 1.0f, 1.0f, 1.0f);
+			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.ambient"), ambient.x, ambient.y, ambient.z);
+			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.diffuse"), diffues.x, diffues.y, diffues.z);
+			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.specular"), specular.x, specular.y, specular.z);
 			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.constant"), 1.0f);
 			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.linear"), 0.09f);
 			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.quadratic"), 0.032f);
+			lightSrcProgram->Use();
+			glUniform1f(glGetUniformLocation(lightSrcProgram->get_programID(), "light"), lightIntensity);
+
 
 			keyboardManager.nextFrame();
 			mouseManager.nextFrame();
@@ -273,6 +280,12 @@ void GameEngine::handleKeyboardEvent()
 	if (keyboardManager.isHold(GLFW_KEY_Q))
 		cameraMovement += glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
 
+	if (keyboardManager.isHold(GLFW_KEY_O))
+		decreaseLight();
+
+	if (keyboardManager.isHold(GLFW_KEY_P))
+		increaseLight();
+
 	glm::normalize(cameraMovement);
 
 	if (keyboardManager.isHold(GLFW_KEY_LEFT_SHIFT) || keyboardManager.isHold(GLFW_KEY_RIGHT_SHIFT))
@@ -307,4 +320,17 @@ void GameEngine::handleScreenResizeEvent(int width, int height)
 	screenHeight = height;
 
 	glViewport(0, 0, screenWidth, screenHeight);
+}
+
+void GameEngine::decreaseLight()
+{
+	if ((lightIntensity -= 0.01f) <= 0.0f)
+		lightIntensity = 0.0f;
+
+}
+
+void GameEngine::increaseLight()
+{
+	if ((lightIntensity += 0.01f) >= 1.0f)
+		lightIntensity = 1.0f;
 }
