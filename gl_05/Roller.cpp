@@ -22,16 +22,17 @@ void Roller::start()
 	chain = new Chain(this, 2060, radius);
 	thick->addChild(chain);
 	chain->tellRotation(transform.getRotation().x);
+	wait = 0;
 }
 
 void Roller::update(float delta)
 {
-	transform.rotate(10.0f * delta, 0.0f, 0.0f);
-	chain->tellRotation(100.0f);
-	if (transform.getRotation().x > 30.0f && transform.getRotation().x < 50.0f)
-		setVisible(false);
-	if (transform.getRotation().x > 50.0f)
-		setVisible(true);
+	wait += delta;
+	if (wait > 5)
+	{
+		transform.rotate(100.0f * delta, 0.0f, 0.0f);
+		chain->tellRotation(100.0f);
+	}
 }
 
 GLfloat Roller::getRadius() const

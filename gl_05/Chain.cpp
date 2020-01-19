@@ -20,14 +20,6 @@ void Chain::start()
 	GameObject* prev = begin;
 	for (auto i = 0; i < lenght - 50; ++i)
 	{
-		if (i == lenght - 51)
-		{
-			prev->setTexture("textures/iipw.png");
-		}
-		if (i == lenght - 50)
-		{
-			prev->setTexture("textures/rusty.png");
-		}
 		GameObject* link = new GameObject(prev);
 		link->addMesh(new ChLinkMesh(0.03f, 0.02f, 0.0025f));
 		link->transform.translate(0.0f, 0.03f - 4 * 0.0025f, 0.0f);
@@ -41,22 +33,15 @@ void Chain::start()
 		{
 			link->transform.rotate(360.0 * (0.03f - 4 * 0.0025f) * 0.994f / (2 * M_PI * (rollerRadius+ 0.01f)), 90.0f, 0.0f);
 		}
-		link->transform.translate(0.0007, 0.0f, 0.0f);
-		//links.push_back(prev);
+		link->transform.translate(0.0007, 0.0f, 0.0f);;
 		prev = link;
 	}
-	//links.push_back(prev);
-	stateChanger = prev; //--links.end();
+	stateChanger = prev;
 
 	prev = new GameObject(begin->getParent()->getParent()->getParent());
-	prev->transform.translate(0.35f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01);
+	prev->transform.translate(0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01);
 	prev->transform.rotate(0.0f, 0.0f, 180.0f);
-	//links.push_back(prev);
-	//looseState = --links.end();
 	looseState = prev;
-	//(*looseState)->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
-
-	
 
 	for (auto i = 0; i < lenght; ++i)
 	{
@@ -65,43 +50,39 @@ void Chain::start()
 		link->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 		link->transform.rotate(0.0f, 90.0f, 0.0f);
 		prev = link;
-		//links.push_back(prev);
-		if(i == 48)
-			link->setTexture("textures/weiti.png");
-		if (i == 49)
-			firstLoose = prev;// --links.end();
-		if (i >= 49)
-			link->setVisible(false);
+		if (i == 48)
+			firstLoose = prev;
 	}
 
 	//hook = new GameObject(prev);
 	//hook->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
 	//hook->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
-	lastRotation = rotation;
 	state = false;
 	toChange = 0;
-	//std::cout << links.size() << std::endl;
+	firstLoose->getChildren()->front()->setVisible(false);
 }
 
 void Chain::update(float delta)
 {
-	//GLfloat dRot = rotation - lastRotation;
-	toChange += 2 * M_PI * (rollerRadius /*+ 0.0725f*/) * (rotation*delta / 360.0f);
+	firstLoose->setVisible(true);
+	
+	float changeDelta = 2 * M_PI * (rollerRadius + 0.01f) * (rotation / 360.0f);
+
+	toChange += changeDelta * delta;
 	GameObject* tmp = looseState;
-	tmp->transform.translate(0.0f, -2 * M_PI * (rollerRadius + 0.01f)  * (rotation * delta / 360.0f), 0.0f);
-	//	-sin(glm::radians(2.0f)) * 2 * M_PI * rollerRadius * dRot / 360.0f
+	looseState->transform.translate(0.0007f * changeDelta / 2 * M_PI * rollerRadius, -changeDelta * delta, 0.0f);
 	
 	if (state)
 	{
 		stateChanger->transform.rotate(0.0f, 0.0f, rotation * delta);
-		if (toChange > 0.02f)
+		if (toChange  >= rollerRadius * M_PI * 2 / 50.76)
 		{
 			tmp = (stateChanger);
 			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
 
-			//firstLoose = firstLoose->getChildren();
-			firstLoose->setVisible(true);
+			firstLoose = firstLoose->getChildren()->front();
+			firstLoose->getChildren()->front()->setVisible(false);
 
 			toChange = 0;
 			state = false;
@@ -110,21 +91,19 @@ void Chain::update(float delta)
 	else
 	{
 		stateChanger->transform.rotate(-rotation * delta, 0.0f, 0.0f);
-		if (toChange > 0.02f)
+		if (toChange >= rollerRadius * M_PI * 2 / 50.76)
 		{
 			tmp = stateChanger;
 			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
+
 			firstLoose = firstLoose->getChildren()->front();
-			std::cout << firstLoose->visible << std::endl;
-			firstLoose->setVisible(true);
-			std::cout << firstLoose->visible << std::endl;
+			firstLoose->getChildren()->front()->setVisible(false);
+
 			toChange = 0;
 			state = true;
 		}
 	}
-
-	lastRotation = rotation;
 }
 
 void Chain::tellRotation(GLfloat aRotation)

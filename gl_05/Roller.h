@@ -20,6 +20,8 @@ private:
 	GLfloat height;
 
 	Chain* chain;
+
+	float wait;
 };
 
 #endif // !ROLLER_H
