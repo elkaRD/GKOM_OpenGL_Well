@@ -149,12 +149,7 @@ void GameObject::setTexture(const char *fileName)
 
 GameObject* GameObject::getParent()
 {
-	//if(parent!=nullptr)
-	//	return parent;
-	//else
-	//{
-		return nullptr;
-	//}
+	return parent;
 }
 
 void GameObject::setVisible(bool isVisible)

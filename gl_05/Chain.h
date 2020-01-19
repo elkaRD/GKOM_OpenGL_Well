@@ -14,15 +14,18 @@ public:
 	void start();
 	void update(float delta);
 	void unroll(float radius);
+	void tellRotation(GLfloat);
 private:
 	const unsigned int lenght;
 	unsigned int freeLinks;
 
 	GLfloat rollerRadius;
-	GameObject* globalParent;
+	GLfloat rotation;
+	GLfloat lastRotation;
 
-	bool first;
+	bool state;
 	GameObject* hook;
+	GameObject* stateChanger;
 };
 
 #endif // !CHAIN_H

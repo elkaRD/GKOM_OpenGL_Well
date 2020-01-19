@@ -18,6 +18,8 @@ public:
 private:
 	GLfloat radius;
 	GLfloat height;
+
+	Chain* chain;
 };
 
 #endif // !ROLLER_H
