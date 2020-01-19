@@ -19,7 +19,7 @@ void Roller::start()
 	crank->transform.translate(0.35f-radius/4, -height*0.6 - 0.25, 0.0f);
 	crank->addMesh(new CubeMesh(0.7f, 0.075f, radius/2));
 
-	Chain* chain = new Chain(this, 5000, radius);
+	Chain* chain = new Chain(this, 2060, radius);
 	thick->addChild(chain);
 }
 

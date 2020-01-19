@@ -27,6 +27,7 @@ public:
 	void destroyObject();
 	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2);
 	void updateObject(float delta);
+	void setVisible(bool isVisible);
 
 	void addChild(GameObject *child);
 	void removeChild(GameObject *child);
@@ -45,6 +46,7 @@ private:
 	Texture *texture;
 	std::vector<MeshRenderer*> meshes;
 	bool firstUpdate = true;
+	bool visible;
 
 protected:
 	GameObject *parent;

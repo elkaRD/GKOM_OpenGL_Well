@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "ChLinkMesh.h"
+#include "CubeMesh.h"
 
 class Chain : public GameObject
 {
@@ -19,6 +20,9 @@ private:
 
 	GLfloat rollerRadius;
 	GameObject* globalParent;
+
+	bool first;
+	GameObject* hook;
 };
 
 #endif // !CHAIN_H

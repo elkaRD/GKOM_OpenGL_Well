@@ -2,6 +2,7 @@
 
 GameObject::GameObject(GameObject* parent) : parent(parent), texture(nullptr)
 {
+	visible = true;
 	if (parent != nullptr)
 	{
 		parent->addChild(this);
@@ -12,6 +13,7 @@ GameObject::GameObject(GameObject* parent) : parent(parent), texture(nullptr)
 
 GameObject::GameObject(GameScene *scene) : scene(scene), texture(nullptr)
 {
+	visible = true;
 	scene->registerObject(this);
 }
 
@@ -22,6 +24,8 @@ GameObject::~GameObject()
 
 void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2)
 {
+	if (!visible)
+		return;
 	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
 	scene->setTransform(transformMatrix);
 
@@ -151,4 +155,9 @@ GameObject* GameObject::getParent()
 	//{
 		return nullptr;
 	//}
+}
+
+void GameObject::setVisible(bool isVisible)
+{
+	visible = isVisible;
 }
