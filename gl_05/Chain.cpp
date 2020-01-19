@@ -38,33 +38,18 @@ void Chain::start()
 	}
 
 	stateChanger = prev;
-	prev->setTexture("textures/iipw.png");
+	//prev->setTexture("textures/iipw.png");
 
-
-
-	std::vector<GameObject*> pathToWell;
-	pathToWell.push_back(begin->getParent()->getParent()->getParent());
-	pathToWell.push_back(begin->getParent()->getParent());
-	pathToWell.push_back(begin->getParent());
-
-
-	glm::mat4 transform;
-	for (auto i = pathToWell.rbegin(); i != pathToWell.rend(); ++i)
-	{
-		transform = (*i)->transform.getTransform(transform);
-	}
-	glm::vec4 gPos = transform * glm::vec4(stateChanger->transform.getPosition(), 1.0f);
-	gPos = gPos / gPos.w;
-	std::cout << gPos.x << ", " << gPos.y << ", " << gPos.z << ",\n";
-	//-29.9845 + 0.335f, 3.14772 + 0.3875, -19.8419
-	GameObject* looseState = new GameObject(pathToWell[0]);
+	looseState = new GameObject(begin->getParent()->getParent()->getParent());
 	//looseState->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
 	looseState->transform.translate(0.35f, 3.52f, rollerRadius + 0.01);
 	prev = looseState;
 
-	for (auto i = 0; i < 1600; ++i)
+	for (auto i = 0; i < 50; ++i)
 	{
 		GameObject* link = new GameObject(prev);
+		if (prev == looseState)
+			firstLoose = link;
 		link->addMesh(new ChLinkMesh(0.03f, 0.02f, 0.0025f));
 		link->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 		link->transform.rotate(0.0f, 90.0f, 0.0f);
@@ -73,7 +58,7 @@ void Chain::start()
 
 	hook = new GameObject(prev);
 	hook->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
-	hook->transform.translate(0.0f, 0.03f - 4 * 0.0025f, 0.0f);
+	hook->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 	lastRotation = rotation;
 	state = false;
 }
@@ -81,14 +66,20 @@ void Chain::start()
 void Chain::update(float delta)
 {
 	GLfloat dRot = rotation - lastRotation;
-	
+	toChange = -2 * M_PI * rollerRadius * dRot / 360.0f;
+	looseState->transform.translate(-sin(glm::radians(2.0f)) * 2 * M_PI * rollerRadius * dRot / 360.0f, toChange, 0.0f);
+	if (toChange < 0.03f - 0.01f)
+		toChange = 0;
+	GameObject* tmp;
 	if (state)
 	{
 		stateChanger->transform.rotate(0.0f, 0.0f, dRot);
 		if (stateChanger->transform.getRotation().z >= 180)
 		{
-			stateChanger->transform.setRotation(0.0f, 90.0f, 0.0f);
+			//stateChanger->transform.setRotation(0.0f, 90.0f, 0.0f);
+			tmp = stateChanger;
 			stateChanger = stateChanger->getParent();
+			
 			//stateChanger->transform.rotate(2.0f, 0.0f, rotation + 9.5f);
 			state = false;
 		}
@@ -98,7 +89,8 @@ void Chain::update(float delta)
 		stateChanger->transform.rotate(-dRot, 0.0f, 0.0f);
 		if (stateChanger->transform.getRotation().x <= 0)
 		{
-			stateChanger->transform.setRotation(0.0f, 90.0f, 0.0f);
+			//stateChanger->transform.setRotation(0.0f, 90.0f, 0.0f);
+			tmp = stateChanger;
 			stateChanger = stateChanger->getParent();
 			//stateChanger->transform.rotate(rotation + 9.5f, 0.0f, 2.0f);
 			state = true;

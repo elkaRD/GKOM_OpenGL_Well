@@ -22,10 +22,13 @@ private:
 	GLfloat rollerRadius;
 	GLfloat rotation;
 	GLfloat lastRotation;
+	GLfloat toChange;
 
 	bool state;
 	GameObject* hook;
 	GameObject* stateChanger;
+	GameObject* looseState;
+	GameObject* firstLoose;
 };
 
 #endif // !CHAIN_H
