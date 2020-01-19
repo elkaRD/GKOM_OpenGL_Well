@@ -25,10 +25,14 @@ private:
 	GLfloat toChange;
 
 	bool state;
-	std::vector< GameObject*> links;
-	std::vector< GameObject*>::iterator stateChanger;
-	std::vector< GameObject*>::iterator looseState;
-	std::vector< GameObject*>::iterator firstLoose;
+	//std::vector< GameObject*> links;
+	//std::vector< GameObject*>::iterator stateChanger;
+	//std::vector< GameObject*>::iterator looseState;
+	//std::vector< GameObject*>::iterator firstLoose;
+	GameObject* stateChanger;
+	GameObject* looseState;
+	GameObject* firstLoose;
+
 };
 
 #endif // !CHAIN_H

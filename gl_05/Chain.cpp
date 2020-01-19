@@ -42,17 +42,18 @@ void Chain::start()
 			link->transform.rotate(360.0 * (0.03f - 4 * 0.0025f) * 0.994f / (2 * M_PI * (rollerRadius+ 0.01f)), 90.0f, 0.0f);
 		}
 		link->transform.translate(0.0007, 0.0f, 0.0f);
-		links.push_back(prev);
+		//links.push_back(prev);
 		prev = link;
 	}
-	links.push_back(prev);
-	stateChanger = --links.end();
+	//links.push_back(prev);
+	stateChanger = prev; //--links.end();
 
 	prev = new GameObject(begin->getParent()->getParent()->getParent());
 	prev->transform.translate(0.35f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01);
 	prev->transform.rotate(0.0f, 0.0f, 180.0f);
-	links.push_back(prev);
-	looseState = --links.end();
+	//links.push_back(prev);
+	//looseState = --links.end();
+	looseState = prev;
 	//(*looseState)->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
 
 	
@@ -64,11 +65,11 @@ void Chain::start()
 		link->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 		link->transform.rotate(0.0f, 90.0f, 0.0f);
 		prev = link;
-		links.push_back(prev);
+		//links.push_back(prev);
 		if(i == 48)
 			link->setTexture("textures/weiti.png");
 		if (i == 49)
-			firstLoose = --links.end();
+			firstLoose = prev;// --links.end();
 		if (i >= 49)
 			link->setVisible(false);
 	}
@@ -79,27 +80,28 @@ void Chain::start()
 	lastRotation = rotation;
 	state = false;
 	toChange = 0;
+	//std::cout << links.size() << std::endl;
 }
 
 void Chain::update(float delta)
 {
 	//GLfloat dRot = rotation - lastRotation;
 	toChange += 2 * M_PI * (rollerRadius /*+ 0.0725f*/) * (rotation*delta / 360.0f);
-	GameObject* tmp = *looseState;
+	GameObject* tmp = looseState;
 	tmp->transform.translate(0.0f, -2 * M_PI * (rollerRadius + 0.01f)  * (rotation * delta / 360.0f), 0.0f);
 	//	-sin(glm::radians(2.0f)) * 2 * M_PI * rollerRadius * dRot / 360.0f
 	
 	if (state)
 	{
-		(*stateChanger)->transform.rotate(0.0f, 0.0f, rotation * delta);
+		stateChanger->transform.rotate(0.0f, 0.0f, rotation * delta);
 		if (toChange > 0.02f)
 		{
-			tmp = (*stateChanger);
-			--stateChanger;// = stateChanger->getParent();
+			tmp = (stateChanger);
+			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
 
-			++firstLoose;// = firstLoose->getChild();
-			(*firstLoose)->setVisible(true);
+			//firstLoose = firstLoose->getChildren();
+			firstLoose->setVisible(true);
 
 			toChange = 0;
 			state = false;
@@ -107,16 +109,16 @@ void Chain::update(float delta)
 	}
 	else
 	{
-		(*stateChanger)->transform.rotate(-rotation * delta, 0.0f, 0.0f);
+		stateChanger->transform.rotate(-rotation * delta, 0.0f, 0.0f);
 		if (toChange > 0.02f)
 		{
-			tmp = (*stateChanger);
-			--stateChanger;// = stateChanger->getParent();
+			tmp = stateChanger;
+			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
-
-			++firstLoose;// = firstLoose->getChild();
-			(*firstLoose)->setVisible(true);
-
+			firstLoose = firstLoose->getChildren()->front();
+			std::cout << firstLoose->visible << std::endl;
+			firstLoose->setVisible(true);
+			std::cout << firstLoose->visible << std::endl;
 			toChange = 0;
 			state = true;
 		}

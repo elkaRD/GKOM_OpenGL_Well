@@ -45,13 +45,13 @@ public:
 	GameObject* GameObject::getRoot();
 
 	//for chain animation
-	GameObject* getChild();
-
+	std::vector<GameObject*>* getChildren();
+	bool visible;
 private:
 	Texture *texture;
 	std::vector<MeshRenderer*> meshes;
 	bool firstUpdate = true;
-	bool visible;
+	
 
 protected:
 	GameObject *parent;

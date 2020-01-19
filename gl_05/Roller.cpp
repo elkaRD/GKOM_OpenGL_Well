@@ -26,8 +26,12 @@ void Roller::start()
 
 void Roller::update(float delta)
 {
-	transform.rotate(100.0f * delta, 0.0f, 0.0f);
+	transform.rotate(10.0f * delta, 0.0f, 0.0f);
 	chain->tellRotation(100.0f);
+	if (transform.getRotation().x > 30.0f && transform.getRotation().x < 50.0f)
+		setVisible(false);
+	if (transform.getRotation().x > 50.0f)
+		setVisible(true);
 }
 
 GLfloat Roller::getRadius() const

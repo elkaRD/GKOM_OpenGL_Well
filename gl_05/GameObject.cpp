@@ -168,8 +168,8 @@ void GameObject::setParent(GameObject* aParent)
 	aParent->addChild(this);
 }
 
-GameObject* GameObject::getChild()
+std::vector<GameObject*>* GameObject::getChildren()
 {
 	if (children.size() != 0)
-		return children[0];
+		return &children;
 }
