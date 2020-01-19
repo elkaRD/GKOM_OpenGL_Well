@@ -17,16 +17,19 @@ public:
 	void render() const;
 	void destroy();
 
-	//methods to use in overridden initializeMeshVertices() method:
-	void scaleVertices(float x, float y, float z);
-	void scaleVertices(float s);
-	void verticalInterpolationScale(float lowerScale, float upperScale);
+	//methods to modify meshes before sending them to GPU
+	virtual void scaleVertices(float x, float y, float z);
+	virtual void scaleVertices(float s);
+	virtual void verticalInterpolationScale(float lowerScale, float upperScale);
+
 	void setColor(float r, float g, float b);
 	void setLight();
 	bool getLight();
 
 protected:
 	
+	std::vector<Vertex> *vertices;
+	std::vector<Vertex> getVertices();
 	virtual void initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode) = 0;
 
 private:
@@ -34,7 +37,7 @@ private:
 	GLenum drawingMode;
 	GLsizei indicesSize;
 
-	std::vector<Vertex> *vertices;
+	
 	std::vector<GLuint> *indices;
 
 	float lerp(float b, float e, float s);

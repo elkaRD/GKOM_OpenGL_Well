@@ -99,3 +99,60 @@ void CubeMesh::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector
 
 	drawingMode = GL_TRIANGLES;
 }
+
+void CubeMesh::scaleVertices(float x, float y, float z)
+{
+	MeshRenderer::scaleVertices(x, y, z);
+
+	//up and down texCoords multipliers
+	float ud_x = 1;
+	float ud_y = 1;
+
+	//left and right texCoords multipliers
+	float lr_x = 1;
+	float lr_y = 1;
+
+	//near and far texCoords multipliers
+	float nf_x = 1;
+	float nf_y = 1;
+
+	if (y > x) nf_y = y / x;
+	if (x > y) nf_x = x / y;
+
+	if (z > x) ud_y = z / x;
+	if (x > z) ud_x = x / z;
+
+	if (y > z) lr_y = y / z;
+	if (z > y) lr_x = z / y;
+
+	for (int i = 0; i < 8; ++i)
+	{
+		(*vertices)[i].texCoord[0] *= ud_x;
+		(*vertices)[i].texCoord[1] *= ud_y;
+	}
+
+	for (int i = 8; i < 16; ++i)
+	{
+		(*vertices)[i].texCoord[0] *= nf_x;
+		(*vertices)[i].texCoord[1] *= nf_y;
+	}
+
+	for (int i = 16; i < 24; ++i)
+	{
+		(*vertices)[i].texCoord[0] *= lr_x;
+		(*vertices)[i].texCoord[1] *= lr_y;
+	}
+}
+
+void CubeMesh::scaleTexCoords(int walls, float x, float y)
+{
+	int index = 0;
+	if (walls == 1) index = 8;
+	else if (walls == 2) index = 16;
+
+	for (int i = index; i < index+8; ++i)
+	{
+		(*vertices)[i].texCoord[0] *= x;
+		(*vertices)[i].texCoord[1] *= y;
+	}
+}

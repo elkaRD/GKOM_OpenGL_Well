@@ -134,3 +134,11 @@ bool MeshRenderer::getLight()
 {
 	return isLight;
 }
+
+std::vector<Vertex> MeshRenderer::getVertices()
+{
+	if (vertices == nullptr)
+		throw std::exception("Trying to get vertices data after sending it to GPU");
+
+	return *vertices;
+}
