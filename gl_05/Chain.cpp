@@ -61,6 +61,12 @@ void Chain::start()
 	bucket->transform.translate(0.0f, 0.6f, 0.0f);
 	bucket->transform.setScale(1.5, 1.5, 1.5);
 
+	GameObject* water = new GameObject(bucket);
+	water->transform.setScale(0.2, 0.08, 0.2);
+	MeshRenderer* cylinder = water->addMesh(new CylinderMesh());
+	cylinder->verticalInterpolationScale(0.7, 1.0);
+	cylinder->setWater();
+
 	state = 0;
 	toChange = 0;
 	firstLoose->getChildren()->front()->setVisible(false);

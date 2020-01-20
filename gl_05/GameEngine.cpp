@@ -151,7 +151,7 @@ void GameEngine::run()
 
 			// Draw our first triangle
 			waterProgram->Use();
-			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 6, cameraPosition.z);
+			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 30, cameraPosition.z);
 			theProgram->Use();
 
 			gameScene->updateScene(deltaTime);
