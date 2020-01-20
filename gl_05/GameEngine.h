@@ -6,6 +6,8 @@
 #include "shprogram.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -28,6 +30,7 @@ private:
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
 	ShaderProgram *lightSrcProgram;
+	ShaderProgram* waterProgram;
 	GameScene *gameScene;
 
 	glm::vec3 cameraPosition;

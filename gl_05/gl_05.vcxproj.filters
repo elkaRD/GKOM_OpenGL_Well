@@ -103,6 +103,12 @@
     <None Include="lightSrc.vert">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="water.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="water.vert">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\awesomeface.png">

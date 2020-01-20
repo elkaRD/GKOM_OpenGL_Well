@@ -105,10 +105,13 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 		lightSrcProgram = new ShaderProgram("lightSrc.vert", "lightSrc.frag");
+		waterProgram = new ShaderProgram("water.vert", "water.frag");
+		//GameObject *xd = new Lamp();
+		srand(static_cast <unsigned> (time(0)));
 		lightIntensity = 0.0f;
 
 		Skybox* skybox = new Skybox();
-		gameScene = new WellScene(theProgram, lightSrcProgram);
+		gameScene = new WellScene(theProgram, waterProgram);
 		gameScene->startScene();
 		skybox->start();
 
@@ -155,8 +158,31 @@ void GameEngine::run()
 			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.quadratic"), 0.032f);
 			lightSrcProgram->Use();
 			glUniform1f(glGetUniformLocation(lightSrcProgram->get_programID(), "light"), lightIntensity);
+			waterProgram->Use();
+			glUniform1f(glGetUniformLocation(waterProgram->get_programID(), "waterHeight"), 20.0f);
+			glUniform1i(glGetUniformLocation(waterProgram->get_programID(), "numWaves"), 4);
+			glUniform1i(glGetUniformLocation(waterProgram->get_programID(), "envMap"), 0);
+			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "eyePos"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
+			glUniform1f(glGetUniformLocation(waterProgram->get_programID(), "time"), glfwGetTime());
+			for (int i = 0; i < 4; ++i) {
+				float amplitude = 0.5f / (i + 1);
+				auto s = std::to_string(i);
+				std::string name = "amplitude[" + s + "]";
+				glUniform1f(glGetUniformLocation(waterProgram->get_programID(), name.c_str()), amplitude);
 
+				float wavelength = 8 * M_PI / (i + 1);
+				name = "wavelength[" + s + "]";
+				glUniform1f(glGetUniformLocation(waterProgram->get_programID(), name.c_str()), wavelength);
 
+				float speed = 1.0f + 2 * i;
+				name = "speed[" + s + "]";
+				glUniform1f(glGetUniformLocation(waterProgram->get_programID(), name.c_str()), speed);
+				float angle = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / M_PI / 3));
+				int a = rand() % 2;
+				if (a == 0) angle *= -1;
+				name = "direction[" + s + "]";
+				glUniform2f(glGetUniformLocation(waterProgram->get_programID(), name.c_str()), cos(angle), sin(angle));
+			}
 			keyboardManager.nextFrame();
 			mouseManager.nextFrame();
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
@@ -216,6 +242,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	lightSrcProgram->Use();
 	viewLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	waterProgram->Use();
+	viewLoc = glGetUniformLocation(waterProgram->get_programID(), "view");
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 300.0f);
@@ -224,6 +253,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	lightSrcProgram->Use();
 	projLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "projection");
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	waterProgram->Use();
+	projLoc = glGetUniformLocation(waterProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	return std::pair<glm::mat4, glm::mat4> (view, projection);
 }
