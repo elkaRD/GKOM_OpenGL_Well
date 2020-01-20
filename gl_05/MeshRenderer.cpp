@@ -5,6 +5,7 @@ MeshRenderer::MeshRenderer()
 	vertices = new std::vector<Vertex>();
 	indices = new std::vector<GLuint>();
 	isLight = false;
+	isWater = false;
 }
 
 void MeshRenderer::init()
@@ -53,9 +54,13 @@ void MeshRenderer::start()
 	delete indices;
 }
 
-void MeshRenderer::render() const
+void MeshRenderer::render(GLuint cubemapTexture) const
 {
 	glBindVertexArray(VAO);
+	if (isWater)
+	{
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cucubemapTexture);
+	}
 	glDrawElements(drawingMode, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
@@ -133,6 +138,16 @@ void MeshRenderer::setLight()
 bool MeshRenderer::getLight()
 {
 	return isLight;
+}
+
+void MeshRenderer::setWater()
+{
+	isWater = true;
+}
+
+bool MeshRenderer::getWater()
+{
+	return isWater;
 }
 
 std::vector<Vertex> MeshRenderer::getVertices()

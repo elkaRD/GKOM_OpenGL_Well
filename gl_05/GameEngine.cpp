@@ -95,13 +95,17 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 		lightSrcProgram = new ShaderProgram("lightSrc.vert", "lightSrc.frag");
+		waterProgram = new ShaderProgram("water.vert", "water.frag");
+		waterProgram->Use();
+		glUniform1i(glGetUniformLocation(waterProgram->get_programID(), "skybox"), 0);
 		lightIntensity = 0.0f;
 
 		Skybox* skybox = new Skybox();
-		gameScene = new WellScene(theProgram, lightSrcProgram);
+		gameScene = new WellScene(theProgram, lightSrcProgram, waterProgram);
+		Light* light = new Light();
 		gameScene->startScene();
 		skybox->start();
-
+		cubemapTexture = skybox->getCubemapTexture();
 
 		handleScreenResizeEvent(screenWidth, screenHeight);
 
@@ -117,35 +121,7 @@ void GameEngine::run()
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			// Use cooresponding shader when setting uniforms/drawing objects 
-			
-			theProgram->Use();
-			GLint objectColorLoc = glGetUniformLocation(theProgram->get_programID(), "objectColor");
-			GLint lightColorLoc = glGetUniformLocation(theProgram->get_programID(), "lightColor");
-			glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-			glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
-
-			GLint lightDirLoc = glGetUniformLocation(theProgram->get_programID(), "dirLight.direction");
-			GLint viewPosLoc = glGetUniformLocation(theProgram->get_programID(), "viewPos");
-			//glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
-			glUniform3f(lightDirLoc, -3.0f, -0.5f, -1.5f);
-			glUniform3f(viewPosLoc, cameraPosition.x, cameraPosition.y, cameraPosition.z);
-			// Set lights properties
-			glm::vec3 ambient = glm::vec3(0.2f, 0.2f, 0.2f) * lightIntensity;
-			glm::vec3 diffues = glm::vec3(1.0f, 1.0f, 1.0f) * lightIntensity;
-			glm::vec3 specular = glm::vec3(0.8f, 0.8f, 0.8f) * lightIntensity;
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.ambient"), 0.5f, 0.5f, 0.5f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.diffuse"), 0.5f, 0.5f, 0.5f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "dirLight.specular"), 0.1f, 0.1f, 0.1f);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.ambient"), ambient.x, ambient.y, ambient.z);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.diffuse"), diffues.x, diffues.y, diffues.z);
-			glUniform3f(glGetUniformLocation(theProgram->get_programID(), "pointLight.specular"), specular.x, specular.y, specular.z);
-			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.constant"), 1.0f);
-			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.linear"), 0.09f);
-			glUniform1f(glGetUniformLocation(theProgram->get_programID(), "pointLight.quadratic"), 0.032f);
-			lightSrcProgram->Use();
-			glUniform1f(glGetUniformLocation(lightSrcProgram->get_programID(), "light"), lightIntensity);
-
+			light->update(lightIntensity, theProgram, lightSrcProgram, cameraPosition);
 
 			keyboardManager.nextFrame();
 			mouseManager.nextFrame();
@@ -164,15 +140,17 @@ void GameEngine::run()
 			std::pair<glm::mat4, glm::mat4> camera = setCamera();	//contains view and projection
 
 			// Draw our first triangle
+			waterProgram->Use();
+			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 30, cameraPosition.z);
 			theProgram->Use();
 
-			gameScene->updateScene((float) deltaTime);
-			gameScene->render();
+			gameScene->updateScene(deltaTime);
+			gameScene->render(cubemapTexture);
 
 			//draw skybox
 			skybox->render(camera.first, camera.second);
 
-			//theProgram->Use();
+			theProgram->Use();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
@@ -206,6 +184,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	lightSrcProgram->Use();
 	viewLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	waterProgram->Use();
+	viewLoc = glGetUniformLocation(waterProgram->get_programID(), "view");
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 300.0f);
@@ -214,6 +195,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	lightSrcProgram->Use();
 	projLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "projection");
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	waterProgram->Use();
+	projLoc = glGetUniformLocation(waterProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	return std::pair<glm::mat4, glm::mat4> (view, projection);
 }
@@ -242,7 +226,7 @@ void GameEngine::window_size_callback(GLFWwindow* window, int width, int height)
 
 void GameEngine::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	getInstance().mouseManager.mousePosChanged((int) xpos, (int) ypos);
+	getInstance().mouseManager.mousePosChanged(xpos, ypos);
 }
 
 void GameEngine::handleKeyboardEvent()

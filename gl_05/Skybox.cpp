@@ -116,6 +116,11 @@ void Skybox::render(glm::mat4 view, glm::mat4 projection)
 	glDepthFunc(GL_LESS);
 }
 
+GLuint Skybox::getCubemapTexture()
+{
+	return cubemapTexture;
+}
+
 void Skybox::destroy()
 {
 	glDeleteVertexArrays(1, &skyboxVAO);

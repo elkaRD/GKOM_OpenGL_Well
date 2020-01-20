@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bucket.cpp" />
     <ClCompile Include="Chain.cpp" />
     <ClCompile Include="ChLinkMesh.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
@@ -118,6 +119,8 @@
     <None Include="lightSrc.vert" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
+    <None Include="water.frag" />
+    <None Include="water.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\awesomeface.png" />
@@ -129,6 +132,7 @@
     <Image Include="textures\weiti.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bucket.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="ChLinkMesh.h" />
     <ClInclude Include="CubeMesh.h" />

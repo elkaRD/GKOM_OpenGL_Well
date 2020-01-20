@@ -90,6 +90,9 @@
     <ClCompile Include="Pyramid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bucket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
@@ -104,6 +107,12 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="lightSrc.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="water.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="water.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
@@ -201,6 +210,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bucket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

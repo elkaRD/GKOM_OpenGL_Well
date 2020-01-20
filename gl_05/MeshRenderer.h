@@ -14,7 +14,7 @@ public:
 
 	void init();
 	void start();
-	void render() const;
+	void render(GLuint cubemapTexture) const;
 	void destroy();
 
 	//methods to modify meshes before sending them to GPU
@@ -25,6 +25,8 @@ public:
 	void setColor(float r, float g, float b);
 	void setLight();
 	bool getLight();
+	void setWater();
+	bool getWater();
 
 protected:
 	
@@ -33,7 +35,7 @@ protected:
 	virtual void initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode) = 0;
 
 private:
-	GLuint VBO, EBO, VAO;
+	GLuint VBO, EBO, VAO, skyboxVAO, cucubemapTexture;
 	GLenum drawingMode;
 	GLsizei indicesSize;
 
@@ -42,7 +44,7 @@ private:
 
 	float lerp(float b, float e, float s);
 	float reversedLerp(float b, float e, float x);
-	bool isLight;
+	bool isLight, isWater;
 };
 
 #endif

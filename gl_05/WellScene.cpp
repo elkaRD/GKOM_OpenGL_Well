@@ -1,7 +1,7 @@
 #include "WellScene.h"
 #include <string>
 
-WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2) : GameScene(shader, shader2)
+WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2, ShaderProgram *shader3) : GameScene(shader, shader2, shader3)
 {
 
 }

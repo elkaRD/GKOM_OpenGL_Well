@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-GameScene::GameScene(ShaderProgram *shader, ShaderProgram *shader2) : shader(shader), shader2(shader2)
+GameScene::GameScene(ShaderProgram *shader, ShaderProgram *shader2, ShaderProgram *shader3) : shader(shader), shader2(shader2), shader3(shader3)
 {
 	rootObject = new GameObject(this);
 	rootObject->start();
@@ -27,9 +27,9 @@ void GameScene::start()
 	
 }
 
-void GameScene::render()
+void GameScene::render(GLuint cubemapTexture)
 {
-	rootObject->renderObject(glm::mat4(), shader, shader2);
+	rootObject->renderObject(glm::mat4(), shader, shader2, shader3, cubemapTexture);
 }
 
 void GameScene::update(float delta)
@@ -58,6 +58,11 @@ ShaderProgram* GameScene::getShader2()
 	return shader2;
 }
 
+ShaderProgram* GameScene::getShader3()
+{
+	return shader3;
+}
+
 void GameScene::setTransform(glm::mat4 trans)
 {
 	shader->Use();
@@ -65,6 +70,9 @@ void GameScene::setTransform(glm::mat4 trans)
 	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 	shader2->Use();
 	transformLoc = glGetUniformLocation(shader2->get_programID(), "transform");
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	shader3->Use();
+	transformLoc = glGetUniformLocation(shader3->get_programID(), "transform");
 	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 }
 

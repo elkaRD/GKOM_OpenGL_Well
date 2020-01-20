@@ -1,6 +1,5 @@
 #ifndef SKYBOX_H
 #define SKYBOX_H
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,13 +15,13 @@ public:
 	void start();
 	void render(glm::mat4 view, glm::mat4 projection);
 	void destroy();
+	GLuint getCubemapTexture();
 private:
 	GLuint skyboxVAO, skyboxVBO;
 	GLuint cubemapTexture;
-	ShaderProgram *skyboxProgram;
+	ShaderProgram* skyboxProgram;
 	std::vector<std::string> faces;
 	void setupBuffers(GLfloat skyboxVercities[]);
 };
 #endif
-
 
