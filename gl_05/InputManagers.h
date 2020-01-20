@@ -23,15 +23,15 @@ public:
 	MouseManager();
 
 	void nextFrame();
-	void mousePosChanged(int x, int y);
-	int getDeltaX();
-	int getDeltaY();
+	void mousePosChanged(double x, double y);
+	double getDeltaX();
+	double getDeltaY();
 private:
-	int lastX;
-	int lastY;
+	double lastX;
+	double lastY;
 
-	int deltaX;
-	int deltaY;
+	double deltaX;
+	double deltaY;
 
 	bool firstUpdate;
 };

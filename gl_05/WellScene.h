@@ -7,6 +7,7 @@
 #include "Lamp.h"
 #include "TestObject.h"
 #include "Tree.h"
+#include "Bench.h"
 
 class WellScene : public GameScene
 {
@@ -22,6 +23,7 @@ private:
 
 	void createAvenue();
 	void testObject();
+	void createForest(float transX, float transZ, float sizeX, float sizeZ, int howMany);
 };
 
 #endif

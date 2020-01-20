@@ -38,6 +38,9 @@ protected:
 	ShaderProgram *shader2;
 	ShaderProgram *shader3;
 
+	int randomInt(int min, int max) const;
+	float randomFloat(float min, float max) const;
+
 private:
 	std::vector<GameObject*> gameObjects;
 };

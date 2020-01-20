@@ -181,3 +181,15 @@ std::vector<GameObject*>* GameObject::getChildren()
 
 	return nullptr;
 }
+
+int GameObject::randomInt(int min, int max) const
+{
+	int d = max - min;
+	return rand() % d + min;
+}
+
+float GameObject::randomFloat(float min, float max) const
+{
+	float d = max - min;
+	return (float)(rand() % 1000) / 1000.0f * d + min;
+}

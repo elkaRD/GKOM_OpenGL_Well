@@ -16,33 +16,28 @@ void WellScene::start()
 
 	GameObject* rim = new GameObject(well2);
 	rim->addMesh(new TubeMesh(3.0f, 1.925f, 0.1f));
-	rim->setTexture("textures/rim.png");
+	rim->setTexture("textures/ring.png");
 	rim->transform.translate(0.0f, 1.1f, 0.0f);
 
-	//Lamp *lamp = new Lamp(rootObject);
-
-	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	//testObject();
-
-	GameObject *g = new Tree(rootObject);
-	g->transform.translate(10, 10, 10);
-	g->setTexture("textures/brickwall.jpg");
+	GameObject* bench = new Bench(rootObject);
+	bench->transform.setPosition(-33.0f, 0.0f, -15.0f);
+	
+	createForest(-120, 10, 30, 6, 20);
+	createForest(-120, -60, 30, 6, 20);
+	createForest(-100, -20, 10, 2, 6);
+	createForest(5, -20, 10, 2, 6);
 }
 
 void WellScene::update(float delta)
 {
-	//well->transform.translate(0.2f * delta, 0, 0);
-	//well->transform.rotate(15.0f * delta, 0, 0);
-	//well->transform.rotate(0, 0, 15.0f * delta);
 
-	//well2->transform.rotate(0, 0, 450.0f * delta);
 }
 
 void WellScene::createAvenue()
 {
-	const int spaceBetweenLamps = 19;
+	const float spaceBetweenLamps = 19;
 
 	GameObject *avenue = new GameObject(rootObject);
 	
@@ -106,4 +101,42 @@ void WellScene::testObject()
 	test->transform.translate(10.0f, 10.0f, 10.0f);
 	//test->transform.setScale(0.01f, 0.01f, 0.01f);
 
+}
+
+void WellScene::createForest(float transX, float transZ, float sizeX, float sizeZ, int howMany)
+{
+	const float dx = 6;
+	const float dy = 6;
+
+	const float tz = transZ;
+	const float tx = transX;
+
+	const int toPick = howMany;
+	int sn = 0;
+
+	std::vector<glm::vec3> spots;
+	std::vector<glm::vec3> picked;
+	
+	for (int i = 0; i < sizeX; ++i)
+	{
+		for (int j = 0; j < sizeZ; ++j)
+		{
+			spots.push_back(glm::vec3(dx* i + tx, 0, dx * j + tz));
+			sn++;
+		}
+	}
+
+	for (int i = 0; i < toPick; ++i)
+	{
+		int r = randomInt(0, sn - i);
+		std::swap(spots[r], spots[sn - i - 1]);
+	}
+
+	for (int i = sn - toPick; i < sn; ++i)
+	{
+		GameObject *tree = new Tree(rootObject);
+		tree->transform.setPosition(spots[i]);
+		tree->transform.translate(randomFloat(-1, 1), randomFloat(-1, 0), randomFloat(-1, 1));
+		tree->transform.setScale(randomFloat(0.75f, 1));
+	}
 }

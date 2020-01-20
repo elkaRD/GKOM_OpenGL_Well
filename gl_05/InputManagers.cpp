@@ -35,7 +35,7 @@ void MouseManager::nextFrame()
 	deltaY = 0;
 }
 
-void MouseManager::mousePosChanged(int x, int y)
+void MouseManager::mousePosChanged(double x, double y)
 {
 	deltaX = x - lastX;
 	deltaY = y - lastY;
@@ -50,12 +50,12 @@ void MouseManager::mousePosChanged(int x, int y)
 	}
 }
 
-int MouseManager::getDeltaX()
+double MouseManager::getDeltaX()
 {
 	return deltaX;
 }
 
-int MouseManager::getDeltaY()
+double MouseManager::getDeltaY()
 {
 	return deltaY;
 }

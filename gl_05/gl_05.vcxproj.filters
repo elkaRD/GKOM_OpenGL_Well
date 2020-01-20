@@ -1,225 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Bench.cpp" />
+    <ClCompile Include="Bucket.cpp" />
+    <ClCompile Include="Chain.cpp" />
+    <ClCompile Include="ChLinkMesh.cpp" />
+    <ClCompile Include="CubeMesh.cpp" />
+    <ClCompile Include="CylinderMesh.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="gl_05.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="InputManagers.cpp" />
+    <ClCompile Include="Lamp.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="PlaneMesh.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="Roller.cpp" />
+    <ClCompile Include="shprogram.cpp" />
+    <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="TubeMesh.cpp" />
+    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Well.cpp" />
+    <ClCompile Include="WellScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gl_05.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shprogram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WellScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Well.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CylinderMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TubeMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Skybox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManagers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Lamp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ChLinkMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Roller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Chain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pyramid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bucket.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Bench.h" />
+    <ClInclude Include="Bucket.h" />
+    <ClInclude Include="Chain.h" />
+    <ClInclude Include="ChLinkMesh.h" />
+    <ClInclude Include="CubeMesh.h" />
+    <ClInclude Include="CylinderMesh.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="InputManagers.h" />
+    <ClInclude Include="Lamp.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="PlaneMesh.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="Roller.h" />
+    <ClInclude Include="shprogram.h" />
+    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="TubeMesh.h" />
+    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Well.h" />
+    <ClInclude Include="WellScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\awesomeface.png" />
+    <Image Include="textures\brickwall.jpg" />
+    <Image Include="textures\brickwall_normal.jpg" />
+    <Image Include="textures\iipw.png" />
+    <Image Include="textures\rollerTex.png" />
+    <Image Include="textures\tubeTex.png" />
+    <Image Include="textures\weiti.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
-    <None Include="skybox.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="skybox.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="lightSrc.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="lightSrc.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="water.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="water.vert">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="textures\awesomeface.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\iipw.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\weiti.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\brickwall.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\brickwall_normal.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\tubeTex.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="textures\rollerTex.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="shprogram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CylinderMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TubeMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Well.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WellScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManagers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lamp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChLinkMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Chain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Roller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pyramid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bucket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <None Include="lightSrc.frag" />
+    <None Include="lightSrc.vert" />
+    <None Include="skybox.frag" />
+    <None Include="skybox.vert" />
+    <None Include="water.frag" />
+    <None Include="water.vert" />
   </ItemGroup>
 </Project>
