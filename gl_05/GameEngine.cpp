@@ -154,7 +154,7 @@ void GameEngine::run()
 			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 30, cameraPosition.z);
 			theProgram->Use();
 
-			gameScene->updateScene((float) deltaTime);
+			gameScene->updateScene((float) deltaTime, controll);
 			gameScene->render(cubemapTexture);
 
 			//draw skybox
