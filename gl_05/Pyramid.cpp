@@ -9,6 +9,8 @@ Pyramid::Pyramid(int sides, float h, float r) : sides(sides), H(h), R(r)
 
 void Pyramid::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, GLenum &drawingMode)
 {
+	const float texMulti = 3;
+
 	float prevX = R * cos(radians((float)(360.0f / sides * (sides - 1))));
 	float prevZ = R * sin(radians((float)(360.0f / sides * (sides - 1))));
 
@@ -21,13 +23,13 @@ void Pyramid::initializeMeshVertices(std::vector<Vertex> &vertices, std::vector<
 		glm::vec3 v2 = glm::vec3(x, -H, z);
 		glm::vec3 normal = glm::cross(v1, v2);
 
-		vertices.push_back(Vertex(vec3(0.0f, H, 0.0f), vec3(1.0f), vec2(0.5f, 1.0f), normal));
+		vertices.push_back(Vertex(vec3(0.0f, H, 0.0f), vec3(1.0f), vec2(0.5f * texMulti, 1.0f * texMulti), normal));
 		vertices.push_back(Vertex(vec3(prevX, 0, prevZ), vec3(1.0f), vec2(0, 0), normal));
-		vertices.push_back(Vertex(vec3(x, 0, z), vec3(1.0f), vec2(1.0f, 0), normal));
+		vertices.push_back(Vertex(vec3(x, 0, z), vec3(1.0f), vec2(1.0f * texMulti, 0), normal));
 
-		vertices.push_back(Vertex(vec3(0.0f, 0.0f, 0.0f), vec3(1.0f), vec2(0.5f, 1.0f), vec3(0, -1.0f, 0)));
+		vertices.push_back(Vertex(vec3(0.0f, 0.0f, 0.0f), vec3(1.0f), vec2(0.5f * texMulti, 1.0f * texMulti), vec3(0, -1.0f, 0)));
 		vertices.push_back(Vertex(vec3(prevX, 0, prevZ), vec3(1.0f), vec2(0, 0), vec3(0, -1.0f, 0)));
-		vertices.push_back(Vertex(vec3(x, 0, z), vec3(1.0f), vec2(1.0f, 0), vec3(0, -1.0f, 0)));
+		vertices.push_back(Vertex(vec3(x, 0, z), vec3(1.0f), vec2(1.0f * texMulti, 0), vec3(0, -1.0f, 0)));
 
 		prevX = x;
 		prevZ = z;

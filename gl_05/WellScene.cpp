@@ -1,16 +1,6 @@
 #include "WellScene.h"
 #include <string>
 
-std::ostream& operator<<(std::ostream& os, const glm::vec3& mx)
-{
-	for (int row = 0; row < 3; ++row)
-	{
-		std::cout << mx[row] << ' ';
-	}
-	std::cout << std::endl;
-	return os;
-}
-
 WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2) : GameScene(shader, shader2)
 {
 
@@ -35,21 +25,15 @@ void WellScene::start()
 
 	createAvenue();
 	//testObject();
-	createForest(-120, 10, 30, 6, 30);
-	createForest(-120, -60, 30, 6, 30);
-
-	GameObject *g = new Tree(rootObject);
-	g->transform.translate(10, 0, 10);
-	g->setTexture("textures/brickwall.jpg");
+	createForest(-120, 10, 30, 6, 20);
+	createForest(-120, -60, 30, 6, 20);
+	createForest(-100, -20, 10, 2, 6);
+	createForest(5, -20, 10, 2, 6);
 }
 
 void WellScene::update(float delta)
 {
-	//well->transform.translate(0.2f * delta, 0, 0);
-	//well->transform.rotate(15.0f * delta, 0, 0);
-	//well->transform.rotate(0, 0, 15.0f * delta);
 
-	//well2->transform.rotate(0, 0, 450.0f * delta);
 }
 
 void WellScene::createAvenue()
@@ -147,15 +131,13 @@ void WellScene::createForest(float transX, float transZ, float sizeX, float size
 	{
 		int r = randomInt(0, sn - i);
 		std::swap(spots[r], spots[sn - i - 1]);
-
-		std::cout << r << "  <-> " << (sn - i - 1) << std::endl;
 	}
 
 	for (int i = sn - toPick; i < sn; ++i)
 	{
-		std::cout << i << "   " << spots[i] << std::endl;
-
 		GameObject *tree = new Tree(rootObject);
 		tree->transform.setPosition(spots[i]);
+		tree->transform.translate(randomFloat(-1, 1), randomFloat(-1, 0), randomFloat(-1, 1));
+		tree->transform.setScale(randomFloat(0.75f, 1));
 	}
 }
