@@ -43,6 +43,7 @@ void Chain::start()
 	prev->transform.translate(0.353f, 3.5175f - (20 - 1) * 0.02f, rollerRadius + 0.01f);
 	prev->transform.rotate(0.0f, 0.0f, 180.0f);
 	looseState = prev;
+	looseState->setTexture("textures/crank.png");
 
 	for (unsigned int i = 0; i < lenght; ++i)
 	{
@@ -55,9 +56,11 @@ void Chain::start()
 			firstLoose = prev;
 	}
 
-	//hook = new GameObject(prev);
-	//hook->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
-	//hook->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
+	GameObject* bucket = new Bucket(looseState);
+	bucket->transform.rotate(0.0f, 90.0f, 180.0f);
+	bucket->transform.translate(0.0f, 0.6f, 0.0f);
+	bucket->transform.setScale(1.5, 1.5, 1.5);
+
 	state = 0;
 	toChange = 0;
 	firstLoose->getChildren()->front()->setVisible(false);
