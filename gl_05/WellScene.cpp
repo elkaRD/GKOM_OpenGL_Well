@@ -16,7 +16,7 @@ void WellScene::start()
 
 	GameObject* rim = new GameObject(well2);
 	rim->addMesh(new TubeMesh(3.0f, 1.925f, 0.1f));
-	rim->setTexture("textures/rim.png");
+	rim->setTexture("textures/ring.png");
 	rim->transform.translate(0.0f, 1.1f, 0.0f);
 
 	//Lamp *lamp = new Lamp(rootObject);
@@ -24,7 +24,10 @@ void WellScene::start()
 	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	testObject();
+	//testObject();
+	GameObject* bench = new Bench(rootObject);
+	bench->transform.setPosition(-33.0f, 0.0f, -15.0f);
+	
 
 	GameObject *g = new Tree(rootObject);
 	g->transform.translate(10, 10, 10);
