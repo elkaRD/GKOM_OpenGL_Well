@@ -16,7 +16,7 @@ void Well::start()
 
 	GameObject *peak = createPeak(this);
 	peak->setTexture("textures/wood.png");
-	roller = createRoller(this);
+	//roller = createRoller(this);
 }
 
 void Well::update(float delta)
