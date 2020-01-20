@@ -28,8 +28,10 @@ private:
 	GLFWwindow *window;
 	ShaderProgram *theProgram;
 	ShaderProgram *lightSrcProgram;
+	ShaderProgram *waterProgram;
 	GameScene *gameScene;
 
+	GLuint skyboxVAO, cubemapTexture;
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
 

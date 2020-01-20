@@ -25,7 +25,7 @@ public:
 
 	void startObject();
 	void destroyObject();
-	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2);
+	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2, ShaderProgram* shader3, GLuint cubemapTexture);
 	void updateObject(float delta);
 	void setVisible(bool isVisible);
 

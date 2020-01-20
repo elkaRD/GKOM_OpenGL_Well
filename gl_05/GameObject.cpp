@@ -22,7 +22,7 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2)
+void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2, ShaderProgram *shader3, GLuint cubemapTexture)
 {
 	if (!visible)
 		return;
@@ -34,15 +34,16 @@ void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* s
 
 	for (const auto& mesh : meshes) 
 	{
-		if (mesh->getLight()) shader2->Use();
+		if (mesh->getWater()) shader3->Use();
+		else if (mesh->getLight()) shader2->Use();
 		else shader->Use();
-		mesh->render();
+		mesh->render(cubemapTexture);
 	}
 
 	render();
 
 	for (auto &child : children)
-		child->renderObject(transformMatrix, shader, shader2);
+		child->renderObject(transformMatrix, shader, shader2, shader3, cubemapTexture);
 }
 
 void GameObject::updateObject(float delta)

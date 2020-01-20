@@ -11,7 +11,7 @@ class GameScene
 {
 public:
 
-	GameScene(ShaderProgram * shader, ShaderProgram * shader2);
+	GameScene(ShaderProgram * shader, ShaderProgram * shader2, ShaderProgram* shader3);
 	virtual ~GameScene();
 
 	void startScene();
@@ -19,12 +19,13 @@ public:
 	void updateScene(float delta);
 
 	virtual void start();
-	void render();
+	void render(GLuint cubemapTexture);
 	virtual void update(float delta);
 	virtual void destroy();
 
 	ShaderProgram* getShader();
 	ShaderProgram* getShader2();
+	ShaderProgram* getShader3();
 
 	void setTransform(glm::mat4 trans);
 	void registerObject(GameObject *gameObject);
@@ -35,6 +36,7 @@ protected:
 	GameObject *rootObject;
 	ShaderProgram *shader;
 	ShaderProgram *shader2;
+	ShaderProgram *shader3;
 
 private:
 	std::vector<GameObject*> gameObjects;

@@ -14,6 +14,11 @@ void Well::start()
 	MeshRenderer *mesh = hole->addMesh(new TubeMesh());
 	hole->setTexture("textures/brickwall.jpg");
 
+	GameObject* stem1 = new GameObject(hole);
+	stem1->transform.setPosition(0, 3, 0);
+	MeshRenderer* cube = stem1->addMesh(new CylinderMesh());
+	cube->setWater();
+
 	GameObject *peak = createPeak(this);
 	peak->setTexture("textures/wood.png");
 	roller = createRoller(this);

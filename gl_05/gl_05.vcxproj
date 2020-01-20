@@ -117,6 +117,8 @@
     <None Include="lightSrc.vert" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
+    <None Include="water.frag" />
+    <None Include="water.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\awesomeface.png" />

@@ -105,13 +105,17 @@ void GameEngine::run()
 		// Build, compile and link shader program
 		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
 		lightSrcProgram = new ShaderProgram("lightSrc.vert", "lightSrc.frag");
+		waterProgram = new ShaderProgram("water.vert", "water.frag");
+		waterProgram->Use();
+		glUniform1i(glGetUniformLocation(waterProgram->get_programID(), "skybox"), 0);
 		lightIntensity = 0.0f;
 
 		Skybox* skybox = new Skybox();
-		gameScene = new WellScene(theProgram, lightSrcProgram);
+		gameScene = new WellScene(theProgram, lightSrcProgram, waterProgram);
 		gameScene->startScene();
 		skybox->start();
-
+		skyboxVAO = skybox->getVAO();
+		cubemapTexture = skybox->getCubemapTexture();
 
 		handleScreenResizeEvent(screenWidth, screenHeight);
 
@@ -174,15 +178,17 @@ void GameEngine::run()
 			std::pair<glm::mat4, glm::mat4> camera = setCamera();	//contains view and projection
 
 			// Draw our first triangle
+			waterProgram->Use();
+			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 6, cameraPosition.z);
 			theProgram->Use();
 
 			gameScene->updateScene(deltaTime);
-			gameScene->render();
+			gameScene->render(cubemapTexture);
 
 			//draw skybox
 			skybox->render(camera.first, camera.second);
 
-			//theProgram->Use();
+			theProgram->Use();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
@@ -216,6 +222,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	lightSrcProgram->Use();
 	viewLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	waterProgram->Use();
+	viewLoc = glGetUniformLocation(waterProgram->get_programID(), "view");
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(70.0f), (float)screenWidth / (float)screenHeight, 0.1f, 300.0f);
@@ -224,6 +233,9 @@ std::pair<glm::mat4, glm::mat4> GameEngine::setCamera()
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	lightSrcProgram->Use();
 	projLoc = glGetUniformLocation(lightSrcProgram->get_programID(), "projection");
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	waterProgram->Use();
+	projLoc = glGetUniformLocation(waterProgram->get_programID(), "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	return std::pair<glm::mat4, glm::mat4> (view, projection);
 }
