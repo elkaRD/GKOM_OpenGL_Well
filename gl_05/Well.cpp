@@ -1,5 +1,6 @@
 #include "Well.h"
 #include "Roller.h"
+#include "Bucket.h"
 
 Well::Well(GameObject *parent) : GameObject(parent)
 {
@@ -22,6 +23,14 @@ void Well::start()
 	GameObject *peak = createPeak(this);
 	peak->setTexture("textures/wood.png");
 	roller = createRoller(this);
+
+	GameObject* bucket = new Bucket(this);
+	bucket->transform.setPosition(-1.6f, 1.5f, 1.0f);
+	bucket->transform.setScale(1.5, 1.5, 1.5);
+
+	GameObject* bed = new GameObject(hole);
+	bed->addMesh(new CubeMesh(3.0f, 0.1f, 3.0f));
+	bed->transform.translate(0.0f, -15.0f, 0.0f);
 }
 
 void Well::update(float delta)

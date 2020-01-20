@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bucket.cpp" />
     <ClCompile Include="Chain.cpp" />
     <ClCompile Include="ChLinkMesh.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
@@ -132,6 +133,7 @@
     <Image Include="textures\weiti.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bucket.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="ChLinkMesh.h" />
     <ClInclude Include="CubeMesh.h" />

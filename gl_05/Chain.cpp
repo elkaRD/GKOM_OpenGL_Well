@@ -1,9 +1,10 @@
 #include "Chain.h"
+#include "Bucket.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <glm\detail\func_geometric.hpp>
 
-Chain::Chain(GameObject* parent): GameObject(parent), lenght(100), rotation(0.0), dRotation(0.0)
+Chain::Chain(GameObject* parent): GameObject(parent), lenght(20), rotation(0.0), dRotation(0.0)
 {}
 
 Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(parent), lenght(lenght) , rollerRadius(radius), rotation(0.0), dRotation(0.0)
@@ -11,7 +12,7 @@ Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(
 
 void Chain::start()
 {
-	this->setTexture("textures/crank.png");
+	
 	this->transform.translate(-rollerRadius+0.015f-0.0025f, 0.35f, 0.015f - 0.0075f);
 	this->transform.rotate(0.0f, 0.0f, 92.0f);
 	GameObject* begin = new GameObject(this);
@@ -42,6 +43,7 @@ void Chain::start()
 	prev->transform.translate(0.353f, 3.5175f - (20 - 1) * 0.02f, rollerRadius + 0.01f);
 	prev->transform.rotate(0.0f, 0.0f, 180.0f);
 	looseState = prev;
+	looseState->setTexture("textures/crank.png");
 
 	for (unsigned int i = 0; i < lenght; ++i)
 	{
@@ -54,12 +56,16 @@ void Chain::start()
 			firstLoose = prev;
 	}
 
-	//hook = new GameObject(prev);
-	//hook->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
-	//hook->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
+	GameObject* bucket = new Bucket(looseState);
+	bucket->transform.rotate(0.0f, 90.0f, 180.0f);
+	bucket->transform.translate(0.0f, 0.6f, 0.0f);
+	bucket->transform.setScale(1.5, 1.5, 1.5);
+
 	state = 0;
 	toChange = 0;
 	firstLoose->getChildren()->front()->setVisible(false);
+	this->setTexture("textures/crank.png");
+	//prev = new Bucket(looseState);
 }
 
 void Chain::update(float delta)
