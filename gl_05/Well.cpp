@@ -1,6 +1,7 @@
 #include "Well.h"
 #include "Roller.h"
 #include "Bucket.h"
+#include "Bench.h"
 
 Well::Well(GameObject *parent) : GameObject(parent)
 {
@@ -31,6 +32,7 @@ void Well::start()
 	GameObject* bed = new GameObject(hole);
 	bed->addMesh(new CubeMesh(3.0f, 0.1f, 3.0f));
 	bed->transform.translate(0.0f, -15.0f, 0.0f);
+
 }
 
 void Well::update(float delta)

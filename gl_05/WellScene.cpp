@@ -24,7 +24,7 @@ void WellScene::start()
 	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	//testObject();
+	testObject();
 
 	GameObject *g = new Tree(rootObject);
 	g->transform.translate(10, 10, 10);
