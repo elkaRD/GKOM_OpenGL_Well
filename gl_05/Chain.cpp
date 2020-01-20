@@ -3,10 +3,10 @@
 #include <math.h>
 #include <glm\detail\func_geometric.hpp>
 
-Chain::Chain(GameObject* parent): GameObject(parent), lenght(100)
+Chain::Chain(GameObject* parent): GameObject(parent), lenght(100), rotation(0.0), dRotation(0.0)
 {}
 
-Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(parent), lenght(lenght) , rollerRadius(radius)
+Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(parent), lenght(lenght) , rollerRadius(radius), rotation(0.0), dRotation(0.0)
 {}
 
 void Chain::start()
@@ -18,7 +18,7 @@ void Chain::start()
 	begin->addMesh(new ChLinkMesh(0.03f, 0.02f, 0.0025f));
 	
 	GameObject* prev = begin;
-	for (auto i = 0; i < lenght - 50; ++i)
+	for (auto i = 0; i < lenght - 20; ++i)
 	{
 		GameObject* link = new GameObject(prev);
 		link->addMesh(new ChLinkMesh(0.03f, 0.02f, 0.0025f));
@@ -39,7 +39,7 @@ void Chain::start()
 	stateChanger = prev;
 
 	prev = new GameObject(begin->getParent()->getParent()->getParent());
-	prev->transform.translate(0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01);
+	prev->transform.translate(0.353f, 3.5175f - (20 - 1) * 0.02f, rollerRadius + 0.01);
 	prev->transform.rotate(0.0f, 0.0f, 180.0f);
 	looseState = prev;
 
@@ -50,7 +50,7 @@ void Chain::start()
 		link->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
 		link->transform.rotate(0.0f, 90.0f, 0.0f);
 		prev = link;
-		if (i == 48)
+		if (i == 18)
 			firstLoose = prev;
 	}
 
@@ -65,18 +65,19 @@ void Chain::start()
 void Chain::update(float delta)
 {
 	firstLoose->setVisible(true);
-	
-	float changeDelta = 2 * M_PI * (rollerRadius + 0.01f) * (rotation / 360.0f);
 
-	toChange += changeDelta * delta;
-	GameObject* tmp = looseState;
-	looseState->transform.translate(0.0007f * changeDelta / 2 * M_PI * rollerRadius, -changeDelta * delta, 0.0f);
-	
+	GameObject* tmp;
+
+	looseState->transform.setPosition(0.353f -(0.0176*rotation / 360.0f) , (3.5175f - 19 * 0.02f) - (rollerRadius + 0.01f) * 2 * M_PI * rotation / 360.0f, rollerRadius + 0.01); //50.26
+	//0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01
+	GLfloat sLen = 3.5175f - (20 - 1) * 0.02f - looseState->transform.getPosition().y;
+	//std::cout << "Rozwiniecie " << sLen << std::endl;
 	if (state)
 	{
-		stateChanger->transform.rotate(0.0f, 0.0f, rotation * delta);
-		if (toChange  >= rollerRadius * M_PI * 2 / 50.76)
+		stateChanger->transform.rotate(0.0f, 0.0f, dRotation);
+		if (llrint(floor(sLen / 0.02f)) % 2 == 0 && dRotation >= 0)
 		{
+			//std::cout << "Przeskok ze state " << stateChanger->transform.getRotation().z << std::endl;
 			tmp = (stateChanger);
 			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
@@ -87,12 +88,24 @@ void Chain::update(float delta)
 			toChange = 0;
 			state = false;
 		}
+		if (llrint(floor(sLen / 0.02f)) % 2 == 0 && dRotation < 0)
+		{
+			tmp = stateChanger;
+			stateChanger = stateChanger->getChildren()->front();
+			stateChanger->setVisible(true);
+
+			firstLoose->setVisible(false);
+			firstLoose = firstLoose->getParent();
+			toChange = 0;
+			state = false;
+		}
 	}
 	else
 	{
-		stateChanger->transform.rotate(-rotation * delta, 0.0f, 0.0f);
-		if (toChange >= rollerRadius * M_PI * 2 / 50.76)
+		stateChanger->transform.rotate(-dRotation,0.0f,0.0f);
+		if (llrint(floor(sLen / 0.02f)) % 2 == 1 && dRotation >= 0)
 		{
+			//std::cout << "Przeskok z !state " << stateChanger->transform.getRotation().x << std::endl;
 			tmp = stateChanger;
 			stateChanger = stateChanger->getParent();
 			tmp->setVisible(false);
@@ -103,10 +116,22 @@ void Chain::update(float delta)
 			toChange = 0;
 			state = true;
 		}
+		if (llrint(floor(sLen / 0.02f)) % 2 == 1 && dRotation < 0)
+		{
+			tmp = stateChanger;
+			stateChanger = stateChanger->getChildren()->front(); 
+			stateChanger->setVisible(true);
+
+			firstLoose->setVisible(false);
+			firstLoose = firstLoose->getParent();
+			toChange = 0;
+			state = true;
+		}
 	}
 }
 
 void Chain::tellRotation(GLfloat aRotation)
 {
-	rotation = aRotation;
+	dRotation = aRotation;
+	rotation += aRotation;
 }

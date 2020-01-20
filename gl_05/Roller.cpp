@@ -1,6 +1,6 @@
 #include "Roller.h"
 
-Roller::Roller(GameObject* parent, GLfloat radius, GLfloat height): GameObject(parent), radius(radius), height(height)
+Roller::Roller(GameObject* parent, GLfloat radius, GLfloat height): GameObject(parent), radius(radius), height(height), maxAngle(10800.0), minAngle(-0.00001)
 {}
 
 Roller::Roller(GameObject* parent): Roller(parent, 0.15f, 2.0f)
@@ -19,20 +19,30 @@ void Roller::start()
 	crank->transform.translate(0.35f-radius/4, -height*0.6 - 0.25, 0.0f);
 	crank->addMesh(new CubeMesh(0.7f, 0.075f, radius/2));
 
-	chain = new Chain(this, 2060, radius);
+	chain = new Chain(this, 2030, radius);
 	thick->addChild(chain);
 	chain->tellRotation(transform.getRotation().x);
-	wait = 0;
+	angle = 0;
+	speed = 0.0f;
 }
 
 void Roller::update(float delta)
 {
-	wait += delta;
-	if (wait > 5)
-	{
-		transform.rotate(100.0f * delta, 0.0f, 0.0f);
-		chain->tellRotation(100.0f);
-	}
+	//if(speed< 18.0f && speed >= 0.0f)
+	speed += 20.0f * delta;
+		
+	if (speed >= 180.0f)
+		speed = 180.0f;
+	//if (speed < 0)
+	//	speed = -1.0f;
+
+	if (angle + speed * delta >= maxAngle || angle + speed * delta <= minAngle)
+		return;
+
+	transform.rotate(speed * delta, 0.0f, 0.0f);
+	chain->tellRotation(speed * delta);
+	angle += speed * delta;
+		
 }
 
 GLfloat Roller::getRadius() const

@@ -21,7 +21,10 @@ private:
 
 	Chain* chain;
 
-	float wait;
+	double angle;
+	float speed;
+	double maxAngle;
+	double minAngle;
 };
 
 #endif // !ROLLER_H
