@@ -15,6 +15,12 @@ public:
 	void update(float delta);
 private:
 
+	std::vector<GameObject*> treeLayers;
+
+	float minAngle;
+	float maxAngle;
+	float swayTime;
+	float swayDuration;
 };
 
 #endif

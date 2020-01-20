@@ -22,6 +22,16 @@ ostream& operator<<(ostream& os, const glm::vec4& mx)
 	return os;
 }
 
+ostream& operator<<(ostream& os, const glm::vec3& mx)
+{
+	for (int row = 0; row < 3; ++row)
+	{
+		cout << mx[row] << ' ';
+	}
+	cout << endl;
+	return os;
+}
+
 ostream& operator<<(ostream& os, const glm::vec2& mx)
 {
 	for (int row = 0; row < 2; ++row)
@@ -46,8 +56,8 @@ GameEngine& GameEngine::getInstance()
 
 GameEngine::GameEngine()
 {
-	cameraPosition = glm::vec3(27, -6, 15);
-	cameraRotation = glm::vec2(0.0f);
+	cameraPosition = glm::vec3(34.43f, -3.23f, 22.13f);
+	cameraRotation = glm::vec2(144.4f, 15);
 }
 
 void GameEngine::init()
@@ -144,7 +154,7 @@ void GameEngine::run()
 			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 30, cameraPosition.z);
 			theProgram->Use();
 
-			gameScene->updateScene(deltaTime);
+			gameScene->updateScene((float) deltaTime);
 			gameScene->render(cubemapTexture);
 
 			//draw skybox
@@ -278,8 +288,8 @@ void GameEngine::handleKeyboardEvent()
 
 void GameEngine::handleMouseEvent()
 {
-	cameraRotation[0] += mouseManager.getDeltaX() * 0.1f;
-	cameraRotation[1] += mouseManager.getDeltaY() * 0.1f;
+	cameraRotation[0] += (float) mouseManager.getDeltaX() * 0.1f;
+	cameraRotation[1] += (float)mouseManager.getDeltaY() * 0.1f;
 
 	if (cameraRotation[0] > 360) cameraRotation[0] -= 360;
 	if (cameraRotation[0] < 0) cameraRotation[0] += 360;

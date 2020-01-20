@@ -20,6 +20,7 @@ public:
 	//methods to modify meshes before sending them to GPU
 	virtual void scaleVertices(float x, float y, float z);
 	virtual void scaleVertices(float s);
+	virtual void colorVertices(glm::vec3 color);
 	virtual void verticalInterpolationScale(float lowerScale, float upperScale);
 
 	void setColor(float r, float g, float b);

@@ -92,6 +92,14 @@ void MeshRenderer::scaleVertices(float s)
 	}
 }
 
+void MeshRenderer::colorVertices(glm::vec3 color)
+{
+	for (auto &vertex : *vertices)
+	{
+		vertex.color = color;
+	}
+}
+
 void MeshRenderer::verticalInterpolationScale(float lowerScale, float upperScale)
 {
 	float maxY = std::numeric_limits<float>::min();
