@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chain.cpp" />
+    <ClCompile Include="ChLinkMesh.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="CylinderMesh.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -97,6 +99,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
+    <ClCompile Include="Roller.cpp" />
     <ClCompile Include="shprogram.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="TestObject.cpp" />
@@ -120,10 +123,13 @@
     <Image Include="textures\brickwall.jpg" />
     <Image Include="textures\brickwall_normal.jpg" />
     <Image Include="textures\iipw.png" />
+    <Image Include="textures\rollerTex.png" />
     <Image Include="textures\tubeTex.png" />
     <Image Include="textures\weiti.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chain.h" />
+    <ClInclude Include="ChLinkMesh.h" />
     <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="CylinderMesh.h" />
     <ClInclude Include="GameEngine.h" />
@@ -135,6 +141,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PlaneMesh.h" />
+    <ClInclude Include="Roller.h" />
     <ClInclude Include="shprogram.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="TestObject.h" />

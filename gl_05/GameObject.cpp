@@ -2,6 +2,7 @@
 
 GameObject::GameObject(GameObject* parent) : parent(parent), texture(nullptr)
 {
+	visible = true;
 	if (parent != nullptr)
 	{
 		parent->addChild(this);
@@ -12,22 +13,19 @@ GameObject::GameObject(GameObject* parent) : parent(parent), texture(nullptr)
 
 GameObject::GameObject(GameScene *scene) : scene(scene), texture(nullptr)
 {
+	visible = true;
 	scene->registerObject(this);
 }
 
 GameObject::~GameObject()
 {
-	parent->removeChild(this);
 
-	for (auto &mesh : meshes)
-	{
-		mesh->destroy();
-		delete mesh;
-	}
 }
 
 void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* shader, ShaderProgram* shader2)
 {
+	if (!visible)
+		return;
 	glm::mat4 transformMatrix = transform.getTransform(parentTransform);
 	scene->setTransform(transformMatrix);
 
@@ -81,6 +79,14 @@ void GameObject::destroyObject()
 		delete child;
 	}
 
+	parent->removeChild(this);
+
+	for (auto &mesh : meshes)
+	{
+		mesh->destroy();
+		delete mesh;
+	}
+
 	destroy();
 }
 
@@ -106,6 +112,9 @@ void GameObject::destroy()
 
 void GameObject::addChild(GameObject *child)
 {
+	if (child->parent != nullptr)
+		child->parent->removeChild(child);
+
 	auto itGameObject = find(children.begin(), children.end(), child);
 	if (itGameObject != children.end()) return;
 
@@ -114,10 +123,16 @@ void GameObject::addChild(GameObject *child)
 
 void GameObject::removeChild(GameObject *child)
 {
-	//TODO: fix
-	//auto objectToRemove = find(children.begin(), children.end(), child);
-	//iter_swap(objectToRemove, children.end() - 1);
-	//children.pop_back();
+	for (unsigned int i = 0; i < children.size(); ++i)
+	{
+		if (children[i] == child)
+		{
+			children[i] = children[children.size() - 1];
+			children[children.size() - 1] = child;
+			children.pop_back();
+			break;
+		}
+	}
 }
 
 MeshRenderer* GameObject::addMesh(MeshRenderer *mesh)
@@ -130,4 +145,31 @@ MeshRenderer* GameObject::addMesh(MeshRenderer *mesh)
 void GameObject::setTexture(const char *fileName)
 {
 	texture = new Texture(scene->getShader(), fileName);
+}
+
+GameObject* GameObject::getParent()
+{
+	return parent;
+}
+
+void GameObject::setVisible(bool isVisible)
+{
+	visible = isVisible;
+}
+
+GameObject* GameObject::getRoot()
+{
+	return scene->getRoot();
+}
+
+void GameObject::setParent(GameObject* aParent)
+{
+	this->parent = aParent;
+	aParent->addChild(this);
+}
+
+std::vector<GameObject*>* GameObject::getChildren()
+{
+	if (children.size() != 0)
+		return &children;
 }

@@ -7,6 +7,7 @@
 class CylinderMesh : public MeshRenderer {
 public:
 	CylinderMesh();
+	CylinderMesh(GLfloat r, GLfloat h);
 protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 	void generatePlate(std::vector<Vertex>& vertices, bool top);

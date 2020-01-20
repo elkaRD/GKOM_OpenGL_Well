@@ -6,6 +6,7 @@
 #include "CylinderMesh.h"
 #include "TubeMesh.h"
 #include "PlaneMesh.h"
+#include "ChLinkMesh.h"
 
 class TestObject : public GameObject
 {

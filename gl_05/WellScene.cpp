@@ -19,7 +19,7 @@ void WellScene::start()
 	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	testObject();
+	//testObject();
 }
 
 void WellScene::update(float delta)
@@ -86,6 +86,7 @@ void WellScene::testObject()
 	GameObject* test = new TestObject(rootObject);
 
 	//GameObject* object = new TestObject(test);
-	test->transform.translate(-10, 10, -10);
+	test->transform.translate(10.0f, 10.0f, 10.0f);
+	//test->transform.setScale(0.01f, 0.01f, 0.01f);
 
 }

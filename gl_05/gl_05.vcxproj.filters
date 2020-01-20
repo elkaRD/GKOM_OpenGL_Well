@@ -78,6 +78,15 @@
     <ClCompile Include="TestObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChLinkMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Roller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Chain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
@@ -112,6 +121,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="textures\tubeTex.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\rollerTex.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -174,6 +186,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChLinkMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Roller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

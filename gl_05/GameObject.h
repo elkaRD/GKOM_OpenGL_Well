@@ -27,6 +27,7 @@ public:
 	void destroyObject();
 	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2);
 	void updateObject(float delta);
+	void setVisible(bool isVisible);
 
 	void addChild(GameObject *child);
 	void removeChild(GameObject *child);
@@ -39,10 +40,18 @@ public:
 	virtual void render();
 	virtual void update(float delta);
 
+	GameObject* getParent();
+	void setParent(GameObject* parent);
+	GameObject* GameObject::getRoot();
+
+	//for chain animation
+	std::vector<GameObject*>* getChildren();
+	bool visible;
 private:
 	Texture *texture;
 	std::vector<MeshRenderer*> meshes;
 	bool firstUpdate = true;
+	
 
 protected:
 	GameObject *parent;
