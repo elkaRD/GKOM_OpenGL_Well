@@ -97,6 +97,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputManagers.cpp" />
     <ClCompile Include="Lamp.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="Pyramid.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManagers.h" />
     <ClInclude Include="Lamp.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="Pyramid.h" />
