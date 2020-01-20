@@ -15,7 +15,6 @@ public:
 	void start();
 	void render(glm::mat4 view, glm::mat4 projection);
 	void destroy();
-	GLuint getVAO();
 	GLuint getCubemapTexture();
 private:
 	GLuint skyboxVAO, skyboxVBO;

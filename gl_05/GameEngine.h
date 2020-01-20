@@ -14,6 +14,7 @@ using namespace std;
 #include "InputManagers.h"
 #include "Skybox.h"
 #include "WellScene.h"
+#include "Light.h"
 
 class GameEngine
 {
@@ -31,7 +32,7 @@ private:
 	ShaderProgram *waterProgram;
 	GameScene *gameScene;
 
-	GLuint skyboxVAO, cubemapTexture;
+	GLuint cubemapTexture;
 	glm::vec3 cameraPosition;
 	glm::vec2 cameraRotation;
 

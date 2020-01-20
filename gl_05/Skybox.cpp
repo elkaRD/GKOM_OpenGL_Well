@@ -116,11 +116,6 @@ void Skybox::render(glm::mat4 view, glm::mat4 projection)
 	glDepthFunc(GL_LESS);
 }
 
-
-GLuint Skybox::getVAO()
-{
-	return skyboxVAO;
-}
 GLuint Skybox::getCubemapTexture()
 {
 	return cubemapTexture;
