@@ -29,15 +29,21 @@ void Roller::start()
 void Roller::update(float delta)
 {
 	//if(speed< 18.0f && speed >= 0.0f)
-	speed += 20.0f * delta;
+	if(speed >= 0)
+		speed = 360.0f;
+	if (speed < 0.0f)
+		speed = -360.0f;
 		
-	if (speed >= 180.0f)
-		speed = 180.0f;
+	//if (speed >= 180.0f)
+	//	speed = 180.0f;
 	//if (speed < 0)
 	//	speed = -1.0f;
 
-	if (angle + speed * delta >= maxAngle || angle + speed * delta <= minAngle)
-		return;
+	if (angle + speed * delta >= maxAngle && speed > 0.0f)
+		speed = -0.01f;
+
+	if (angle + speed * delta <= minAngle && speed < 0.0f)
+		speed = 0.0f;
 
 	transform.rotate(speed * delta, 0.0f, 0.0f);
 	chain->tellRotation(speed * delta);

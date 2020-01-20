@@ -24,7 +24,7 @@ private:
 	double dRotation;
 	GLfloat toChange;
 
-	bool state;
+	unsigned int state;
 	GameObject* stateChanger;
 	GameObject* looseState;
 	GameObject* firstLoose;

@@ -57,77 +57,54 @@ void Chain::start()
 	//hook = new GameObject(prev);
 	//hook->addMesh(new CubeMesh(0.01f, 0.01f, 0.01f));
 	//hook->transform.translate(0.0f, -0.03f + 4 * 0.0025f, 0.0f);
-	state = false;
+	state = 0;
 	toChange = 0;
 	firstLoose->getChildren()->front()->setVisible(false);
 }
 
 void Chain::update(float delta)
 {
-	firstLoose->setVisible(true);
-
 	GameObject* tmp;
-
 	looseState->transform.setPosition(0.353f -(0.0176*rotation / 360.0f) , (3.5175f - 19 * 0.02f) - (rollerRadius + 0.01f) * 2 * M_PI * rotation / 360.0f, rollerRadius + 0.01); //50.26
 	//0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01
 	GLfloat sLen = 3.5175f - (20 - 1) * 0.02f - looseState->transform.getPosition().y;
 	//std::cout << "Rozwiniecie " << sLen << std::endl;
-	if (state)
+	//if (state % 2 == 1)
+	//{
+	//	stateChanger->transform.rotate(0.0f, 0.0f, dRotation);
+	//}
+	//else
+	//{
+	//	stateChanger->transform.rotate(-dRotation,0.0f,0.0f);
+	//}
+	int stateChanges = llrint(floor(sLen / 0.02f)) - state;
+	while (stateChanges>0 && dRotation > 0)
 	{
-		stateChanger->transform.rotate(0.0f, 0.0f, dRotation);
-		if (llrint(floor(sLen / 0.02f)) % 2 == 0 && dRotation >= 0)
-		{
-			//std::cout << "Przeskok ze state " << stateChanger->transform.getRotation().z << std::endl;
-			tmp = (stateChanger);
-			stateChanger = stateChanger->getParent();
-			tmp->setVisible(false);
+		tmp = (stateChanger);
+		stateChanger = stateChanger->getParent();
+		tmp->setVisible(false);
 
-			firstLoose = firstLoose->getChildren()->front();
-			firstLoose->getChildren()->front()->setVisible(false);
+		firstLoose = firstLoose->getChildren()->front();
+		firstLoose->getChildren()->front()->setVisible(false);
+		firstLoose->setVisible(true);
 
-			toChange = 0;
-			state = false;
-		}
-		if (llrint(floor(sLen / 0.02f)) % 2 == 0 && dRotation < 0)
-		{
-			tmp = stateChanger;
-			stateChanger = stateChanger->getChildren()->front();
-			stateChanger->setVisible(true);
-
-			firstLoose->setVisible(false);
-			firstLoose = firstLoose->getParent();
-			toChange = 0;
-			state = false;
-		}
+		toChange = 0;
+		--stateChanges;
+		++state;
 	}
-	else
+	while (stateChanges < 0 && dRotation < 0)
 	{
-		stateChanger->transform.rotate(-dRotation,0.0f,0.0f);
-		if (llrint(floor(sLen / 0.02f)) % 2 == 1 && dRotation >= 0)
-		{
-			//std::cout << "Przeskok z !state " << stateChanger->transform.getRotation().x << std::endl;
-			tmp = stateChanger;
-			stateChanger = stateChanger->getParent();
-			tmp->setVisible(false);
+		tmp = stateChanger;
+		stateChanger = stateChanger->getChildren()->front();
+		stateChanger->setVisible(true);
 
-			firstLoose = firstLoose->getChildren()->front();
-			firstLoose->getChildren()->front()->setVisible(false);
-
-			toChange = 0;
-			state = true;
-		}
-		if (llrint(floor(sLen / 0.02f)) % 2 == 1 && dRotation < 0)
-		{
-			tmp = stateChanger;
-			stateChanger = stateChanger->getChildren()->front(); 
-			stateChanger->setVisible(true);
-
-			firstLoose->setVisible(false);
-			firstLoose = firstLoose->getParent();
-			toChange = 0;
-			state = true;
-		}
+		firstLoose->setVisible(false);
+		firstLoose = firstLoose->getParent();
+		toChange = 0;
+		++stateChanges;
+		--state;
 	}
+
 }
 
 void Chain::tellRotation(GLfloat aRotation)
