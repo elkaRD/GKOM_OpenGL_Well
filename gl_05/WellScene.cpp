@@ -42,7 +42,7 @@ void WellScene::update(float delta)
 
 void WellScene::createAvenue()
 {
-	const float spaceBetweenLamps = 9;
+	const int spaceBetweenLamps = 19;
 
 	GameObject *avenue = new GameObject(rootObject);
 	
@@ -50,6 +50,7 @@ void WellScene::createAvenue()
 	for (int x = -10; x <= 20; ++x)
 	{
 		GameObject *lamp = new Lamp(avenue);
+		lamp->setTexture("textures/rusty.png");
 		lamp->transform.translate(x * spaceBetweenLamps, 0, 0);
 		//int tmp = x + 10;
 		//auto s = std::to_string(tmp);
@@ -87,6 +88,13 @@ void WellScene::createAvenue()
 	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition27"), 17 * spaceBetweenLamps, 4, 0);
 	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition28"), 18 * spaceBetweenLamps, 4, 0);
 	glUniform3f(glGetUniformLocation(shader->get_programID(), "pointLightsPosition29"), 19 * spaceBetweenLamps, 4, 0);
+
+	GameObject* sidewalk = new GameObject(avenue);
+	sidewalk->addMesh(new PlaneMesh(1000.0f, 4.0f, 1000.0f, 4.0f));
+	sidewalk->setTexture("textures/asphalt.png");
+	sidewalk->transform.setPosition(-10.0f, 0.01f, -5.0f);
+
+
 }
 
 void WellScene::testObject()
