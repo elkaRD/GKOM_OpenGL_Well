@@ -16,7 +16,7 @@ void Lamp::start()
 	GameObject *base2 = new GameObject(base1);
 	base2->transform.translate(0, 0.45f, 0);
 	mesh = base2->addMesh(new CylinderMesh());
-	mesh->verticalInterpolationScale(1.2, 0.7f);
+	mesh->verticalInterpolationScale(1.2f, 0.7f);
 	mesh->scaleVertices(0.2f, 0.15f, 0.2f);
 
 	GameObject *base3 = new GameObject(base2);

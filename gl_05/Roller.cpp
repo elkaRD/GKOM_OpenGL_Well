@@ -14,18 +14,18 @@ void Roller::start()
 	thick->addMesh(thickMesh);
 	
 	GameObject* thin = new GameObject(thick);
-	MeshRenderer* thinMesh = new CylinderMesh(radius / 4, height * 1.2 + 0.35);
+	MeshRenderer* thinMesh = new CylinderMesh(radius / 4, height * 1.2f + 0.35f);
 	thin->transform.translate(0.0f, -0.1f, 0.0f);
 	thin->addMesh(thinMesh);
 
 	GameObject* crank = new GameObject(thick);
 	crank->setTexture("textures/crank.png");
-	crank->transform.translate(-0.35f+radius/4, -height*0.6 - 0.25, 0.0f);
+	crank->transform.translate(-0.35f+radius/4, -height*0.6f - 0.25f, 0.0f);
 	crank->addMesh(new CubeMesh(0.7f, 0.045f, radius/2));
 
 	GameObject* crank2 = new GameObject(thick);
 	crank2->setTexture("textures/rollerTex.png");
-	crank2->transform.translate(-0.63, -height * 0.6 - 0.4f, 0.0f);
+	crank2->transform.translate(-0.63f, -height * 0.6f - 0.4f, 0.0f);
 	crank2->addMesh(new CylinderMesh(radius/6, 0.3f));
 
 	chain = new Chain(this, 2030, radius);

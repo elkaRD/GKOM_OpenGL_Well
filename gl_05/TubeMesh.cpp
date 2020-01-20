@@ -37,7 +37,7 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f - angle / 360.0f, slice / layers) * texScale : glm::vec2(uCoord, 1.0f - angle / 360.0f);
-			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * (radius), 0.0f, -sinf(angle * M_PI / 180.0f) * (radius));
+			glm::vec3 radial = glm::vec3(cosf(angle * (float) M_PI / 180.0f) * (radius), 0.0f, -sinf(angle * (float) M_PI / 180.0f) * (radius));
 			vertices.push_back(Vertex(sliceCenter + radial, color, tex, glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius),
@@ -51,7 +51,7 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
 			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f - angle / 360.0f, slice / layers) * texScale : glm::vec2(uCoord, 1.0f - angle / 360.0f);
-			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f), 0.0f, -sinf(angle * M_PI / 180.0f)) * (radius - wallThickness);
+			glm::vec3 radial = glm::vec3(cosf(angle * (float) M_PI / 180.0f), 0.0f, -sinf(angle * (float) M_PI / 180.0f)) * (radius - wallThickness);
 			vertices.push_back(Vertex(sliceCenter + radial, color, tex, -glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * (radius - wallThickness),
@@ -70,16 +70,16 @@ void TubeMesh::generateWalls(std::vector<Vertex>& vertices)
 		{
 			for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 			{
-				glm::vec2 tex = texMode == 'r' ? glm::vec2(angle / 360.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
-					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
-				vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
-					-sinf(angle * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
+				glm::vec2 tex = texMode == 'r' ? glm::vec2(angle / 360.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(angle * (float) M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
+					-sinf(angle * (float) M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
+				vertices.push_back(Vertex(center + glm::vec3(cosf(angle * (float) M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
+					-sinf(angle * (float) M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
 			}
-			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
-				-sinf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
+			glm::vec2 tex = texMode == 'r' ? glm::vec2(1.0f * texScale.x, i / 12.0f) : textureCenter + glm::vec2(cosf(0.0f * (float) M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius,
+				-sinf(0.0f * (float) M_PI / 180.0f) * (radius - wallThickness * i) / 4 / radius);
 			if(texMode=='r')
-				vertices.push_back(Vertex(center + glm::vec3(cosf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
-					-sinf(0.0f * M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
+				vertices.push_back(Vertex(center + glm::vec3(cosf(0.0f * (float) M_PI / 180.0f) * (radius - wallThickness * i), 0.0f,
+					-sinf(0.0f * (float) M_PI / 180.0f) * (radius - wallThickness * i)), color, tex, up));
 		}
 		center.y -= height;
 		up = glm::vec3(0.0f, -1.0f, 0.0f);

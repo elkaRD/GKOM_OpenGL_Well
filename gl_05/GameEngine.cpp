@@ -176,7 +176,7 @@ void GameEngine::run()
 			// Draw our first triangle
 			theProgram->Use();
 
-			gameScene->updateScene(deltaTime);
+			gameScene->updateScene((float) deltaTime);
 			gameScene->render();
 
 			//draw skybox
@@ -252,7 +252,7 @@ void GameEngine::window_size_callback(GLFWwindow* window, int width, int height)
 
 void GameEngine::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	getInstance().mouseManager.mousePosChanged(xpos, ypos);
+	getInstance().mouseManager.mousePosChanged((int) xpos, (int) ypos);
 }
 
 void GameEngine::handleKeyboardEvent()

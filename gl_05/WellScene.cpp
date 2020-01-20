@@ -42,7 +42,7 @@ void WellScene::update(float delta)
 
 void WellScene::createAvenue()
 {
-	const int spaceBetweenLamps = 9;
+	const float spaceBetweenLamps = 9;
 
 	GameObject *avenue = new GameObject(rootObject);
 	

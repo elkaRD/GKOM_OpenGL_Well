@@ -40,9 +40,9 @@ void PlaneMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vecto
 		glm::vec2 texCenter = glm::vec2((0.5f + holeCenter.x / width), (0.5f + holeCenter.y / length));
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / HOLE_SEG)
 		{
-			vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * holeRadius, 0.0f,-sinf(angle * M_PI / 180.0f) * holeRadius),
-				color,texCenter * texScale + glm::vec2(cosf(angle * M_PI / 180.0f) * holeRadius / width,
-					-sinf(angle * M_PI / 180.0f) * holeRadius / length) * texScale, up));
+			vertices.push_back(Vertex(center + glm::vec3(cosf(angle * (float) M_PI / 180.0f) * holeRadius, 0.0f,-sinf(angle * (float)M_PI / 180.0f) * holeRadius),
+				color,texCenter * texScale + glm::vec2(cosf(angle * (float) M_PI / 180.0f) * holeRadius / width,
+					-sinf(angle * (float)M_PI / 180.0f) * holeRadius / length) * texScale, up));
 		}
 	}
 	

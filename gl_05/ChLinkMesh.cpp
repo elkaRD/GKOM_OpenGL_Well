@@ -39,7 +39,7 @@ void ChLinkMesh::generateVertices(std::vector<Vertex>& vertices)
 	{
 		for (float angle = 0.0f; angle <= 360.0f; angle += 360.0f / segments)
 		{
-			glm::vec4 radial = glm::vec4(cosf(angle * M_PI / 180.0f) * radius, 0.0f, -sinf(angle * M_PI / 180.0f) * radius, 1.0f);
+			glm::vec4 radial = glm::vec4(cosf(angle * (float) M_PI / 180.0f) * radius, 0.0f, -sinf(angle * (float) M_PI / 180.0f) * radius, 1.0f);
 				radial = transform[i] * radial;
 			glm::vec3 aRadial = glm::vec3(radial.x, radial.y, radial.z);
 			glm::vec3 bias = glm::vec3(0.0f, -height / 2 + 3 * radius, 0.0f);

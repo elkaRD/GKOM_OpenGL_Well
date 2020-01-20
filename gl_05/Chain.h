@@ -20,8 +20,8 @@ private:
 	unsigned int freeLinks;
 
 	GLfloat rollerRadius;
-	double rotation;
-	double dRotation;
+	float rotation;
+	float dRotation;
 	GLfloat toChange;
 
 	unsigned int state;
