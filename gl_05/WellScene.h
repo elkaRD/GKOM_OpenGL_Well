@@ -6,6 +6,7 @@
 #include "Ground.h"
 #include "Lamp.h"
 #include "TestObject.h"
+#include "Tree.h"
 
 class WellScene : public GameScene
 {

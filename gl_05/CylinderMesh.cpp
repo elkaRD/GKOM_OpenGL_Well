@@ -39,9 +39,9 @@ void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 
 	for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 	{
-		vertices.push_back(Vertex(center + glm::vec3(cosf(angle * M_PI / 180.0f) * radius, 0.0f,
-			-sinf(angle * M_PI / 180.0f) * radius), color, textureCenter + glm::vec2(cosf(angle * M_PI / 180.0f) * 0.25f,
-				-sinf(angle * M_PI / 180.0f) * 0.25f), normal));
+		vertices.push_back(Vertex(center + glm::vec3(cosf(angle * (float) M_PI / 180.0f) * radius, 0.0f,
+			-sinf(angle * (float) M_PI / 180.0f) * radius), color, textureCenter + glm::vec2(cosf(angle * (float) M_PI / 180.0f) * 0.25f,
+				-sinf(angle * (float) M_PI / 180.0f) * 0.25f), normal));
 	}
 
 }
@@ -54,7 +54,7 @@ void CylinderMesh::generateWalls(std::vector<Vertex>& vertices)
 		float uCoord = 0.5f + 0.5f / layers * slice;
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
-			glm::vec3 radial = glm::vec3(cosf(angle * M_PI / 180.0f) * radius, 0.0f, -sinf(angle * M_PI / 180.0f) * radius);
+			glm::vec3 radial = glm::vec3(cosf(angle * (float) M_PI / 180.0f) * radius, 0.0f, -sinf(angle * (float) M_PI / 180.0f) * radius);
 			vertices.push_back(Vertex(sliceCenter + radial, color, glm::vec2(uCoord, 1.0f - angle / 360.0f), glm::normalize(radial)));
 		}
 		vertices.push_back(Vertex(sliceCenter + glm::vec3(cosf(0.0f) * radius, 0.0f, -sinf(0.0f) * radius), color, glm::vec2(uCoord, 0.0f),

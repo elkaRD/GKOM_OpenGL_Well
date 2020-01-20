@@ -173,4 +173,6 @@ std::vector<GameObject*>* GameObject::getChildren()
 {
 	if (children.size() != 0)
 		return &children;
+
+	return nullptr;
 }
