@@ -25,6 +25,10 @@ void WellScene::start()
 
 	createAvenue();
 	//testObject();
+
+	GameObject *g = new Tree(rootObject);
+	g->transform.translate(10, 10, 10);
+	g->setTexture("textures/brickwall.jpg");
 }
 
 void WellScene::update(float delta)
