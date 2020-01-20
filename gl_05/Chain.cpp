@@ -61,11 +61,12 @@ void Chain::start()
 	bucket->transform.translate(0.0f, 0.6f, 0.0f);
 	bucket->transform.setScale(1.5, 1.5, 1.5);
 
-	GameObject* water = new GameObject(bucket);
+	water = new GameObject(bucket);
 	water->transform.setScale(0.2, 0.08, 0.2);
 	MeshRenderer* cylinder = water->addMesh(new CylinderMesh());
 	cylinder->verticalInterpolationScale(0.7, 1.0);
 	cylinder->setWater();
+	water->setVisible(false);
 
 	state = 0;
 	toChange = 0;
@@ -77,6 +78,9 @@ void Chain::start()
 void Chain::update(float delta, int controll)
 {
 	if (controll == 0) return;
+
+	if (rotation > 2780)
+		water->setVisible(true);
 	GameObject* tmp;
 	looseState->transform.setPosition(0.353f -(0.0176f*rotation / 360.0f) , (3.5175f - 19 * 0.02f) - (rollerRadius + 0.01f) * 2 * (float) M_PI * rotation / 360.0f, rollerRadius + 0.01f); //50.26
 	//0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01

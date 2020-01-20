@@ -28,7 +28,7 @@ private:
 	GameObject* stateChanger;
 	GameObject* looseState;
 	GameObject* firstLoose;
-
+	GameObject* water;
 };
 
 #endif // !CHAIN_H
