@@ -19,19 +19,11 @@ void WellScene::start()
 	rim->setTexture("textures/ring.png");
 	rim->transform.translate(0.0f, 1.1f, 0.0f);
 
-	//Lamp *lamp = new Lamp(rootObject);
-
-	//well->addChild(new TestObject(this));
 
 	createAvenue();
-	//testObject();
 	GameObject* bench = new Bench(rootObject);
 	bench->transform.setPosition(-33.0f, 0.0f, -15.0f);
 	
-
-	GameObject *g = new Tree(rootObject);
-	g->transform.translate(10, 10, 10);
-	g->setTexture("textures/brickwall.jpg");
 	createForest(-120, 10, 30, 6, 20);
 	createForest(-120, -60, 30, 6, 20);
 	createForest(-100, -20, 10, 2, 6);
