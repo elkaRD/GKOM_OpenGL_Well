@@ -7,6 +7,7 @@
 #include "Lamp.h"
 #include "TestObject.h"
 #include "Tree.h"
+#include "Bench.h"
 
 class WellScene : public GameScene
 {
