@@ -106,26 +106,5 @@ GameObject* Well::createRoller(GameObject *parent)
 	roller->setTexture("textures/rollerTex.png");
 	roller->transform.translate(0, 3.5, 0);
 
-
-	//horizontal->transform.rotate(0, 0, 90);
-	//horizontal->transform.translate(0.5f, 0, 0);
-	//MeshRenderer *mesh = horizontal->addMesh(new CylinderMesh());
-	//mesh->scaleVertices(0.08f, 0.8, 0.08f);
-
-	//GameObject *thicker = new GameObject(horizontal);
-	//thicker->transform.translate(0,0.5,0);
-	//mesh = thicker->addMesh(new CylinderMesh());
-	//mesh->scaleVertices(0.2f, 0.32, 0.2f);
-
-	//GameObject *vertical = new GameObject(horizontal);
-	//vertical->transform.translate(-0.4, -2, 0);
-	//mesh = vertical->addMesh(new CubeMesh());
-	//mesh->scaleVertices(1.1f, 0.08, 0.17f);
-
-	//GameObject *handle = new GameObject(vertical);
-	//handle->transform.translate(-0.4,-0.21,0);
-	//mesh = handle->addMesh(new CylinderMesh());
-	//mesh->scaleVertices(0.06f, 0.1, 0.06f);
-
 	return roller;
 }
