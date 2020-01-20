@@ -7,6 +7,7 @@
 class TubeMesh : public MeshRenderer {
 public:
 	TubeMesh();
+	TubeMesh(float r, float t, float h);
 protected:
 	virtual void initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode);
 	void generateWalls(std::vector<Vertex>& vertices);

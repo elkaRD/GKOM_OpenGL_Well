@@ -6,7 +6,10 @@
 #include <iostream>
 #include <glm\detail\func_geometric.hpp>
 
-TubeMesh::TubeMesh(): height(30.0f), radius(1.5f), wallThickness(0.2f), segments(DEFAULT_SEGMENTS_NUMBER), texScale(3.0f, 30.0f), 
+TubeMesh::TubeMesh(): height(30.0f), radius(1.075f), wallThickness(0.125f), segments(DEFAULT_SEGMENTS_NUMBER), texScale(3.0f, 30.0f), 
+	texMode('r') {}
+
+TubeMesh::TubeMesh(float r, float t, float h): height(h), radius(r), wallThickness(t), segments(DEFAULT_SEGMENTS_NUMBER), texScale(1.0f,1.0f),
 	texMode('r') {}
 
 void TubeMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)

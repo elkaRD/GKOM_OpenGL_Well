@@ -11,7 +11,7 @@ Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(
 
 void Chain::start()
 {
-	this->setTexture("textures/rusty.png");
+	this->setTexture("textures/crank.png");
 	this->transform.translate(-rollerRadius+0.015-0.0025, 0.35f, 0.015f - 0.0075f);
 	this->transform.rotate(0.0f, 0.0f, 92.0f);
 	GameObject* begin = new GameObject(this);

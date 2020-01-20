@@ -14,6 +14,11 @@ void WellScene::start()
 	well2 = new Well(well);
 	well2->transform.setPosition(-30, 0, -20);
 
+	GameObject* rim = new GameObject(well2);
+	rim->addMesh(new TubeMesh(3.0f, 1.925f, 0.1f));
+	rim->setTexture("textures/rim.png");
+	rim->transform.translate(0.0f, 1.1f, 0.0f);
+
 	//Lamp *lamp = new Lamp(rootObject);
 
 	//well->addChild(new TestObject(this));
