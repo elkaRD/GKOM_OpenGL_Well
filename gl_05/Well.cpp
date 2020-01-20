@@ -30,18 +30,7 @@ GameObject* Well::createStem(GameObject *parent)
 	stem1->transform.setPosition(0, 3, 0);
 	MeshRenderer *cube = stem1->addMesh(new CubeMesh());
 	cube->scaleVertices(0.2f, 4, 0.2f);
-
-	GameObject *oblique1 = new GameObject(stem1);
-	oblique1->transform.setRotation(54, 0, 0);
-	oblique1->transform.setPosition(0, 1.8f, -0.5f);
-	cube = oblique1->addMesh(new CubeMesh());
-	cube->scaleVertices(0.23f, 1.2f, 0.32f);
-
-	GameObject *oblique2 = new GameObject(stem1);
-	oblique2->transform.setRotation(-54, 0, 0);
-	oblique2->transform.setPosition(0, 1.8f, 0.5f);
-	cube = oblique2->addMesh(new CubeMesh());
-	cube->scaleVertices(0.23f, 1.2f, 0.32f);
+	stem1->setTexture("textures/wood1.png");
 
 	GameObject *smallerOblique1 = new GameObject(stem1);
 	smallerOblique1->transform.setRotation(45, 0, 0);
@@ -54,6 +43,18 @@ GameObject* Well::createStem(GameObject *parent)
 	smallerOblique2->transform.setPosition(0, 1.3f, -0.4f);
 	cube = smallerOblique2->addMesh(new CubeMesh());
 	cube->scaleVertices(0.12f, 1.1f, 0.12f);
+
+	GameObject *oblique1 = new GameObject(stem1);
+	oblique1->transform.setRotation(54, 0, 0);
+	oblique1->transform.setPosition(0, 1.8f, -0.5f);
+	cube = oblique1->addMesh(new CubeMesh());
+	cube->scaleVertices(0.23f, 1.2f, 0.32f);
+
+	GameObject *oblique2 = new GameObject(stem1);
+	oblique2->transform.setRotation(-54, 0, 0);
+	oblique2->transform.setPosition(0, 1.8f, 0.5f);
+	cube = oblique2->addMesh(new CubeMesh());
+	cube->scaleVertices(0.23f, 1.2f, 0.32f);
 
 	return stem1;
 }
@@ -68,17 +69,12 @@ GameObject* Well::createPeak(GameObject *parent)
 	GameObject *stem2 = createStem(pivot);
 	stem2->transform.translate(1.17f, 0, 0);
 
-	GameObject *horizontal = new GameObject(pivot);
-	horizontal->transform.setRotation(-45, 0, 0);
-	horizontal->transform.setPosition(0, 5.12f, 0);
-	MeshRenderer *cube = horizontal->addMesh(new CubeMesh());
-	cube->scaleVertices(3.07f, 0.32f, 0.32f);
-
 	GameObject *peak1 = new GameObject(pivot);
 	peak1->transform.setRotation(-36, 0, 0);
 	peak1->transform.setPosition(0, 4.85f, -0.7f);
-	cube = peak1->addMesh(new CubeMesh());
+	MeshRenderer *cube = peak1->addMesh(new CubeMesh());
 	cube->scaleVertices(3.29f, 0.15f, 1.7f);
+	peak1->setTexture("textures/wood.png");
 
 	GameObject *peak2 = new GameObject(pivot);
 	peak2->transform.setRotation(36, 0, 0);
@@ -92,6 +88,13 @@ GameObject* Well::createPeak(GameObject *parent)
 	MeshRenderer *mesh = middlePeak->addMesh(new CylinderMesh());
 	mesh->scaleVertices(0.12f, 0.75f, 0.12f);
 	middlePeak->setTexture("textures/rollerTex.png");
+
+	GameObject *horizontal = new GameObject(pivot);
+	horizontal->transform.setRotation(-45, 0, 0);
+	horizontal->transform.setPosition(0, 5.12f, 0);
+	cube = horizontal->addMesh(new CubeMesh());
+	cube->scaleVertices(3.07f, 0.32f, 0.32f);
+	horizontal->setTexture("textures/wood1.png");
 
 	return pivot;
 }
