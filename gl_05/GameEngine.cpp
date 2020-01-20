@@ -154,7 +154,7 @@ void GameEngine::run()
 			glUniform3f(glGetUniformLocation(waterProgram->get_programID(), "cameraPos"), cameraPosition.x, cameraPosition.y + 30, cameraPosition.z);
 			theProgram->Use();
 
-			gameScene->updateScene(deltaTime);
+			gameScene->updateScene(deltaTime, controll);
 			gameScene->render(cubemapTexture);
 
 			//draw skybox
@@ -269,6 +269,15 @@ void GameEngine::handleKeyboardEvent()
 
 	if (keyboardManager.isHold(GLFW_KEY_P))
 		increaseLight();
+
+	if (keyboardManager.isHold(GLFW_KEY_I))
+		controll = 1;
+
+	if (keyboardManager.isHold(GLFW_KEY_U))
+		controll = -1;
+
+	if (!keyboardManager.isHold(GLFW_KEY_I) && !keyboardManager.isHold(GLFW_KEY_U))
+		controll = 0;
 
 	glm::normalize(cameraMovement);
 

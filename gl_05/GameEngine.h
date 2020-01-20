@@ -38,7 +38,7 @@ private:
 
 	GameEngine();
 
-	GLuint screenWidth = 1280, screenHeight = 720;
+	GLuint screenWidth = 1280, screenHeight = 720, controll = 0;
 	GLfloat lightIntensity;
 
 	double currentFrame, deltaTime, lastFrame;

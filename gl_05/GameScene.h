@@ -16,7 +16,7 @@ public:
 
 	void startScene();
 	void destroyScene();
-	void updateScene(float delta);
+	void updateScene(float delta, GLint controll);
 
 	virtual void start();
 	void render(GLuint cubemapTexture);

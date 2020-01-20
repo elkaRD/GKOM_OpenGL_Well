@@ -74,8 +74,9 @@ void Chain::start()
 	//prev = new Bucket(looseState);
 }
 
-void Chain::update(float delta)
+void Chain::update(float delta, int controll)
 {
+	if (controll == 0) return;
 	GameObject* tmp;
 	looseState->transform.setPosition(0.353f -(0.0176f*rotation / 360.0f) , (3.5175f - 19 * 0.02f) - (rollerRadius + 0.01f) * 2 * (float) M_PI * rotation / 360.0f, rollerRadius + 0.01f); //50.26
 	//0.353f, 3.5175f - (50 - 1) * 0.02f, rollerRadius + 0.01
@@ -90,7 +91,7 @@ void Chain::update(float delta)
 	//	stateChanger->transform.rotate(-dRotation,0.0f,0.0f);
 	//}
 	int stateChanges = (int) llrint(floor(sLen / 0.02f)) - state;
-	while (stateChanges>0 && dRotation > 0)
+	while(controll == 1 && stateChanges >= 0 && dRotation >= 0)
 	{
 		tmp = (stateChanger);
 		stateChanger = stateChanger->getParent();
@@ -104,7 +105,7 @@ void Chain::update(float delta)
 		--stateChanges;
 		++state;
 	}
-	while (stateChanges < 0 && dRotation < 0)
+	while(controll == -1 && stateChanges < 0 && dRotation < 0)
 	{
 		tmp = stateChanger;
 		stateChanger = stateChanger->getChildren()->front();

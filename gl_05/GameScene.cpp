@@ -42,9 +42,9 @@ void GameScene::destroy()
 
 }
 
-void GameScene::updateScene(float delta)
+void GameScene::updateScene(float delta, GLint controll)
 {
-	rootObject->updateObject(delta);
+	rootObject->updateObject(delta, controll);
 	update(delta);
 }
 

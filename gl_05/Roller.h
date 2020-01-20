@@ -12,7 +12,7 @@ public:
 	Roller(GameObject* parent);
 	Roller(GameObject* parent, GLfloat radius, GLfloat height);
 	void start();
-	void update(float delta);
+	void update(float delta, GLint controll);
 	GLfloat getRadius() const;
 	GLfloat getHeight() const;
 private:

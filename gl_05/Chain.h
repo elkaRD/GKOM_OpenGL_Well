@@ -12,7 +12,7 @@ public:
 	Chain(GameObject* parent, unsigned int lenght, float rollerRadius);
 
 	void start();
-	void update(float delta);
+	void update(float delta, int controll);
 	void unroll(float radius);
 	void tellRotation(GLfloat);
 private:

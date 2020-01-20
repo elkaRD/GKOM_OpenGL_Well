@@ -26,7 +26,7 @@ public:
 	void startObject();
 	void destroyObject();
 	void renderObject(const glm::mat4& parentTransform, ShaderProgram* shader, ShaderProgram* shader2, ShaderProgram* shader3, GLuint cubemapTexture);
-	void updateObject(float delta);
+	void updateObject(float delta, GLint controll);
 	void setVisible(bool isVisible);
 
 	void addChild(GameObject *child);
@@ -39,6 +39,7 @@ public:
 	virtual void destroy();
 	virtual void render();
 	virtual void update(float delta);
+	virtual void update(float delta, GLint controll);
 
 	GameObject* getParent();
 	void setParent(GameObject* parent);

@@ -46,19 +46,19 @@ void GameObject::renderObject(const glm::mat4 &parentTransform, ShaderProgram* s
 		child->renderObject(transformMatrix, shader, shader2, shader3, cubemapTexture);
 }
 
-void GameObject::updateObject(float delta)
+void GameObject::updateObject(float delta, GLint controll)
 {
 	if (firstUpdate)
 	{
 		firstUpdate = false;
 		startObject();
 	}
-
 	update(delta);
+	update(delta, controll);
 
 	for (auto &child : children)
 	{
-		child->updateObject(delta);
+		child->updateObject(delta, controll);
 	}
 }
 
@@ -97,6 +97,11 @@ void GameObject::render()
 }
 
 void GameObject::update(float delta)
+{
+
+}
+
+void GameObject::update(float delta, GLint controll)
 {
 
 }

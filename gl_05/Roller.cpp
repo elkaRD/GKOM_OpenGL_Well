@@ -30,17 +30,18 @@ void Roller::start()
 
 	chain = new Chain(this, 2030, radius);
 	thick->addChild(chain);
-	chain->tellRotation(transform.getRotation().x);
+	chain->tellRotation(0);
 	angle = 0;
 	speed = 0.0f;
 }
 
-void Roller::update(float delta)
+void Roller::update(float delta, GLint controll)
 {
+	if (controll == 0) return;
 	//if(speed< 18.0f && speed >= 0.0f)
-	if(speed >= 0)
+	if(speed >= 0 || controll == 1)
 		speed = 360.0f;
-	if (speed < 0.0f)
+	if (speed < 0.0f || controll == -1)
 		speed = -360.0f;
 		
 	//speed = 0;
@@ -48,7 +49,6 @@ void Roller::update(float delta)
 	//	speed = 180.0f;
 	//if (speed < 0)
 	//	speed = -1.0f;
-
 	if (angle + speed * delta >= maxAngle && speed > 0.0f)
 		speed = -0.01f;
 
