@@ -22,6 +22,7 @@ private:
 
 	void createAvenue();
 	void testObject();
+	void createForest(float transX, float transZ, float sizeX, float sizeZ, int howMany);
 };
 
 #endif

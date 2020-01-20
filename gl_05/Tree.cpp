@@ -7,6 +7,12 @@ Tree::Tree(GameObject *parent) : GameObject(parent)
 
 void Tree::start()
 {
+	GameObject *root = new GameObject(this);
+	MeshRenderer *mesh = root->addMesh(new CylinderMesh());
+	mesh->scaleVertices(0.8f, 0.75f, 0.8f);
+	mesh->verticalInterpolationScale(1, randomFloat(0.2f, 0.6f));
+	root->transform.translate(0, randomFloat(1, 2), 0);
+
 	GameObject *p = this;
 	int levels = 3;
 	if (rand() % 3 == 0) levels = 4;
@@ -14,11 +20,12 @@ void Tree::start()
 
 	for (int i = 0; i < levels; ++i)
 	{
-		GameObject *g2 = new GameObject(p);
-		g2->addMesh(new Pyramid(randomInt(5, 8), randomFloat(4, 5) * pow(0.8f, i), randomFloat(4, 5) * pow(0.7f, i)));
-		g2->transform.translate(0, randomFloat(2.5f, 3.0f) * pow(0.85f, i), 0);
+		GameObject *g = new GameObject(p);
+		g->addMesh(new Pyramid(randomInt(5, 8), randomFloat(4, 5) * pow(0.8f, i), randomFloat(4, 5) * pow(0.7f, i)));
+		g->transform.translate(0, randomFloat(2.5f, 3.0f) * pow(0.85f, i), 0);
+		g->transform.rotate(0, randomFloat(0, 360), 0);
 
-		p = g2;
+		p = g;
 	}
 }
 

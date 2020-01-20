@@ -22,16 +22,6 @@ ostream& operator<<(ostream& os, const glm::vec4& mx)
 	return os;
 }
 
-ostream& operator<<(ostream& os, const glm::vec3& mx)
-{
-	for (int row = 0; row < 3; ++row)
-	{
-		cout << mx[row] << ' ';
-	}
-	cout << endl;
-	return os;
-}
-
 ostream& operator<<(ostream& os, const glm::vec2& mx)
 {
 	for (int row = 0; row < 2; ++row)

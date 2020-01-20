@@ -1,6 +1,16 @@
 #include "WellScene.h"
 #include <string>
 
+std::ostream& operator<<(std::ostream& os, const glm::vec3& mx)
+{
+	for (int row = 0; row < 3; ++row)
+	{
+		std::cout << mx[row] << ' ';
+	}
+	std::cout << std::endl;
+	return os;
+}
+
 WellScene::WellScene(ShaderProgram *shader, ShaderProgram *shader2) : GameScene(shader, shader2)
 {
 
@@ -25,9 +35,11 @@ void WellScene::start()
 
 	createAvenue();
 	//testObject();
+	createForest(-120, 10, 30, 6, 30);
+	createForest(-120, -60, 30, 6, 30);
 
 	GameObject *g = new Tree(rootObject);
-	g->transform.translate(10, 10, 10);
+	g->transform.translate(10, 0, 10);
 	g->setTexture("textures/brickwall.jpg");
 }
 
@@ -106,4 +118,44 @@ void WellScene::testObject()
 	test->transform.translate(10.0f, 10.0f, 10.0f);
 	//test->transform.setScale(0.01f, 0.01f, 0.01f);
 
+}
+
+void WellScene::createForest(float transX, float transZ, float sizeX, float sizeZ, int howMany)
+{
+	const float dx = 6;
+	const float dy = 6;
+
+	const float tz = transZ;
+	const float tx = transX;
+
+	const int toPick = howMany;
+	int sn = 0;
+
+	std::vector<glm::vec3> spots;
+	std::vector<glm::vec3> picked;
+	
+	for (int i = 0; i < sizeX; ++i)
+	{
+		for (int j = 0; j < sizeZ; ++j)
+		{
+			spots.push_back(glm::vec3(dx* i + tx, 0, dx * j + tz));
+			sn++;
+		}
+	}
+
+	for (int i = 0; i < toPick; ++i)
+	{
+		int r = randomInt(0, sn - i);
+		std::swap(spots[r], spots[sn - i - 1]);
+
+		std::cout << r << "  <-> " << (sn - i - 1) << std::endl;
+	}
+
+	for (int i = sn - toPick; i < sn; ++i)
+	{
+		std::cout << i << "   " << spots[i] << std::endl;
+
+		GameObject *tree = new Tree(rootObject);
+		tree->transform.setPosition(spots[i]);
+	}
 }

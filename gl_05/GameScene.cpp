@@ -77,3 +77,15 @@ GameObject* GameScene::getRoot()
 {
 	return rootObject;
 }
+
+int GameScene::randomInt(int min, int max) const
+{
+	int d = max - min;
+	return rand() % d + min;
+}
+
+float GameScene::randomFloat(float min, float max) const
+{
+	float d = max - min;
+	return (float)(rand() % 1000) / 1000.0f * d + min;
+}
