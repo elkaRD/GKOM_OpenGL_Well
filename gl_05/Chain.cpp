@@ -1,9 +1,10 @@
 #include "Chain.h"
+#include "Bucket.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <glm\detail\func_geometric.hpp>
 
-Chain::Chain(GameObject* parent): GameObject(parent), lenght(100), rotation(0.0), dRotation(0.0)
+Chain::Chain(GameObject* parent): GameObject(parent), lenght(20), rotation(0.0), dRotation(0.0)
 {}
 
 Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(parent), lenght(lenght) , rollerRadius(radius), rotation(0.0), dRotation(0.0)
@@ -11,7 +12,7 @@ Chain::Chain(GameObject* parent, unsigned int lenght, float radius): GameObject(
 
 void Chain::start()
 {
-	this->setTexture("textures/crank.png");
+	
 	this->transform.translate(-rollerRadius+0.015f-0.0025f, 0.35f, 0.015f - 0.0075f);
 	this->transform.rotate(0.0f, 0.0f, 92.0f);
 	GameObject* begin = new GameObject(this);
@@ -60,6 +61,8 @@ void Chain::start()
 	state = 0;
 	toChange = 0;
 	firstLoose->getChildren()->front()->setVisible(false);
+	this->setTexture("textures/crank.png");
+	//prev = new Bucket(looseState);
 }
 
 void Chain::update(float delta)

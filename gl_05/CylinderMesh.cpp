@@ -6,6 +6,9 @@
 #include <glm\detail\func_geometric.hpp>
 
 
+CylinderMesh::CylinderMesh(int bucket) : bucket(bucket), radius(0.005), height(0.4), segments(5), layers(7),
+color(glm::vec3(1.0f, 0.0f, 0.0f)) {}
+
 void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, GLenum& drawingMode)
 {
 	generatePlate(vertices, true);
@@ -24,10 +27,10 @@ void CylinderMesh::initializeMeshVertices(std::vector<Vertex>& vertices, std::ve
 }
 
 CylinderMesh::CylinderMesh(GLfloat r, GLfloat h): radius(r), height(h), segments(DEFAULT_SEGMENTS_NUMBER), layers(DEFAULT_LAYERS_NUMBER),
-color(glm::vec3(1.0f, 0.0f, 0.0f)) {}
+color(glm::vec3(1.0f, 0.0f, 0.0f)), bucket(0) {}
 
 CylinderMesh::CylinderMesh() : height(5.0f), radius(1.0f), segments(DEFAULT_SEGMENTS_NUMBER), layers(DEFAULT_LAYERS_NUMBER),
-color(glm::vec3(1.0f, 0.0f, 0.0f)) {}
+color(glm::vec3(1.0f, 0.0f, 0.0f)), bucket(0) {}
 
 void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 {
@@ -48,9 +51,18 @@ void CylinderMesh::generatePlate(std::vector<Vertex>& vertices, bool top)
 
 void CylinderMesh::generateWalls(std::vector<Vertex>& vertices)
 {
+	float tab[] = { 0.0f, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.0 };
 	for (unsigned int slice = 0; slice <= layers; ++slice)
 	{ 
-		glm::vec3 sliceCenter = glm::vec3(0.0f, height / 2.0f - height / layers * slice, 0.0f);
+		glm::vec3 sliceCenter;
+		if (bucket!=0)
+		{
+			sliceCenter = glm::vec3(tab[slice], height / 2.0f - height / layers * slice, 0.0f);
+		}
+		else
+		{
+			sliceCenter = glm::vec3(0.0f, height / 2.0f - height / layers * slice, 0.0f);
+		}
 		float uCoord = 0.5f + 0.5f / layers * slice;
 		for (float angle = 0.0f; angle < 360.0f; angle += 360.0f / segments)
 		{
