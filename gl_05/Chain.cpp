@@ -79,7 +79,7 @@ void Chain::update(float delta, int controll)
 {
 	if (controll == 0) return;
 
-	if (rotation > 2780)
+	if (rotation > 3320)
 		water->setVisible(true);
 	GameObject* tmp;
 	looseState->transform.setPosition(0.353f -(0.0176f*rotation / 360.0f) , (3.5175f - 19 * 0.02f) - (rollerRadius + 0.01f) * 2 * (float) M_PI * rotation / 360.0f, rollerRadius + 0.01f); //50.26
