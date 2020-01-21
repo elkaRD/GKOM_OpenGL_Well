@@ -20,6 +20,11 @@ Marcin Różański,
 
 <img src="/images/final.jpg" alt="drawing" width="400"/>
 
+**Sterowanie:**
+Kamera: W/S/A/D lub strzałki E/Q
+Oświetlenie: O/P
+Studnia: I/U
+
 ## Wykorzystane materiały:
 1. http://learnopengl.com/
 2. https://www.youtube.com/channel/UC1Gx4dn-QcSpJtZNdiqxy0A
